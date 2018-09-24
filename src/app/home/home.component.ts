@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {SpotifyService} from '../shared/spotify';
-import {AuthService} from "../shared/auth";
-import {ToastrService} from "ngx-toastr";
+import {AuthService} from "../auth";
+import {SpotifyService} from "../shared/services/spotify-services";
 
 
 @Component({
@@ -13,25 +12,19 @@ import {ToastrService} from "ngx-toastr";
 export class HomeComponent implements OnInit {
   user: any;
 
-
   constructor(public router: Router,
               private spotifyService: SpotifyService,
-              private auth: AuthService,
-              private toasr: ToastrService) {
-    this.auth.loggedOut.subscribe((success) => {
-      if (success) {
-        this.toasr.success('Successfully logged out.');
-      }
-    })
+              private auth: AuthService) {
   }
 
   public login() {
     this.spotifyService.login().subscribe(
-      token => {
+      success => {
         this.spotifyService.getCurrentUser()
           .subscribe(data => {
               localStorage.setItem('user', JSON.stringify(data));
-              this.router.navigate(['main'])
+              this.auth.user.next(data);
+              this.router.navigateByUrl('main');
             },
             err => console.error(err));
       },
@@ -44,6 +37,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.user.subscribe(data => {
+      console.log(data);
+    });
 
   }
 

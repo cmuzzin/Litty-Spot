@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../../../../../shared/spotify';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { ActiveSongService } from '../../../../music-player/active-song.service';
-import { NavigationService } from '../../../../../shared/navigation/navigation.service';
+import { NavigationService } from '../../../../../shared/services/navigation.service';
 import { LoadArtistService } from '../load-artist.service';
+import {SpotifyService} from "../../../../../shared/services/spotify-services";
 
 @Component({
     selector: 'app-overview',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../../shared/spotify/angular2-spotify';
+import {SpotifyService} from '../../../../shared/services/spotify-services';
 import {LoadArtistService} from './load-artist.service';
-import { UtilitiesService } from '../../../../shared/utilities/utilities.service';
+import {UtilitiesService} from '../../../../shared/utilities/utilities.service';
 
 @Component({
   selector: 'app-artist',
@@ -15,9 +15,9 @@ export class ArtistComponent implements OnInit {
   artistId: any;
   artistIds: [any];
 
-  constructor( private spotifyService: SpotifyService,
-               private loadArtistService: LoadArtistService,
-               private utilities: UtilitiesService) {
+  constructor(private spotifyService: SpotifyService,
+              private loadArtistService: LoadArtistService,
+              private utilities: UtilitiesService) {
   }
 
   ngOnInit() {

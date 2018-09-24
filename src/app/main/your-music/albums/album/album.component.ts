@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { SpotifyService } from '../../../../shared/spotify/angular2-spotify';
+import { SpotifyService } from '../../../../shared/services/spotify-services';
 import { Router } from '@angular/router';
 import { ActiveSongService } from '../../../music-player/active-song.service';
-import { NavigationService } from '../../../../shared/navigation/navigation.service';
+import { NavigationService } from '../../../../shared/services/navigation.service';
 
 @Component({
     selector: 'app-album',

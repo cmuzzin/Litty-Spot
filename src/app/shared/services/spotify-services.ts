@@ -703,7 +703,6 @@ export class SpotifyService {
         parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
       }
     }
-    ;
     return parts.join('&');
   };
 
@@ -749,7 +748,6 @@ export class SpotifyService {
   }
 
   private handleError(error: Response) {
-    console.error(error);
     return Observable.throw(error.json().error || 'Server error');
   }
 

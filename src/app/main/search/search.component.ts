@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../shared/spotify/angular2-spotify';
+import {SpotifyService} from '../../shared/services/spotify-services';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {ActiveSongService} from '../music-player/active-song.service';
-import {NavigationService} from '../../shared/navigation/navigation.service';
+import {NavigationService} from '../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
-import {Subject} from "rxjs/Subject";
 
 
 @Component({

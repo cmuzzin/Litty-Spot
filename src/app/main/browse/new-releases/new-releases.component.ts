@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {SpotifyService} from '../../../shared/spotify/angular2-spotify';
+import {SpotifyService} from '../../../shared/services/spotify-services';
 import {Router} from '@angular/router';
 import * as _ from 'lodash';
-import { NavigationService } from '../../../shared/navigation/navigation.service';
+import { NavigationService } from '../../../shared/services/navigation.service';
 
 @Component({
   selector: 'app-new-releases',
@@ -10,42 +10,29 @@ import { NavigationService } from '../../../shared/navigation/navigation.service
   styleUrls: ['./new-releases.component.scss']
 })
 export class NewReleasesComponent implements OnInit {
-  public offset: any;
+  public offset: number = 0;
   public newReleases: any;
   public options: any;
   private album: any;
-  public totalNewReleases: any;
-  constructor(public spotifyService: SpotifyService, public router: Router, private navigationService: NavigationService) { }
+  constructor(private spotifyService: SpotifyService, private router: Router, private navigationService: NavigationService) { }
 
   ngOnInit() {
-    this.offset = 0;
-    this.getNewReleases();
-  }
-
-  getNewReleases() {
-    this.options = {
-      limit: 50
-    };
     this.spotifyService.getNewReleases().subscribe(
       data => {
-        this.newReleases = data.albums.items;
-        this.totalNewReleases = data.albums.total;
+        this.newReleases = data.albums;
       },
       error => {
         console.log(error);
       }
     )
   }
-
   loadMoreNewReleases() {
-    this.offset = this.offset + 20;
     this.options = {
-      offset: this.offset,
-      limit: 50
+      offset: this.offset + 20,
     };
     this.spotifyService.getNewReleases(this.options).subscribe(
       data => {
-        this.newReleases = _.concat(this.newReleases, data.albums.items);
+        this.newReleases = _.concat(this.newReleases.items, data.albums.items);
         document.getElementById('loadMoreNewReleases').blur();
       },
       error => {

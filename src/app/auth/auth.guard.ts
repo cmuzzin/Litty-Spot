@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import {SpotifyService} from "../spotify/angular2-spotify";
+import {SpotifyService} from "../shared/services/spotify-services";
 
 @Injectable()
 export class AuthGuard implements CanActivate {

@@ -12,10 +12,8 @@ export class CallbackComponent {
     let hash = window.location.hash;
     if (hash) {
       if (window.location.search.substring(1).indexOf('error') !== -1) {
-        // login failure
         window.close();
       } else if (hash) {
-        // login success
         let token = window.location.hash.split('&')[0].split('=')[1];
         localStorage.setItem('angular2-spotify-token', token);
       }

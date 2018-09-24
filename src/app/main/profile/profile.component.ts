@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {SpotifyService} from '../../shared/spotify/angular2-spotify';
-import { NavigationService } from '../../shared/navigation/navigation.service';
-import {AuthService} from "../../shared/auth";
+import {SpotifyService} from '../../shared/services/spotify-services';
+import {NavigationService} from '../../shared/services/navigation.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,10 +10,10 @@ import {AuthService} from "../../shared/auth";
 })
 export class ProfileComponent implements OnInit {
   user: any;
+
   constructor(public router: Router,
               public spotifyService: SpotifyService,
-              private navigationService: NavigationService,
-              private auth: AuthService) {
+              private navigationService: NavigationService) {
   }
 
   ngOnInit() {
@@ -22,8 +21,7 @@ export class ProfileComponent implements OnInit {
   }
 
   logout() {
-   this.navigationService.logout();
-   this.auth.loggedOut.next(true);
+    this.navigationService.logout();
   }
 
 }

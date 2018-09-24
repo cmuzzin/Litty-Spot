@@ -16,7 +16,7 @@ import {BrowseComponent} from './main/browse/browse.component';
 import {FeaturedComponent} from './main/browse/featured/featured.component';
 import {GenreMoodsComponent} from './main/browse/genre-moods/genre-moods.component';
 import {NewReleasesComponent} from './main/browse/new-releases/new-releases.component';
-import {AuthGuard} from './shared/auth';
+import {AuthGuard} from './auth';
 import {CategoryComponent} from './main/browse/genre-moods/category/category.component';
 import {ArtistComponent} from './main/your-music/artists/artist/artist.component';
 import {OverviewComponent} from './main/your-music/artists/artist/overview/overview.component';
@@ -43,29 +43,23 @@ const routes: Routes = [
       {
         path: 'search',
         component: SearchComponent,
-        canActivate: [AuthGuard],
         data: { title: 'Search Spotify'}
       },
       {
         path: 'playlist',
-        component: PlaylistComponent,
-        canActivate: [AuthGuard]
+        component: PlaylistComponent
       },
       {
         path: 'album',
-        component: AlbumComponent,
-        canActivate: [AuthGuard]
+        component: AlbumComponent
       },
       {
         path: 'category',
-        component: CategoryComponent,
-        canActivate: [AuthGuard]
-
+        component: CategoryComponent
       },
       {
         path: 'user',
-        component: UserComponent,
-        canActivate: [AuthGuard]
+        component: UserComponent
       },
       {
         path: 'artist',
@@ -80,8 +74,7 @@ const routes: Routes = [
             path: 'related-artists',
             component: RelatedArtistsComponent
           }
-        ],
-        canActivate: [AuthGuard]
+        ]
       },
       {
         path: 'your-music',
@@ -95,8 +88,7 @@ const routes: Routes = [
           {
             path: 'songs',
             component: SongsComponent
-          }
-          ,
+          },
           {
             path: 'albums',
             component: AlbumsComponent
@@ -108,8 +100,7 @@ const routes: Routes = [
           {  path: 'most-played',
             component: MostPlayedComponent
           }
-        ],
-        canActivate: [AuthGuard]
+        ]
       },
       {
         path: 'profile',
@@ -134,8 +125,7 @@ const routes: Routes = [
             path: 'new-releases',
             component: NewReleasesComponent
           }
-        ],
-        canActivate: [AuthGuard]
+        ]
       }
     ],
     canActivate: [AuthGuard]

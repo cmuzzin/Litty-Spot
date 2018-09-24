@@ -1,17 +1,21 @@
-<p class="title is-2 has-text-centered">{{featuredPlaylists?.message}}</p>
-<div class="columns is-multiline push-around">
-  <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let featured of featuredPlaylists?.playlists.items">
-    <div class="card">
-      <div class="card-image">
-        <figure class="image is-square">
-          <img src="{{featured?.images[0]?.url}}" alt="">
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="content">
-          <p class="is-size-6 clickable link-hover"  (click)="goToPlaylist(featured)">{{featured?.name}}</p>
+<div *ngIf="featuredPlaylists">
+  <h1 class="title is-2 has-text-centered">{{featuredPlaylists.message}}</h1>
+  <div class="columns is-multiline push-around">
+    <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let featured of featuredPlaylists.playlists.items">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-square">
+            <img src="{{featured.images[0].url}}" *ngIf="featured.images[0].url">
+            <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!featured.images[0].url">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <a class="subtitle clickable"  (click)="goToPlaylist(featured)">{{featured.name}}</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>

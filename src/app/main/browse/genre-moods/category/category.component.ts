@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../../shared/spotify/angular2-spotify';
+import {SpotifyService} from '../../../../shared/services/spotify-services';
 import * as _ from 'lodash';
-import { NavigationService } from '../../../../shared/navigation/navigation.service';
+import { NavigationService } from '../../../../shared/services/navigation.service';
 
 @Component({
   selector: 'app-category',
@@ -12,26 +12,16 @@ export class CategoryComponent implements OnInit {
   category: any;
   categoryPlaylists: any;
   options: any;
-  offset: any;
-  totalCategories: any;
+  offset: any = 0;
 
   constructor(private spotifyService: SpotifyService, private navigationService: NavigationService) {
   }
 
   ngOnInit() {
-    this.offset = 0;
-    this.loadCategory();
-  }
-
-  loadCategory() {
-    this.options = {
-      limit: 50
-    };
     this.category = JSON.parse(localStorage.getItem('category'));
-    this.spotifyService.getCategoryPlaylists(this.category.id, this.options).subscribe(
+    this.spotifyService.getCategoryPlaylists(this.category.id).subscribe(
       data => {
-        this.totalCategories = data.playlists.total;
-        this.categoryPlaylists = data.playlists.items;
+        this.categoryPlaylists = data.playlists;
       },
       error => {
         console.log(error);
@@ -40,14 +30,12 @@ export class CategoryComponent implements OnInit {
   }
 
   loadMoreCategories() {
-    this.offset = this.offset + 50;
     this.options = {
-      limit: 50,
-      offset: this.offset
+      offset: this.offset + 20
     };
     this.spotifyService.getCategoryPlaylists(this.category.id, this.options).subscribe(
       data => {
-        this.categoryPlaylists = _.concat(this.categoryPlaylists, data.playlists.items);
+        this.categoryPlaylists.items = _.concat(this.categoryPlaylists.items, data.playlists.items);
       },
       error => {
         console.log(error);

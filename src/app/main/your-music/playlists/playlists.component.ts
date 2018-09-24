@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../../../shared/spotify/angular2-spotify';
+import { SpotifyService } from '../../../shared/services/spotify-services';
 import * as _ from 'lodash';
-import { NavigationService } from '../../../shared/navigation/navigation.service';
+import { NavigationService } from '../../../shared/services/navigation.service';
 
 @Component({
     selector: 'app-playlists',

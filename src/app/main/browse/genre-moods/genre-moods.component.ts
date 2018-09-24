@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../shared/spotify/angular2-spotify';
+import {SpotifyService} from '../../../shared/services/spotify-services';
 import {Router} from '@angular/router';
-import { NavigationService } from '../../../shared/navigation/navigation.service';
+import { NavigationService } from '../../../shared/services/navigation.service';
 
 @Component({
   selector: 'app-genre-moods',
@@ -18,13 +18,6 @@ export class GenreMoodsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCategories();
-  }
-
-  getCategories() {
-    this.options = {
-      limit: 50
-    };
     this.spotifyService.getCategories(this.options).subscribe(
       data => {
         this.categories = data;

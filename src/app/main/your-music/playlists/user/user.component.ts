@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './user.service';
-import { SpotifyService } from '../../../../shared/spotify/angular2-spotify';
+import { UserService } from '../../../../shared/services/user.service';
+import { SpotifyService } from '../../../../shared/services/spotify-services';
 import { UtilitiesService } from '../../../../shared/utilities/utilities.service';
-import { NavigationService } from '../../../../shared/navigation/navigation.service';
+import { NavigationService } from '../../../../shared/services/navigation.service';
 import * as _ from 'lodash';
 
 @Component({

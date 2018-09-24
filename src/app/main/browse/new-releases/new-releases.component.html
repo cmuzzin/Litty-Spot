@@ -1,25 +1,25 @@
-<p class="title is-2 has-text-centered">New Albums and Singles</p>
-<div class="columns is-multiline push-around">
-  <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let new of newReleases">
-    <div class="card">
-      <div class="card-image">
-        <figure class="image is-square">
-          <img src="{{new?.images[0]?.url}}" alt="no image">
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="content">
-          <p class="is-size-6 clickable link-hover" (click)="goToAlbum(new)">{{new?.name}}</p>
+<div *ngIf="newReleases">
+  <h1 class="title is-2 has-text-centered">New Albums and Singles</h1>
+  <div class="columns is-multiline push-around">
+    <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let newRelease of newReleases.items">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-square">
+            <img src="{{newRelease.images[0].url}}" alt="no image" *ngIf="newRelease.images[0].url">
+            <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!newRelease.images[0].url">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <a class="subtitle clickable" (click)="goToAlbum(newRelease)">{{newRelease.name}}</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="columns push-around">
-  <div class="column">
-    <button id="loadMoreNewReleases" class="button is-primary is-outlined is-fullwidth"
-            (click)="loadMoreNewReleases()" *ngIf="newReleases?.length < totalNewReleases">
-      Load More New Releases
-    </button>
-  </div>
+  <button id="loadMoreNewReleases" class="button is-primary is-outlined is-fullwidth"
+          (click)="loadMoreNewReleases()" *ngIf="newReleases.items.length < newReleases.total">
+    Load More New Releases
+  </button>
+
 </div>

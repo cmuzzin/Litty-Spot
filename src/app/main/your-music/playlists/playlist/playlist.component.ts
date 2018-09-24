@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../../../../shared/spotify/angular2-spotify';
+import { SpotifyService } from '../../../../shared/services/spotify-services';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { ActiveSongService } from '../../../music-player/active-song.service';
 import { UtilitiesService } from '../../../../shared/utilities/utilities.service';
-import { NavigationService } from '../../../../shared/navigation/navigation.service';
+import { NavigationService } from '../../../../shared/services/navigation.service';
 import { EditPlayListService } from '../../../../shared/modals/edit-playlist-modal/edit-play-list-service';
 
 @Component({

@@ -6,19 +6,15 @@ import {CallbackComponent} from "./callback/callback.component";
 import {HttpModule} from "@angular/http";
 import {APP_BASE_HREF, CommonModule} from "@angular/common";
 import {AppConfig} from "./shared/config/app.config";
-import {SpotifyService} from "./shared/spotify/angular2-spotify";
-import {AuthService} from "./shared/auth/auth.service";
-import {AuthHttp} from "./shared/auth/auth.http";
-import {AuthGuard} from "./shared/auth/auth.guard";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SideNavComponent} from "./main/side-nav/side-nav.component";
 import {MainComponent} from "./main/main.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ActiveSongService} from "./main/music-player/active-song.service";
 import {LoadArtistService} from "./main/your-music/artists/artist/load-artist.service";
-import {UserService} from "./main/your-music/playlists/user/user.service";
+import {UserService} from "./shared/services/user.service";
 import {UtilitiesService} from "./shared/utilities/utilities.service";
-import {NavigationService} from "./shared/navigation/navigation.service";
+import {NavigationService} from "./shared/services/navigation.service";
 import {AddToPlaylistModalComponent} from "./shared/modals/add-to-playlist-modal/add-to-playlist-modal.component";
 import {AddSongToPlaylistService} from "./shared/modals/add-to-playlist-modal/add-song-to-playlist.service";
 import {EditPlaylistModalComponent} from "./shared/modals/edit-playlist-modal/edit-playlist-modal.component";
@@ -30,6 +26,8 @@ import {MusicPlayerComponent} from "./main/music-player/music-player.component";
 import {MainModule} from "./main/main.module";
 import {ControlPanelComponent} from "./main/control-panel/control-panel.component";
 import {ControlPanelServiceService} from "./main/control-panel/control-panel-service.service";
+import {AuthGuard, AuthService} from "./auth";
+import {SpotifyService} from "./shared/services/spotify-services";
 
 
 @NgModule({
@@ -86,7 +84,7 @@ import {ControlPanelServiceService} from "./main/control-panel/control-panel-ser
         authToken: localStorage.getItem('angular2-spotify-token')
       },
     },
-     AuthGuard, AuthHttp, AuthService, AppConfig
+     AuthGuard, AuthService, AppConfig
   ],
   bootstrap: [AppComponent]
 })

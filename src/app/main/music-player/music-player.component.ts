@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActiveSongService } from './active-song.service';
-import { SpotifyService } from '../../shared/spotify';
-import { NavigationService } from '../../shared/navigation/navigation.service';
+import { NavigationService } from '../../shared/services/navigation.service';
+import {SpotifyService} from "../../shared/services/spotify-services";
 
 
 @Component({
