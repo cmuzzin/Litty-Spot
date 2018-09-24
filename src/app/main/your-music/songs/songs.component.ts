@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import * as moment from 'moment';
 import * as _ from 'lodash';
 import {ActiveSongService} from '../../music-player/active-song.service';
 import {NavigationService} from '../../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
 import {SpotifyService} from "../../../shared/services/spotify-services";
+import {UtilitiesService} from "../../../shared/utilities/utilities.service";
 
 @Component({
   selector: 'app-songs',
@@ -15,42 +15,25 @@ export class SongsComponent implements OnInit {
   trackToAdd: any;
   tracks: any;
   options: any;
-  offset: any;
-  totalTracks: any;
+  offset: number = 0;
   album: any;
   selectedRow: any;
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
               private navigationService: NavigationService,
+              private utilities: UtilitiesService,
               private addSongToPlaylistService: AddSongToPlaylistService) {
   }
 
   ngOnInit() {
-    this.offset = 0;
-    this.getSavedTracks();
+    this.spotifyService.getSavedUserTracks().subscribe(
+      data => {this.tracks = data;},
+      error => {console.log(error);
+      }
+    );
     this.addSongToPlaylistService.songToAddToPlaylist.subscribe(
-      songBeingAdded => {
-        this.trackToAdd = songBeingAdded;
-      }
-    )
-  }
-
-  getSavedTracks() {
-    this.options = {
-      limit: 50
-    };
-    this.spotifyService.getSavedUserTracks(this.options).subscribe(
-      data => {
-        this.tracks = data.items;
-        this.totalTracks = data.total;
-        _.each(this.tracks, (track: any) => {
-          track.track.duration_ms = moment(track.track.duration_ms).format('m:ss')
-        })
-      },
-      error => {
-        console.log(error);
-      }
+      songBeingAdded => { this.trackToAdd = songBeingAdded; }
     )
   }
 
@@ -62,14 +45,10 @@ export class SongsComponent implements OnInit {
     };
     this.spotifyService.getSavedUserTracks(this.options).subscribe(
       data => {
-        _.each(data.items, (track: any) => {
-          track.track.duration_ms = moment(track.track.duration_ms).format('m:ss');
-        });
-        this.tracks = _.concat(this.tracks, data.items);
+        this.tracks.items = this.tracks.items.concat(data.items);
         document.getElementById('loadMoreSongsButton').blur();
       },
-      error => {
-        console.log(error);
+      error => {console.log(error);
       }
     )
   };
@@ -86,9 +65,7 @@ export class SongsComponent implements OnInit {
         };
         this.navigationService.goToAlbum(this.album);
       },
-      error => {
-        console.log(error);
-      }
+      error => {console.log(error);}
     );
   };
 
@@ -101,5 +78,9 @@ export class SongsComponent implements OnInit {
     this.selectedRow = index;
     this.activeSongService.currentSong.next(track.track);
   };
+
+  formatDuration(duration) {
+    return this.utilities.formatDuration(duration);
+  }
 
 }

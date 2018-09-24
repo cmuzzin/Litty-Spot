@@ -10,14 +10,13 @@ export class ControlPanelComponent implements OnInit {
   toggle: boolean;
 
   constructor(private controlPanelService: ControlPanelServiceService) {
-    this.controlPanelService.toggleControlPanel.subscribe(
-      toggle => {
-        this.toggle = toggle;
-      }
-    );
   }
 
   ngOnInit() {
+    this.controlPanelService.toggleControlPanel.subscribe(toggle => {
+        this.toggle = toggle;
+      }
+    );
   }
 
   close() {

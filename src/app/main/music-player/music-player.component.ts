@@ -29,12 +29,8 @@ export class MusicPlayerComponent implements OnInit {
 
     getTrack(currentSong) {
         this.spotifyService.getTrack(currentSong.id).subscribe(
-            data => {
-                this.currentSong = data;
-            },
-            error => {
-                console.log(error);
-            }
+            data => { this.currentSong = data; },
+            error => { console.log(error); }
         );
     }
 
