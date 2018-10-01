@@ -1,5 +1,4 @@
-<div *ngIf="tracks">
-  <div class="columns push-around">
+  <div class="columns push-around" *ngIf="tracks">
     <div class="column">
       <table class="table is-fullwidth">
         <thead>
@@ -9,14 +8,13 @@
           <th>Artist</th>
           <th>Album</th>
           <th></th>
-          <th><i class="fa fa-clock-o"></i></th>
+          <th>
+            <i class="fa fa-clock-o"></i>
+          </th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let track of tracks.items; let i = index"
-            class="clickable"
-            (dblclick)="setClickedRow(i, track)"
-            [class.is-selected]="i == selectedRow">
+        <tr *ngFor="let track of tracks.items; let i = index" class="clickable" (dblclick)="setClickedRow(i, track)">
           <td>{{i + 1}}</td>
           <td>{{track.track.name}}</td>
           <td (click)="goToArtist(track.track.album.artists[0])">{{track.track.album.artists[0].name}}</td>
@@ -33,6 +31,5 @@
       </button>
     </div>
   </div>
-</div>
 
 

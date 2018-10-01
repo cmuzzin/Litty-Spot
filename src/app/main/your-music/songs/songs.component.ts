@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as _ from 'lodash';
 import {ActiveSongService} from '../../music-player/active-song.service';
 import {NavigationService} from '../../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
@@ -32,9 +31,7 @@ export class SongsComponent implements OnInit {
       error => {console.log(error);
       }
     );
-    this.addSongToPlaylistService.songToAddToPlaylist.subscribe(
-      songBeingAdded => { this.trackToAdd = songBeingAdded; }
-    )
+    this.addSongToPlaylistService.songToAddToPlaylist.subscribe(songBeingAdded => { this.trackToAdd = songBeingAdded; })
   }
 
   loadMoreTracks() {
