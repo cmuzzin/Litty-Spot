@@ -16,7 +16,6 @@ export class NavigationService {
     goToArtist(artist) {
         this.loadArtistService.currentArtist.next(artist);
         this.router.navigate(['main/artist'])
-
     };
 
     goToPlaylist(playlist) {

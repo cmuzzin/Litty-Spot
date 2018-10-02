@@ -46,7 +46,7 @@ const routes: Routes = [
         data: { title: 'Search Spotify'}
       },
       {
-        path: 'playlist',
+        path: 'playlist/:ownerId/:id',
         component: PlaylistComponent
       },
       {
@@ -105,7 +105,6 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: [AuthGuard]
       },
       {
         path: 'browse',
@@ -127,8 +126,7 @@ const routes: Routes = [
           }
         ]
       }
-    ],
-    canActivate: [AuthGuard]
+    ]
   }
 ];
 

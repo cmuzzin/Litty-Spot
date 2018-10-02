@@ -15,15 +15,16 @@ export class UserComponent implements OnInit {
     userPlaylists: any;
     userId: any;
     options: any;
-    offset: any;
+    offset: number = 0;
     totalUserPlaylists: any;
 
-    constructor(private userService: UserService, private spotifyService: SpotifyService, private utilities: UtilitiesService,
+    constructor(private userService: UserService,
+                private spotifyService: SpotifyService,
+                private utilities: UtilitiesService,
                 private navigationService: NavigationService) {
     }
 
     ngOnInit() {
-        this.offset = 0;
         this.userService.user.subscribe(
             userId => {
                 if (userId) {
@@ -42,25 +43,15 @@ export class UserComponent implements OnInit {
             limit: 50
         };
         this.spotifyService.getUserPlaylists(this.userId, this.options).subscribe(
-            data => {
-                this.userPlaylists = data.items;
-                this.totalUserPlaylists = data.total;
-            },
-            error => {
-                console.log(error);
-            }
+            data => { this.userPlaylists = data;},
+            error => {console.log(error);}
         )
     };
 
     getUserInfo() {
         this.spotifyService.getUser(this.userId).subscribe(
-            data => {
-                this.user = data;
-                this.user.followers.total = this.utilities.numberWithCommas(this.user.followers.total);
-            },
-            error => {
-                console.log(error);
-            }
+            data => {this.user = data;},
+            error => {console.log(error);}
         )
     };
 
@@ -76,7 +67,7 @@ export class UserComponent implements OnInit {
         };
         this.spotifyService.getUserPlaylists(this.user.id, this.options).subscribe(
             data => {
-                this.userPlaylists = _.concat(this.userPlaylists, data.items);
+                this.userPlaylists.items = _.concat(this.userPlaylists.items, data.items);
                 document.getElementById('loadMoreUserPlaylists').blur();
             },
             error => {

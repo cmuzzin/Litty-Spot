@@ -1,29 +1,37 @@
-<div class="columns is-multiline push-around">
-
-  <div class="column is-full" *ngIf="playlist?.tracks.items?.length > 0">
-    <div class="row">
-      <div class="columns">
-        <div class="column is-one-quarter">
-          <figure class="image is-5by4">
-            <img src="{{playlist?.images[0]?.url}}" width="{{playlist.images[0]?.width}}"
-                 height="{{playlist.images[0]?.height}}" alt="Image">
-          </figure>
-          <p>
-            <button class="button is-primary is-outlined is-rounded is-fullwidth push-down" *ngIf="user.id === playlist.owner.id" (click)="toggleEditModal(playlist)">Edit Playlist</button>
-          </p>
-        </div>
-        <div class="column is-three-quarters">
-          <p class="title" [(ngModel)]="playlist.name" ngDefaultControl>{{playlist.name}}</p>
-          <p class="push-down">Playlist By: <a class="is-link is-outlined" (click)="goToUser(playlist.owner.id)">{{user.id}}</a></p>
-          <p [(ngModel)]="playlist.description" ngDefaultControl [innerHTML]='playlist.description'></p>
-          <p>{{playlist.tracks.total}} songs | {{playlist.followers.total}} followers</p>
-          <p class="push-down">
-            <button class="button is-primary is-outlined is-rounded is-large"
-                    *ngIf="followed === false && user.id != playlist.owner.id" (click)="followPlaylist()">Follow</button>
-            <button class="button is-primary is-rounded is-large"
-                    *ngIf="followed === true && user.id != playlist.owner.id" (click)="unfollowPlaylist()">Unfollow</button>
-          </p>
-        </div>
+<div class="columns is-multiline push-around" *ngIf="playlist.id">
+  <div class="column is-full">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <figure class="image is-5by4">
+          <img src="{{playlist.images[0].url}}"
+               width="{{playlist.images[0].width}}"
+               height="{{playlist.images[0].height}}"
+               *ngIf="playlist.images.length">
+          <img src="http://bulma.io/images/placeholders/480x480.png"
+               *ngIf="!playlist.images.length">
+        </figure>
+        <p>
+          <button class="button is-primary is-outlined is-rounded is-fullwidth"
+                  *ngIf="user.id === playlist.owner.id"
+                  (click)="toggleEditModal(playlist)">Edit Playlist
+          </button>
+        </p>
+      </div>
+      <div class="column is-three-quarters">
+        <p class="title" [(ngModel)]="playlist.name" ngDefaultControl>{{playlist.name}}</p>
+        <p>Playlist By:
+          <a class="is-link is-outlined" (click)="goToUser(playlist.owner.id)">{{user.id}}</a>
+        </p>
+        <p [(ngModel)]="playlist.description" ngDefaultControl [innerHTML]='playlist.description'></p>
+        <p>{{formatNumberWithCommas(playlist.tracks.total)}} songs | {{formatNumberWithCommas(playlist.followers.total)}} followers</p>
+        <p>
+          <button class="button is-primary is-outlined is-rounded"
+                  *ngIf="followed === false && user.id !== playlist.owner.id" (click)="followPlaylist()">Follow
+          </button>
+          <button class="button is-primary is-rounded"
+                  *ngIf="followed === true && user.id !== playlist.owner.id" (click)="unfollowPlaylist()">Unfollow
+          </button>
+        </p>
       </div>
     </div>
   </div>
@@ -39,31 +47,21 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="clickable" *ngFor="let track of tracks; let i = index" (dblclick)="setClickedRow(i, track)"
-          [class.is-selected]="i == selectedRow">
+      <tr class="clickable" *ngFor="let item of playlist.tracks.items; let i = index" (dblclick)="setClickedRow(i, track)">
         <td>{{i + 1}}</td>
-        <td class="table-truncate">
-          <p class="table-truncate__body">
-            {{track.track.name}}
-          </p>
+        <td>{{item.track.name}}</td>
+        <td>
+          <a (click)="goToArtist(item.track.artists[0])">{{item.track.artists[0].name}}</a>
         </td>
         <td>
-          <span class="td-hover" (click)="goToArtist(track.track.artists[0])">{{track.track.artists[0].name}}</span>
+          <a (click)="goToAlbum(item.track.album)">{{item.track.album.name}}</a>
         </td>
-        <td class="table-truncate">
-          <span class="td-hover table-truncate__body" (click)="goToAlbum(track.track.album)">{{track.track.album.name}}</span>
-        </td>
-        <td>{{track.track.duration_ms}}</td>
+        <td>{{formatDuration(item.track.duration_ms)}}</td>
       </tr>
       </tbody>
     </table>
     <button id="loadMorePlaylistTracks" class="button is-primary is-outlined is-fullwidth"
-            *ngIf="tracks?.length < tracksTotal" (click)="loadMoreTracks()">Load More Tracks
+            *ngIf="playlist.tracks.items.length < playlist.tracks.total" (click)="loadMoreTracks()">Load more tracks
     </button>
-  </div>
-  <div class="column is-full" *ngIf="playlist?.tracks.items?.length  === 0">
-    <div class="notification is-danger">
-      <p>This playlist has no data. Go explore and add some songs to it!</p>
-    </div>
   </div>
 </div>

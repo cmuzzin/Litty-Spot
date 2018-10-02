@@ -8,30 +8,17 @@ import {NavigationService} from "../../../shared/services/navigation.service";
   styleUrls: ['./most-played.component.scss']
 })
 export class MostPlayedComponent implements OnInit {
-  options: any;
-  mostPlayedArtists: any;
-  type: string;
+  mostPlayed: any;
+  type: string = 'artist';
 
   constructor(private spotifyService: SpotifyService, private navigationService: NavigationService) { }
 
   ngOnInit() {
-    this.type = 'artists';
-    this.loadUserPersonalizationData();
-  }
-
-  loadUserPersonalizationData() {
-    this.options = {
-      limit: 50
-    };
-    this.spotifyService.getUserTopArtistsAndTracks(this.type, this.options).subscribe(
-      data => {
-        this.mostPlayedArtists = data.items;
-      },
-      error => {
-        console.log(error);
-      }
+    this.spotifyService.getUserTopArtistsAndTracks(this.type).subscribe(
+      data => {this.mostPlayed = data.items;},
+      error => {console.log(error);}
     )
-  };
+  }
 
   goToArtist(artist) {
     this.navigationService.goToArtist(artist);

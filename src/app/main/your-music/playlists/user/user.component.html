@@ -1,34 +1,31 @@
-<div class="columns is-multiline push-around">
+<div class="columns is-multiline push-around" *ngIf="user">
   <div class="column is-full has-text-centered ">
-    <img class="is-square img-circle user-image" src="{{user?.images[0]?.url}}">
-    <p class="title is-1 user-name">{{user?.display_name}}</p>
-    <p class="subtitle is-4 user-title">PUBLIC PLAYLISTS</p>
+    <img class="is-square img-circle" src="{{user.images[0].url}}">
+    <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!user.images[0].url">
+    <p class="title is-1">{{user.display_name}}</p>
+    <p class="subtitle is-4">PUBLIC PLAYLISTS</p>
   </div>
-  <div class="column is-12">
-    <div class="columns is-multiline">
-      <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet"
-           *ngFor="let playlist of userPlaylists">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-square">
-              <img src="{{playlist.images[0].url}}" alt="" *ngIf="playlist.images.length > 0">
-              <img src="http://bulma.io/images/placeholders/480x480.png" alt="" *ngIf="playlist.images.length === 0">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <p class="is-size-6 remove-margin-bottom-spacing clickable link-hover" (click)="goToPlaylist(playlist)">
-                {{playlist.name}}</p>
-            </div>
-          </div>
-        </div>
+</div>
+<div class="columns is-multiline push-around" *ngIf="userPlaylists">
+  <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet"
+       *ngFor="let playlist of userPlaylists.items">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{playlist.images[0].url}}" *ngIf="playlist.images.length">
+          <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!playlist.images.length">
+        </figure>
       </div>
-      <div class="column is-full">
-        <button id="loadMoreUserPlaylists" class="button is-primary is-outlined is-fullwidth"
-                (click)="loadMorePlaylists()"
-                *ngIf="userPlaylists?.length < totalUserPlaylists">Load more Playlists
-        </button>
+      <div class="card-content">
+        <div class="content">
+          <p class="subtitle" (click)="goToPlaylist(playlist)">{{playlist.name}}</p>
+        </div>
       </div>
     </div>
   </div>
+  <button id="loadMoreUserPlaylists" class="button is-primary is-outlined is-fullwidth"
+          (click)="loadMorePlaylists()"
+          *ngIf="userPlaylists.items.length < userPlaylists.total">
+    Load more playlists
+  </button>
 </div>

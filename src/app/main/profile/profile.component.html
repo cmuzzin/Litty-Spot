@@ -1,7 +1,7 @@
-<div class="columns is-multiline is-centered is-vcentered push-around">
-  <div class="column is-full ">
-    <img class="is-square img-circle" src="{{user?.images[0].url}}" *ngIf="user.images.length">
-    <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" alt="" *ngIf="user.images.length === 0">
+<div class="columns is-multiline push-around">
+  <div class="column is-full has-text-centered">
+    <img class="is-square img-circle" src="{{user.images[0].url}}" *ngIf="user.images.length">
+    <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!user.images.length">
     <h1 class="title is-1">{{user.display_name}}</h1>
     <button class="button is-primary is-outlined is-large" (click)="logout()">Logout</button>
   </div>
