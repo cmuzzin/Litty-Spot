@@ -28,7 +28,6 @@
     "bulma": "^0.7.1",
     "bulma-quickview": "0.0.1",
     "bulma-switch": "0.0.2",
-    "bulma-tooltip": "0.0.4",
     "core-js": "^2.4.1",
     "express": "^4.16.0",
     "firebase": "^5.0.2",

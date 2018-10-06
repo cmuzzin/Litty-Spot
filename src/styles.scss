@@ -1,26 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bulma/css/bulma.css";
+@import "variables";
+@import "~bulma/bulma";
 @import "~font-awesome/css/font-awesome.css";
-@import "assets/bulma-variables";
-@import "assets/variables";
 @import "~ngx-toastr/toastr.css";
 @import "~bulma-switch/switch";
 @import "~bulma-quickview/quickview";
-@import "~bulma-tooltip/tooltip";
 
-
-html {
-  background-color: $app-background;
-}
-
-body {
-  overflow: visible !important;
+html, body {
   font-family: "Open Sans";
-}
-
-.main {
-  margin-bottom: 100px;
-  background-color: $app-background;
+  background-color: #fafafa;
 }
 
 .push-around {

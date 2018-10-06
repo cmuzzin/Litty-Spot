@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { SpotifyService } from '../../../../shared/services/spotify-services';
-import { UtilitiesService } from '../../../../shared/utilities/utilities.service';
+import { UtilitiesService } from '../../../../shared/services/utilities.service';
 import { NavigationService } from '../../../../shared/services/navigation.service';
 import * as _ from 'lodash';
 import {Router} from "@angular/router";

@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import {ActiveSongService} from '../music-player/active-song.service';
 import {NavigationService} from '../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
-import {UtilitiesService} from "../../shared/utilities/utilities.service";
+import {UtilitiesService} from "../../shared/services/utilities.service";
 import {Router} from "@angular/router";
 
 

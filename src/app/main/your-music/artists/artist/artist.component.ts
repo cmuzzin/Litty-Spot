@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import {LoadArtistService} from './load-artist.service';
-import {UtilitiesService} from '../../../../shared/utilities/utilities.service';
+import {UtilitiesService} from '../../../../shared/services/utilities.service';
 
 @Component({
   selector: 'app-artist',

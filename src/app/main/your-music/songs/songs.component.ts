@@ -3,7 +3,7 @@ import {ActiveSongService} from '../../music-player/active-song.service';
 import {NavigationService} from '../../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
 import {SpotifyService} from "../../../shared/services/spotify-services";
-import {UtilitiesService} from "../../../shared/utilities/utilities.service";
+import {UtilitiesService} from "../../../shared/services/utilities.service";
 
 @Component({
   selector: 'app-songs',

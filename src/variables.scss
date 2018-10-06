@@ -1,0 +1,98 @@
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+@import "~bulma/sass/utilities/derived-variables.sass";
+
+// Colors
+$black:        hsl(0, 0%, 4%) !default
+$black-bis:    hsl(0, 0%, 7%) !default
+$black-ter:    hsl(0, 0%, 14%) !default
+
+$grey-darker:  hsl(0, 0%, 21%) !default
+$grey-dark:    hsl(0, 0%, 29%) !default
+$grey:         hsl(0, 0%, 48%) !default
+$grey-light:   hsl(0, 0%, 71%) !default
+$grey-lighter: hsl(0, 0%, 86%) !default
+
+$white-ter:    hsl(0, 0%, 96%) !default
+$white-bis:    hsl(0, 0%, 98%) !default
+$white:        hsl(0, 0%, 100%) !default
+
+$orange:       hsl(14,  100%, 53%) !default
+$yellow:       hsl(48,  100%, 67%) !default
+$green:        hsl(141, 71%,  48%) !default
+$turquoise:    hsl(171, 100%, 41%) !default
+$cyan:         hsl(204, 86%,  53%) !default
+$blue:         hsl(217, 71%,  53%) !default
+$purple:       hsl(271, 100%, 71%) !default
+$red:          hsl(348, 100%, 61%) !default
+
+
+// custom
+$dark-blue: #004369;
+$dark-blue-invert: findColorInvert($dark-blue);
+$alt-purple: hsl(275,87%,45%);
+$alt-purple-invert: findColorInvert($alt-purple);
+$section-grey: #f4f7fa;
+$section-grey-invert: findColorInvert($section-grey);
+$accent-color: #535b6e;
+
+//Spotify Colors:
+$spotify-green: #1ed760;
+$spotify-green-invert: findColorInvert($spotify-green);
+$spotify-black: #191414;
+$spotify-black-invert: findColorInvert($spotify-black);
+
+
+
+
+$addColors: (
+  "alt-purple":($alt-purple, $alt-purple-invert),
+  "dark-blue": ($dark-blue, $dark-blue-invert),
+  "section-grey": ($section-grey, $section-grey-invert),
+  "spotify-green": ($spotify-green, $spotify-green-invert),
+  "spotify-black": ($spotify-black, $spotify-black-invert)
+);
+$colors: map-merge($colors, $addColors);
+
+// Typography
+
+$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
+$family-monospace: monospace !default
+$render-mode: optimizeLegibility !default
+
+$size-1: 3rem !default
+$size-2: 2.5rem !default
+$size-3: 2rem !default
+$size-4: 1.5rem !default
+$size-5: 1.25rem !default
+$size-6: 1rem !default
+$size-7: 0.75rem !default
+
+$weight-light: 300 !default
+$weight-normal: 400 !default
+$weight-medium: 500 !default
+$weight-semibold: 600 !default
+$weight-bold: 700 !default
+
+$primary: $turquoise !default
+$info: $cyan !default
+$success: $green !default
+$warning: $yellow !default
+$danger: $red !default
+
+$light: $white-ter !default
+$dark: $grey-darker !default
+
+// General colors
+
+$background: $white-ter !default
+$border: $grey-lighter !default
+$border-hover: $grey-light !default
+
+
+//overrides
+$menu-item-active-background-color: $primary;
+$tabs-link-active-color: $primary;
+$tabs-link-active-border-bottom-color: $primary;
+$table-background-color: none;
+

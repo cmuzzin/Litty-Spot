@@ -13,7 +13,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ActiveSongService} from "./main/music-player/active-song.service";
 import {LoadArtistService} from "./main/your-music/artists/artist/load-artist.service";
 import {UserService} from "./shared/services/user.service";
-import {UtilitiesService} from "./shared/utilities/utilities.service";
+import {UtilitiesService} from "./shared/services/utilities.service";
 import {NavigationService} from "./shared/services/navigation.service";
 import {AddToPlaylistModalComponent} from "./shared/modals/add-to-playlist-modal/add-to-playlist-modal.component";
 import {AddSongToPlaylistService} from "./shared/modals/add-to-playlist-modal/add-song-to-playlist.service";
@@ -21,7 +21,6 @@ import {EditPlaylistModalComponent} from "./shared/modals/edit-playlist-modal/ed
 import {EditPlayListService} from "./shared/modals/edit-playlist-modal/edit-play-list-service";
 import {ToastrModule} from "ngx-toastr";
 import {HomeModule} from "./home/home.module";
-import {BrowseModule} from "./main/browse/browse.module";
 import {MusicPlayerComponent} from "./main/music-player/music-player.component";
 import {MainModule} from "./main/main.module";
 import {ControlPanelComponent} from "./main/control-panel/control-panel.component";
@@ -42,15 +41,13 @@ import {SpotifyService} from "./shared/services/spotify-services";
     ControlPanelComponent
   ],
   imports: [
-    AppRoutingModule,
+    CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     FormsModule,
-    BrowserAnimationsModule,
-    HomeModule,
     ReactiveFormsModule,
-    BrowseModule,
-    CommonModule,
+    HomeModule,
     MainModule,
     ToastrModule.forRoot({
       timeOut: 5000,
@@ -60,7 +57,8 @@ import {SpotifyService} from "./shared/services/spotify-services";
       progressBar: true,
       newestOnTop: true,
       preventDuplicates: true
-    })
+    }),
+    AppRoutingModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},

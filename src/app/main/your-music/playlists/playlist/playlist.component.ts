@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import * as _ from 'lodash';
 import {ActiveSongService} from '../../../music-player/active-song.service';
-import {UtilitiesService} from '../../../../shared/utilities/utilities.service';
+import {UtilitiesService} from '../../../../shared/services/utilities.service';
 import {NavigationService} from '../../../../shared/services/navigation.service';
 import {EditPlayListService} from '../../../../shared/modals/edit-playlist-modal/edit-play-list-service';
 import {ActivatedRoute} from "@angular/router";
