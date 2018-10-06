@@ -12,32 +12,25 @@ import {NavigationService} from '../../../shared/services/navigation.service';
 
 export class AlbumsComponent implements OnInit {
   albums: any;
+  offset: number = 0;
   options: any;
-  offset: any;
   albumsTotal: any;
 
-  constructor(public spotifyService: SpotifyService, public router: Router, private navigationService: NavigationService) {
+  constructor(private spotifyService: SpotifyService,
+              private router: Router,
+              private navigationService: NavigationService) {
   }
 
   ngOnInit() {
-    this.offset = 0;
-    this.getSavedAlbums();
-  }
-
-  getSavedAlbums() {
-    this.options = {
-      limit: 50
-    };
-    this.spotifyService.getSavedUserAlbums(this.options).subscribe(
+    this.spotifyService.getSavedUserAlbums().subscribe(
       data => {
         this.albumsTotal = data.total;
         this.albums = data.items
       },
-      error => {
-        console.log(error);
+      error => {console.log(error);
       }
     )
-  };
+  }
 
   loadMoreAlbums() {
     this.offset = this.offset + 20;

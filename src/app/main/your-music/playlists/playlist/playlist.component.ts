@@ -31,11 +31,8 @@ export class PlaylistComponent implements OnInit {
 
   ngOnInit() {
     this.ar.params.subscribe(params => {
-      console.log(params);
       this.spotifyService.getPlaylist(params.ownerId, params.id).subscribe(
-        data => {
-          this.playlist = data;
-        },
+        data => {this.playlist = data;},
         error => {console.log(error)}
       );
       this.user = JSON.parse(localStorage.getItem('user'));
@@ -107,9 +104,7 @@ export class PlaylistComponent implements OnInit {
         };
         this.navigationService.goToAlbum(this.album);
       },
-      error => {
-        console.log(error);
-      }
+      error => {console.log(error);}
     );
   };
 

@@ -6,9 +6,9 @@
     <p class="subtitle is-4">PUBLIC PLAYLISTS</p>
   </div>
 </div>
-<div class="columns is-multiline push-around" *ngIf="userPlaylists">
+<div class="columns is-multiline push-around" *ngIf="playlists">
   <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet"
-       *ngFor="let playlist of userPlaylists.items">
+       *ngFor="let playlist of playlists.items">
     <div class="card">
       <div class="card-image">
         <figure class="image is-square">
@@ -25,7 +25,7 @@
   </div>
   <button id="loadMoreUserPlaylists" class="button is-primary is-outlined is-fullwidth"
           (click)="loadMorePlaylists()"
-          *ngIf="userPlaylists.items.length < userPlaylists.total">
+          *ngIf="playlists.items.length < playlists.total">
     Load more playlists
   </button>
 </div>

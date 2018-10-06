@@ -4,6 +4,7 @@ import { SpotifyService } from '../../../../shared/services/spotify-services';
 import { UtilitiesService } from '../../../../shared/utilities/utilities.service';
 import { NavigationService } from '../../../../shared/services/navigation.service';
 import * as _ from 'lodash';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-user',
@@ -12,16 +13,16 @@ import * as _ from 'lodash';
 })
 export class UserComponent implements OnInit {
     user: any;
-    userPlaylists: any;
+    playlists: any;
     userId: any;
     options: any;
     offset: number = 0;
-    totalUserPlaylists: any;
 
     constructor(private userService: UserService,
                 private spotifyService: SpotifyService,
                 private utilities: UtilitiesService,
-                private navigationService: NavigationService) {
+                private navigationService: NavigationService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -33,30 +34,20 @@ export class UserComponent implements OnInit {
                 } else {
                     this.userId = JSON.parse(localStorage.getItem('userId'));
                 }
-                this.getUserPlaylists();
-                this.getUserInfo();
+              this.spotifyService.getUserPlaylists(this.userId).subscribe(
+                data => { this.playlists = data;},
+                error => {console.log(error);}
+              );
+
+              this.spotifyService.getUser(this.userId).subscribe(
+                data => {this.user = data;},
+                error => {console.log(error);}
+              )
             });
     }
 
-    getUserPlaylists() {
-        this.options = {
-            limit: 50
-        };
-        this.spotifyService.getUserPlaylists(this.userId, this.options).subscribe(
-            data => { this.userPlaylists = data;},
-            error => {console.log(error);}
-        )
-    };
-
-    getUserInfo() {
-        this.spotifyService.getUser(this.userId).subscribe(
-            data => {this.user = data;},
-            error => {console.log(error);}
-        )
-    };
-
     goToPlaylist(playlist) {
-        this.navigationService.goToPlaylist(playlist);
+      this.router.navigate(['main/playlist', playlist.owner.id, playlist.id])
     }
 
     loadMorePlaylists() {
@@ -67,7 +58,7 @@ export class UserComponent implements OnInit {
         };
         this.spotifyService.getUserPlaylists(this.user.id, this.options).subscribe(
             data => {
-                this.userPlaylists.items = _.concat(this.userPlaylists.items, data.items);
+                this.playlists.items = _.concat(this.playlists.items, data.items);
                 document.getElementById('loadMoreUserPlaylists').blur();
             },
             error => {
