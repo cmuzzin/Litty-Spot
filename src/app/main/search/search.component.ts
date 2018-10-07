@@ -87,11 +87,11 @@ export class SearchComponent implements OnInit {
   }
 
   clear() {
-    this.artists = [];
-    this.albums = [];
-    this.playlists = [];
-    this.tracks = [];
-    this.searchQuery = '';
+    this.artists = null;
+    this.albums = null;
+    this.playlists = null;
+    this.tracks = null;
+    this.searchQuery = null;
   };
 
   setClickedRow(index, track) {this.activeSongService.currentSong.next(track)};
