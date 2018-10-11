@@ -6,6 +6,7 @@ import {NavigationService} from '../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
 import {UtilitiesService} from "../../shared/services/utilities.service";
 import {Router} from "@angular/router";
+import {FormControl, Validators} from "@angular/forms";
 
 
 @Component({
@@ -15,6 +16,7 @@ import {Router} from "@angular/router";
 })
 export class SearchComponent implements OnInit {
   searchQuery: string;
+  searchInput: FormControl = new FormControl('', Validators.required);
   noResults: boolean = false;
   type: string = 'album,artist,track,playlist';
   artists: any;
@@ -34,18 +36,22 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  search() {
-    this.spotifyService.search(this.searchQuery, this.type).subscribe(
-      data => {
-        this.artists = data.artists;
-        this.albums = data.albums;
-        this.playlists = data.playlists;
-        this.tracks = data.tracks;
-      },
-      error => {console.log(error);}
-    )
+    this.searchInput.valueChanges.debounceTime(300).subscribe(
+      value => {
+        this.searchQuery = value;
+        this.spotifyService.search(value, this.type).subscribe(
+          data => {
+            this.artists = data.artists;
+            this.albums = data.albums;
+            this.playlists = data.playlists;
+            this.tracks = data.tracks;
+          },
+          error => {
+            console.log(error);
+          }
+        )
+      }
+    );
   }
 
   loadMoreTracks() {
@@ -94,7 +100,9 @@ export class SearchComponent implements OnInit {
     this.searchQuery = null;
   };
 
-  setClickedRow(index, track) {this.activeSongService.currentSong.next(track)};
+  setClickedRow(index, track) {
+    this.activeSongService.currentSong.next(track)
+  };
 
   formatDuration(duration) {
     return this.utilities.formatDuration(duration);

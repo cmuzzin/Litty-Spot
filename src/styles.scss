@@ -39,6 +39,10 @@ html, body {
   cursor: pointer;
 }
 
+.is-fixed {
+  position: fixed;
+}
+
 .no-transition {
   transition: 0s !important;
 }
@@ -57,19 +61,6 @@ html, body {
   border-radius: 50%;
 }
 
-
-.table-truncate {
-  position: relative;
-  width: 30%;
-}
-
-.table-truncate__body {
-  position: absolute;
-  max-width: 95%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 $widthAmounts: (1, 2.5, 3, 4 , 5, 6, 7); // Just add the numbers here, you can use points too.
 $widthUnit: "em"; // Add the unit here (rem|em|px|%)

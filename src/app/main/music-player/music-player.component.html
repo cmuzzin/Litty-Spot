@@ -1,44 +1,31 @@
-<footer *ngIf="currentSong?.name">
-  <div class="container-fluid">
-    <div class="columns has-text-centered push-around" *ngIf="currentSong">
-      <div class="column is-one-third">
-        <div class="song-content">
-          <article class="media">
-            <figure class="media-left">
-              <p class="image is-64x64">
-                <img src="{{currentSong?.album.images[0].url}}">
-              </p>
-            </figure>
-            <div class="content">
-              <p class="is-size-5 text-white truncate">{{currentSong?.name}}</p>
-              <p class="is-size-6 text-white clickable truncate"
-                 (click)="goToArtist(currentSong.artists[0])">{{currentSong?.artists[0].name}}</p>
-            </div>
-          </article>
-        </div>
-      </div>
-      <div class="column is-two-thirds">
-        <div class="columns">
-          <div class="column is-two-thirds">
-            <audio class="audio-player" controls autoplay src="{{currentSong?.preview_url}}"
-                   *ngIf="currentSong.preview_url">Your browser does not support the audio tag.
-            </audio>
-            <article class="message is-danger" *ngIf="!currentSong?.preview_url">
-              <div class="message-body">
-                This track doesn't have a preview available. You can listen to the track <a
-                href="{{currentSong?.external_urls.spotify}}" class="is-link">here!</a>
-              </div>
-            </article>
-          </div>
-          <div class="column is-one-third">
-            <article class="message is-info" *ngIf="currentSong.preview_url">
-              <div class="message-body">
-                Full song <a href="{{currentSong?.external_urls.spotify}}" class="is-link">here!</a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
+<div class="card is-fixed musicPlayer" *ngIf="currentSong">
+  <div class="card-header">
+    <p class="card-header-title"></p>
+    <a class="card-header-icon" (click)="close()">
+      <span class="icon">
+        <i class="fa fa-times"></i>
+      </span>
+    </a>
+  </div>
+  <div class="card-image" *ngIf="currentSong.preview_url">
+    <figure class="image is-16by9">
+      <img src="{{currentSong.album.images[0].url}}" *ngIf="currentSong.album.images.length">
+      <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!currentSong.album.images.length">
+    </figure>
+  </div>
+  <div class="card-content has-text-centered">
+    <div *ngIf="currentSong.preview_url">
+      <h1 class="title is-6 is-marginless">{{currentSong.name}}</h1>
+      <a class="is-link" (click)="goToArtist(currentSong.artists[0])">{{currentSong.artists[0].name}}</a>
+      <audio controls autoplay src="{{currentSong.preview_url}}">
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
+    <div class="notification is-danger" *ngIf="!currentSong.preview_url">
+      This track doesn't have a preview available. You can listen to the track
+      <a class="is-link" href="{{currentSong.external_urls.spotify}}">here!</a>
     </div>
   </div>
-</footer>
+</div>
+
+

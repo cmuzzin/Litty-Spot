@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import * as _ from 'lodash';
 import { NavigationService } from '../../../../shared/services/navigation.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-category',
@@ -14,7 +15,8 @@ export class CategoryComponent implements OnInit {
   options: any;
   offset: any = 0;
 
-  constructor(private spotifyService: SpotifyService, private navigationService: NavigationService) {
+  constructor(private spotifyService: SpotifyService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -44,6 +46,6 @@ export class CategoryComponent implements OnInit {
   };
 
   goToPlaylist(playlist) {
-    this.navigationService.goToPlaylist(playlist);
+    this.router.navigate(['main/playlist', playlist.owner.id, playlist.id])
   };
 }

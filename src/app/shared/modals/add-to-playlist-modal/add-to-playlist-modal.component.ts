@@ -17,7 +17,8 @@ export class AddToPlaylistModalComponent implements OnInit {
   options: any;
   toggle: boolean;
 
-  constructor(private spotifyService: SpotifyService, private addSongToPlaylistService: AddSongToPlaylistService,
+  constructor(private spotifyService: SpotifyService,
+              private addSongToPlaylistService: AddSongToPlaylistService,
               private toastr: ToastrService) {
   }
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from "../../../shared/services/spotify-services";
 import {NavigationService} from "../../../shared/services/navigation.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-most-played',
@@ -9,15 +10,26 @@ import {NavigationService} from "../../../shared/services/navigation.service";
 })
 export class MostPlayedComponent implements OnInit {
   mostPlayed: any;
-  type: string = 'artist';
+  type: string = 'artists';
 
-  constructor(private spotifyService: SpotifyService, private navigationService: NavigationService) { }
+  constructor(private spotifyService: SpotifyService,
+              private navigationService: NavigationService,
+              private ar: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.spotifyService.getUserTopArtistsAndTracks(this.type).subscribe(
-      data => {this.mostPlayed = data.items;},
-      error => {console.log(error);}
-    )
+    this.ar.params.subscribe(
+      params => {
+        this.spotifyService.getUserTopArtistsAndTracks(this.type).subscribe(
+          data => {
+            this.mostPlayed = data.items;
+          },
+          error => {
+            console.log(error);
+          }
+        )
+      }
+    );
   }
 
   goToArtist(artist) {

@@ -10,12 +10,6 @@
           <img src="http://bulma.io/images/placeholders/480x480.png"
                *ngIf="!playlist.images.length">
         </figure>
-        <p>
-          <button class="button is-primary is-outlined is-rounded is-fullwidth"
-                  *ngIf="user.id === playlist.owner.id"
-                  (click)="toggleEditModal(playlist)">Edit Playlist
-          </button>
-        </p>
       </div>
       <div class="column is-three-quarters">
         <p class="title" [(ngModel)]="playlist.name" ngDefaultControl>{{playlist.name}}</p>
@@ -30,6 +24,10 @@
           </button>
           <button class="button is-primary is-rounded"
                   *ngIf="followed === true && user.id !== playlist.owner.id" (click)="unfollowPlaylist()">Unfollow
+          </button>
+          <button class="button is-primary is-outlined is-rounded"
+                  *ngIf="user.id === playlist.owner.id"
+                  (click)="toggleEditModal(playlist)">Edit
           </button>
         </p>
       </div>
@@ -47,7 +45,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="clickable" *ngFor="let item of playlist.tracks.items; let i = index" (dblclick)="setClickedRow(i, track)">
+      <tr class="clickable" *ngFor="let item of playlist.tracks.items; let i = index" (dblclick)="setClickedRow(item)">
         <td>{{i + 1}}</td>
         <td>{{item.track.name}}</td>
         <td>
