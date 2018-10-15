@@ -1,4 +1,4 @@
-[DEMO](https://my-spotify-1fdd4.firebaseapp.com/home)
+
 
 ## App features:
 
