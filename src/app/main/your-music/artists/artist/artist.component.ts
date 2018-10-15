@@ -10,7 +10,7 @@ import {UtilitiesService} from '../../../../shared/services/utilities.service';
 })
 export class ArtistComponent implements OnInit {
   artist: any;
-  type: string;
+  type: string = 'artist';
   isFollowing: boolean;
   artistId: any;
   artistIds: [any];
@@ -21,7 +21,6 @@ export class ArtistComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.type = 'artist';
     this.loadArtistService.currentArtist.subscribe(
       currentArtist => {
         if (currentArtist.id) {

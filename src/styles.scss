@@ -62,7 +62,9 @@ html, body {
 }
 
 .row-selected {
-  border-right: 10px solid $turquoise;
+  border-right: 8px solid $turquoise;
+  border-left: 8px solid $turquoise;
+  background-color: $section-grey;
 }
 
 $widthAmounts: (1, 2.5, 3, 4 , 5, 6, 7); // Just add the numbers here, you can use points too.

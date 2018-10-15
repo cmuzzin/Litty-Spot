@@ -2,18 +2,17 @@
     <div class="column">
       <p class="title is-2 has-text-centered">Artists</p>
       <div class="columns is-multiline">
-        <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let artist of mostPlayed">
+        <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let artist of mostPlayed">
           <div class="card">
             <div class="card-image">
               <figure class="image is-square">
                 <img src="{{artist.images[0].url}}" *ngIf="artist.images.length">
-                <img src="http://bulma.io/images/placeholders/480x480.png"
-                     *ngIf="!artist.images.length">
+                <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!artist.images.length">
               </figure>
             </div>
             <div class="card-content">
               <div class="content">
-                <p class="subtitle clickable" (click)="goToArtist(artist)">{{artist?.name}}</p>
+                <a class="is-link" (click)="goToArtist(artist)">{{artist.name}}</a>
               </div>
             </div>
           </div>

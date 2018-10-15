@@ -1,27 +1,20 @@
-<div class="columns push-around">
-  <div class="column">
-    <div class="columns is-multiline push-left">
-      <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let artist of artists">
+<div class="columns is-multiline push-around" *ngIf="artists">
+      <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let artist of artists.items">
         <div class="card">
           <div class="card-image">
             <figure class="image is-square">
-              <img src="{{artist.images[0]?.url}}" alt="">
+              <img src="{{artist.images[0].url}}" *ngIf="artist.images.length">
+              <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!artist.images.length">
             </figure>
           </div>
           <div class="card-content">
             <div class="content">
-              <p class="is-size-6 clickable link-hover" (click)="goToArtist(artist)">{{artist.name}}</p>
+              <a class="is-link" (click)="goToArtist(artist)">{{artist.name}}</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-<div class="columns push-around">
-  <div class="column">
-    <button class="button is-primary is-outlined is-fullwidth" id="loadMoreArtists" (click)="loadMoreArtists()"
-            *ngIf="artists?.length < totalArtists">Load More Artists</button>
-  </div>
+  <button id="loadMoreArtists" class="button is-primary is-outlined is-fullwidth" (click)="loadMoreArtists()"
+          *ngIf="artists.items.length < artists.total">Load More Artists</button>
 </div>
 
