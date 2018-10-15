@@ -60,10 +60,9 @@ export class PlaylistComponent implements OnInit {
   };
 
   loadMoreTracks() {
-    this.offset = this.offset + 100;
     this.options = {
       limit: 100,
-      offset: this.offset
+      offset: this.offset += 100
     };
 
     this.spotifyService.getPlaylistTracks(this.playlist.owner.id, this.playlist.id, this.options).subscribe(

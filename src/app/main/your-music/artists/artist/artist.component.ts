@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import {LoadArtistService} from './load-artist.service';
 import {UtilitiesService} from '../../../../shared/services/utilities.service';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-artist',
@@ -17,7 +18,8 @@ export class ArtistComponent implements OnInit {
 
   constructor(private spotifyService: SpotifyService,
               private loadArtistService: LoadArtistService,
-              private utilities: UtilitiesService) {
+              private utilities: UtilitiesService,
+              private ar: ActivatedRoute) {
   }
 
   ngOnInit() {
