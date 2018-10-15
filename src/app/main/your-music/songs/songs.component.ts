@@ -16,7 +16,7 @@ export class SongsComponent implements OnInit {
   tracks: any;
   options: any;
   offset: number = 0;
-  selectedRow: any;
+  selected: boolean;
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
@@ -41,7 +41,7 @@ export class SongsComponent implements OnInit {
   }
 
   loadMoreTracks() {
-    this.offset = this.offset + 50;
+    this.offset += 50;
     this.options = {
       limit: 50,
       offset: this.offset
@@ -70,9 +70,9 @@ export class SongsComponent implements OnInit {
     this.addSongToPlaylistService.toggleAddSongToPlaylist.next(true);
   };
 
-  setClickedRow(index, track) {
-    this.selectedRow = index;
-    this.activeSongService.currentSong.next(track.track);
+  setClickedRow(item, i) {
+    this.selected = i;
+    this.activeSongService.currentSong.next(item.track);
   };
 
   formatDuration(duration) {

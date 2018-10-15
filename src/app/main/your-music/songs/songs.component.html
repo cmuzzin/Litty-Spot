@@ -14,19 +14,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let track of tracks.items; let i = index" class="clickable" (dblclick)="setClickedRow(i, track)">
+        <tr *ngFor="let item of tracks.items; let i = index" class="clickable" (dblclick)="setClickedRow(item, i)"  [class.row-selected]="i === selected">
           <td>{{i + 1}}</td>
-          <td>{{track.track.name}}</td>
+          <td>{{item.track.name}}</td>
           <td>
-            <a class="is-link" (click)="goToArtist(track.track.album.artists[0])">{{track.track.album.artists[0].name}}</a>
+            <a class="is-link" (click)="goToArtist(item.track.album.artists[0])">{{item.track.album.artists[0].name}}</a>
           </td>
           <td>
-            <a class="is-link" (click)="goToAlbum(track.track.album)">{{track.track.album.name}}</a>
+            <a class="is-link" (click)="goToAlbum(item.track.album)">{{item.track.album.name}}</a>
           </td>
           <td>
-            <i class="fa fa-plus" (click)="toggleAddToPlaylistModal(track.track)"></i>
+            <i class="fa fa-plus" (click)="toggleAddToPlaylistModal(item.track)"></i>
           </td>
-          <td>{{formatDuration(track.track.duration_ms)}}</td>
+          <td>{{formatDuration(item.track.duration_ms)}}</td>
         </tr>
         </tbody>
       </table>

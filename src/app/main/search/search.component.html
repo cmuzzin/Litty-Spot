@@ -100,7 +100,7 @@
         <tbody>
         <tr *ngFor="let track of tracks.items; let i = index"
             class="clickable"
-            (dblclick)="setClickedRow(i, track)">
+            (dblclick)="setClickedRow(track, i)" [class.row-selected]="i === selected">
           <td>{{track.name}}</td>
           <td>
             <a class="is-link" (click)="goToArtist(track.artists[0])">{{track.artists[0].name}}</a>

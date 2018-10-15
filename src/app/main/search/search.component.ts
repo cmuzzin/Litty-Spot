@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit {
   album: any;
   options: any;
   offset: number = 0;
+  selected: boolean;
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
@@ -75,17 +76,7 @@ export class SearchComponent implements OnInit {
   };
 
   goToAlbum(album) {
-    this.spotifyService.getAlbum(album.id).subscribe(
-      data => {
-        this.album = {
-          album: data
-        };
-        this.navigationService.goToAlbum(this.album);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.router.navigate(['main/album', album.id]);
   };
 
   goToPlaylist(playlist) {
@@ -100,7 +91,8 @@ export class SearchComponent implements OnInit {
     this.searchQuery = null;
   };
 
-  setClickedRow(index, track) {
+  setClickedRow(track,i) {
+    this.selected = i;
     this.activeSongService.currentSong.next(track)
   };
 
