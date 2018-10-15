@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../shared/services/spotify-services';
-import * as _ from 'lodash';
 import {NavigationService} from '../../../shared/services/navigation.service';
 import {Router} from "@angular/router";
 
@@ -17,13 +16,18 @@ export class PlaylistsComponent implements OnInit {
 
   constructor(private spotifyService: SpotifyService,
               private navigationService: NavigationService,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.spotifyService.getUserPlaylists(this.user.id).subscribe(
-      data => {this.playlists = data;},
-      error => {console.log(error);}
+      data => {
+        this.playlists = data;
+      },
+      error => {
+        console.log(error);
+      }
     );
   }
 
@@ -33,10 +37,12 @@ export class PlaylistsComponent implements OnInit {
     this.options = {offset: this.offset};
     this.spotifyService.getUserPlaylists(this.user.id).subscribe(
       data => {
-        this.playlists.items = _.concat(this.playlists.items, data.items);
+        this.playlists.items = this.playlists.items.concat(data.items);
         document.getElementById('loadMorePlaylists').blur();
       },
-      error => {console.log(error);}
+      error => {
+        console.log(error);
+      }
     );
   }
 

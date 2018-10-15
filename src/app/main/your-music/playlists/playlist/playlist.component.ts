@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
-import * as _ from 'lodash';
+import concat from 'lodash-es/concat';
 import {ActiveSongService} from '../../../music-player/active-song.service';
 import {UtilitiesService} from '../../../../shared/services/utilities.service';
 import {NavigationService} from '../../../../shared/services/navigation.service';
 import {EditPlayListService} from '../../../../shared/modals/edit-playlist-modal/edit-play-list-service';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-playlist',
@@ -18,27 +18,35 @@ export class PlaylistComponent implements OnInit {
   followed: boolean;
   options: any;
   offset: number = 0;
-  tracks: any;
-  album: any;
+  selected: boolean;
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
               private utilities: UtilitiesService,
               private navigationService: NavigationService,
               private editPlaylistService: EditPlayListService,
-              private ar: ActivatedRoute) {
+              private ar: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.ar.params.subscribe(params => {
       this.spotifyService.getPlaylist(params.ownerId, params.id).subscribe(
-        data => {this.playlist = data;},
-        error => {console.log(error)}
+        data => {
+          this.playlist = data;
+        },
+        error => {
+          console.log(error)
+        }
       );
       this.user = JSON.parse(localStorage.getItem('user'));
       this.spotifyService.playlistFollowingContains(params.ownerId, params.id, this.user.id).subscribe(
-        data => {this.followed = data[0];},
-        error => {console.log(error);}
+        data => {
+          this.followed = data[0];
+        },
+        error => {
+          console.log(error);
+        }
       )
     });
 
@@ -60,7 +68,7 @@ export class PlaylistComponent implements OnInit {
 
     this.spotifyService.getPlaylistTracks(this.playlist.owner.id, this.playlist.id, this.options).subscribe(
       tracks => {
-        this.playlist.tracks.items = _.concat(this.playlist.tracks.items, tracks.items);
+        this.playlist.tracks.items = concat(this.playlist.tracks.items, tracks.items);
         document.getElementById('loadMorePlaylistTracks').blur();
       },
       error => {
@@ -84,7 +92,7 @@ export class PlaylistComponent implements OnInit {
   unfollowPlaylist() {
     this.spotifyService.unfollowPlaylist(this.playlist.owner.id, this.playlist.id).subscribe(
       () => {
-       this.followed = !this.followed;
+        this.followed = !this.followed;
       },
       error => {
         console.log(error);
@@ -97,19 +105,12 @@ export class PlaylistComponent implements OnInit {
   };
 
   goToAlbum(album) {
-    this.spotifyService.getAlbum(album.id).subscribe(
-      data => {
-        this.album = {
-          album: data
-        };
-        this.navigationService.goToAlbum(this.album);
-      },
-      error => {console.log(error);}
-    );
+    this.router.navigate(['main/album', album.id]);
   };
 
 
-  setClickedRow(item) {
+  setClickedRow(item, i) {
+    this.selected = i;
     this.activeSongService.currentSong.next(item.track);
   };
 

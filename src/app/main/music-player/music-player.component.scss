@@ -1,8 +1,13 @@
 .musicPlayer {
+  position: fixed;
+  opacity: 0;
   bottom: 35px;
   left: 35px;
-  transition: 200ms linear all;
+  transition: 500ms linear all;
   width: 300px;
+  &.visible {
+    opacity: 1;
+  }
 }
 
 audio{

@@ -7,20 +7,17 @@ import {ControlPanelServiceService} from "./control-panel-service.service";
   styleUrls: ['./control-panel.component.scss']
 })
 export class ControlPanelComponent implements OnInit {
-  toggle: boolean;
-
+  toggle: boolean = false;
   constructor(private controlPanelService: ControlPanelServiceService) {
   }
 
   ngOnInit() {
-    this.controlPanelService.toggleControlPanel.subscribe(toggle => {
-        this.toggle = toggle;
-      }
-    );
+
   }
 
-  close() {
-    this.controlPanelService.toggleControlPanel.next(false);
+  show () {
+    this.toggle = !this.toggle;
   }
+
 
 }

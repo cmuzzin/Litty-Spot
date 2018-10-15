@@ -1,7 +1,7 @@
 <div class="columns is-multiline push-around" *ngIf="user">
   <div class="column is-full has-text-centered ">
-    <img class="is-square img-circle" src="{{user.images[0].url}}">
-    <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!user.images[0].url">
+    <img class="is-square is-rounded" src="{{user.images.length}}" *ngIf="user.images.length">
+    <img class="is-square is-rounded" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!user.images.length">
     <p class="title is-1">{{user.display_name}}</p>
     <p class="subtitle is-4">PUBLIC PLAYLISTS</p>
   </div>

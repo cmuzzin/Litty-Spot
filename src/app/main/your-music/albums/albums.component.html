@@ -1,28 +1,24 @@
-<div class="columns push-around" *ngIf="albums">
-  <div class="column">
-    <div class="columns is-multiline">
-      <div class="column is-2-widescreen is-one-quarter-desktop" *ngFor="let item of albums">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-square">
-              <img src="{{item.album.images[0].url}}" *ngIf="item.album.images.length">
-              <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!item.album.images.length">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <p class="title is-6  clickable link-hover remove-margin-bottom-spacing" (click)="goToAlbum(item)">{{item.album.name}}</p>
-              <p class=" is-size-6 ">{{item.album.artists[0].name}}</p>
-            </div>
-          </div>
+<div class="columns is-multiline" *ngIf="albums">
+  <div class="column is-one-fifth-desktop is-full-tablet" *ngFor="let item of albums.items">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{item.album.images[0].url}}" *ngIf="item.album.images.length">
+          <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!item.album.images.length">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="content">
+          <p class="subtitle" (click)="goToAlbum(item.album)">{{item.album.name}}</p>
+          <a class="is-link">{{item.album.artists[0].name}}</a>
         </div>
       </div>
     </div>
-    <div class="columns">
-      <div class="column">
-        <button id="loadMoreAlbums" class="button is-primary is-outlined  is-fullwidth" *ngIf="albums?.length < albumsTotal" (click)="loadMoreAlbums()">Load More Albums</button>
-      </div>
-    </div>
   </div>
+  <button id="loadMoreAlbums"
+          class="button is-primary is-outlined is-fullwidth"
+          *ngIf="albums.items.length < albums.total"
+          (click)="loadMoreAlbums()">Load More Albums
+  </button>
 </div>
 

@@ -17,10 +17,14 @@
         <tr *ngFor="let track of tracks.items; let i = index" class="clickable" (dblclick)="setClickedRow(i, track)">
           <td>{{i + 1}}</td>
           <td>{{track.track.name}}</td>
-          <td (click)="goToArtist(track.track.album.artists[0])">{{track.track.album.artists[0].name}}</td>
-          <td (click)="goToAlbum(track.track.album)">{{track.track.album.name}}</td>
           <td>
-            <i class="fa fa-plus" aria-hidden="true" (click)="toggleAddToPlaylistModal(track.track)"></i>
+            <a class="is-link" (click)="goToArtist(track.track.album.artists[0])">{{track.track.album.artists[0].name}}</a>
+          </td>
+          <td>
+            <a class="is-link" (click)="goToAlbum(track.track.album)">{{track.track.album.name}}</a>
+          </td>
+          <td>
+            <i class="fa fa-plus" (click)="toggleAddToPlaylistModal(track.track)"></i>
           </td>
           <td>{{formatDuration(track.track.duration_ms)}}</td>
         </tr>

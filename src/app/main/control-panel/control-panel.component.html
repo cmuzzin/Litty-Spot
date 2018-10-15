@@ -1,14 +1,14 @@
-<div id="quickviewDefault" class="quickview" [ngClass]="{'is-active' : toggle}">
-  <header class="quickview-header">
-    <p class="title">Playback Control</p>
-    <span class="delete" (click)="close()"></span>
-  </header>
-  <div class="quickview-body">
-    <div class="quickview-block">
-
+<div class="dropdown push-down" [ngClass]="{'is-active': toggle}">
+  <div class="dropdown-trigger">
+    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2" (click)="show()">
+      <span>Playback</span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+    <div class="dropdown-content">
+      <div class="dropdown-item">
+        <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+      </div>
     </div>
   </div>
-  <footer class="quickview-footer">
-
-  </footer>
 </div>

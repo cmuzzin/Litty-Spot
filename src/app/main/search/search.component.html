@@ -3,15 +3,12 @@
     <div class="column is-full">
       <div class="field is-grouped">
         <p class="control has-icons-left has-icons-right is-expanded">
-          <input class="input is-primary"
+          <input class="input"
                  placeholder="Search for a Artist, Song, Album or Playlist"
                  [formControl]="searchInput">
           <span class="icon is-small is-left"><i class="fa fa-search"></i></span>
         </p>
         <p class="control">
-          <a class="button is-primary is-outlined" (click)="search()">
-            Search
-          </a>
           <a class="button is-danger is-outlined" (click)="clear()">
             Reset
           </a>
@@ -30,7 +27,7 @@
 <div id="artists" class="section" *ngIf="artists  && !noResults">
   <h1 class="title is-2 has-text-centered">Artists</h1>
   <div class="columns is-multiline">
-    <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let artist of artists.items">
+    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let artist of artists.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -40,7 +37,7 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <a class="subtitle clickable" (click)="goToArtist(artist)">{{artist.name}}</a>
+            <a class="is-link" (click)="goToArtist(artist)">{{artist.name}}</a>
           </div>
         </div>
       </div>
@@ -50,7 +47,7 @@
 <div id="albums" class="section" *ngIf="albums && !noResults">
   <h1 class="title is-2 has-text-centered">Albums</h1>
   <div class="columns is-multiline">
-    <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let album of albums.items">
+    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let album of albums.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -60,7 +57,7 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <a class="subtitle clickable" (click)="goToAlbum(album)">{{album.name}}</a>
+            <a class="is-link" (click)="goToAlbum(album)">{{album.name}}</a>
           </div>
         </div>
       </div>
@@ -70,8 +67,7 @@
 <div id="playlists" class="section" *ngIf="playlists && !noResults">
   <p class="title is-2 has-text-centered">Playlists</p>
   <div class="columns is-multiline">
-    <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet"
-         *ngFor="let playlist of playlists.items">
+    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let playlist of playlists.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -81,7 +77,7 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <a class="subtitle clickable" (click)="goToPlaylist(playlist)">{{playlist.name}}</a>
+            <a class="is-link" (click)="goToPlaylist(playlist)">{{playlist.name}}</a>
           </div>
         </div>
       </div>
@@ -106,10 +102,14 @@
             class="clickable"
             (dblclick)="setClickedRow(i, track)">
           <td>{{track.name}}</td>
-          <td (click)="goToArtist(track.artists[0])">{{track.artists[0].name}}</td>
-          <td (click)="goToAlbum(track.album)">{{track.album.name}}</td>
           <td>
-            <i class="fa fa-plus" aria-hidden="true" (click)="toggleAddToPlaylistModal(track)"></i>
+            <a class="is-link" (click)="goToArtist(track.artists[0])">{{track.artists[0].name}}</a>
+          </td>
+          <td>
+            <a class="is-link" (click)="goToAlbum(track.album)">{{track.album.name}}</a>
+          </td>
+          <td>
+            <i class="fa fa-plus" (click)="toggleAddToPlaylistModal(track)"></i>
           </td>
           <td>{{formatDuration(track.duration_ms)}}</td>
           <td>

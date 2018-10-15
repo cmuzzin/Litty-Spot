@@ -2,7 +2,7 @@
   <div class="column is-full">
     <div class="columns">
       <div class="column is-one-quarter">
-        <figure class="image is-5by4">
+        <figure class="image is-square">
           <img src="{{playlist.images[0].url}}"
                width="{{playlist.images[0].width}}"
                height="{{playlist.images[0].height}}"
@@ -14,11 +14,11 @@
       <div class="column is-three-quarters">
         <p class="title" [(ngModel)]="playlist.name" ngDefaultControl>{{playlist.name}}</p>
         <p>Playlist By:
-          <a class="is-link is-outlined" (click)="goToUser(playlist.owner.id)">{{user.id}}</a>
+          <a class="is-link is-outlined push-left" (click)="goToUser(playlist.owner.id)">{{user.id}}</a>
         </p>
-        <p [(ngModel)]="playlist.description" ngDefaultControl [innerHTML]='playlist.description'></p>
-        <p>{{formatNumberWithCommas(playlist.tracks.total)}} songs | {{formatNumberWithCommas(playlist.followers.total)}} followers</p>
-        <p>
+        <p class="push-down" [(ngModel)]="playlist.description" ngDefaultControl [innerHTML]='playlist.description'></p>
+        <p>{{formatNumberWithCommas(playlist.tracks.total)}} songs {{formatNumberWithCommas(playlist.followers.total)}} followers</p>
+        <p class="push-down">
           <button class="button is-primary is-outlined is-rounded"
                   *ngIf="followed === false && user.id !== playlist.owner.id" (click)="followPlaylist()">Follow
           </button>
@@ -34,18 +34,23 @@
     </div>
   </div>
   <div class="column is-full">
-    <table class="table table-striped is-fullwidth">
+    <table class="table table-striped is-hoverable is-fullwidth">
       <thead>
       <tr>
         <th></th>
         <th>Title</th>
         <th>Artist</th>
         <th>Album</th>
-        <th><i class="fa fa-clock-o"></i></th>
+        <th>
+          <i class="fa fa-clock-o"></i>
+        </th>
       </tr>
       </thead>
       <tbody>
-      <tr class="clickable" *ngFor="let item of playlist.tracks.items; let i = index" (dblclick)="setClickedRow(item)">
+      <tr class="clickable"
+          *ngFor="let item of playlist.tracks.items; let i = index"
+          (dblclick)="setClickedRow(item, i)"
+          [class.row-selected]="i === selected">
         <td>{{i + 1}}</td>
         <td>{{item.track.name}}</td>
         <td>
@@ -58,8 +63,10 @@
       </tr>
       </tbody>
     </table>
-    <button id="loadMorePlaylistTracks" class="button is-primary is-outlined is-fullwidth"
-            *ngIf="playlist.tracks.items.length < playlist.tracks.total" (click)="loadMoreTracks()">Load more tracks
+    <button id="loadMorePlaylistTracks"
+            class="button is-primary is-outlined is-fullwidth"
+            *ngIf="playlist.tracks.items.length < playlist.tracks.total"
+            (click)="loadMoreTracks()">Load more tracks
     </button>
   </div>
 </div>

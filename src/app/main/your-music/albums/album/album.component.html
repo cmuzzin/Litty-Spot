@@ -1,24 +1,24 @@
-<div class="columns is-multiline push-around">
-  <div class="column is-4-widescreen is-4-desktop is-full-tablet">
-    <div class="card">
+<div class="columns is-multiline push-around" *ngIf="album">
+  <div class="column is-one-quarter-desktop is-full-tablet">
+    <div class="card has-text-centered">
       <div class="card-image">
         <figure class="image is-4by3">
-          <img src="{{album?.album.images[0]?.url}}" width="{{album?.album.images[0]?.width}}" height="{{album?.album.images[0]?.height}}" alt="Image">
+          <img src="{{album.images[0].url}}" *ngIf="album.images.length">
+          <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!album.images.length">
         </figure>
       </div>
       <div class="card-content">
-        <p class="is-size-5">{{album?.album.name}}</p>
-        <span class="is-size-6 clickable album-artist" (click)="goToArtist(album?.album.artists[0])">{{album?.album.artists[0].name}}</span>
-        <p class="push">{{album?.album.release_date | date: 'yyyy'}} - {{album?.album.tracks.total}} songs</p>
-        <!--<button class="button is-primary is-medium" *ngIf="isPlaying" (click)="pauseAlbum()">Pause</button>-->
+        <h1 class="title is-marginless">{{album.name}}</h1>
+        <a class="is-link is-size-4" (click)="goToArtist(album.artists[0])">{{album.artists[0].name}}</a>
+        <p class="push">{{album.release_date | date: 'yyyy'}} - {{album.total}} songs</p>
       </div>
       <footer class="card-footer">
-        <a class="card-footer-item" *ngIf="!saved" (click)="saveAlbum(album.album)"><button class="button is-primary is-outlined is-medium is-fullwidth save-button">Save</button></a>
-        <a class="card-footer-item" *ngIf="saved" (click)="removeAlbum(album.album)"><button class="button is-primary is-medium is-fullwidth save-button">Remove</button></a>
+        <a class="card-footer-item" *ngIf="!saved" (click)="saveAlbum(album.album)"><button class="button is-primary is-outlined is-medium is-fullwidth">Save</button></a>
+        <a class="card-footer-item" *ngIf="saved" (click)="removeAlbum(album.album)"><button class="button is-primary is-medium is-fullwidth">Remove</button></a>
       </footer>
     </div>
   </div>
-  <div class="column is-8-widescreen is-8-desktop is-full-tablet">
+  <div class="column is-three-quarters-desktop is-full-tablet">
     <table class="table table-striped is-fullwidth">
       <thead>
       <tr>
@@ -28,10 +28,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let track of albumTracks; let i = index" class="clickable" (dblclick)="setClickedRow(i, track)" [class.is-selected]="i == selectedRow">
+      <tr *ngFor="let track of album.tracks.items; let i = index"
+          class="clickable"
+          (dblclick)="setClickedRow(track, i)"
+          [class.row-selected]="i === selected">
         <td>{{i + 1}}</td>
-        <td>{{track?.name}}</td>
-        <td>{{track?.duration_ms}}</td>
+        <td>{{track.name}}</td>
+        <td>{{formatDuration(track.duration_ms)}}</td>
       </tr>
       </tbody>
     </table>

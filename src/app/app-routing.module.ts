@@ -50,7 +50,7 @@ const routes: Routes = [
         component: PlaylistComponent
       },
       {
-        path: 'album',
+        path: 'album/:albumId',
         component: AlbumComponent
       },
       {

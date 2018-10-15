@@ -32,6 +32,6 @@ export class FeaturedComponent implements OnInit {
   }
 
   goToPlaylist(playlist) {
-    this.navigationService.goToPlaylist(playlist);
+    this.router.navigate(['main/playlist', playlist.owner.id, playlist.id])
   };
 }

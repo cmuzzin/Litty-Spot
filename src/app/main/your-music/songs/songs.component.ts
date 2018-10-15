@@ -4,6 +4,7 @@ import {NavigationService} from '../../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
 import {SpotifyService} from "../../../shared/services/spotify-services";
 import {UtilitiesService} from "../../../shared/services/utilities.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-songs',
@@ -15,23 +16,28 @@ export class SongsComponent implements OnInit {
   tracks: any;
   options: any;
   offset: number = 0;
-  album: any;
   selectedRow: any;
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
               private navigationService: NavigationService,
               private utilities: UtilitiesService,
-              private addSongToPlaylistService: AddSongToPlaylistService) {
+              private addSongToPlaylistService: AddSongToPlaylistService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.spotifyService.getSavedUserTracks().subscribe(
-      data => {this.tracks = data;},
-      error => {console.log(error);
+      data => {
+        this.tracks = data;
+      },
+      error => {
+        console.log(error);
       }
     );
-    this.addSongToPlaylistService.songToAddToPlaylist.subscribe(songBeingAdded => { this.trackToAdd = songBeingAdded; })
+    this.addSongToPlaylistService.songToAddToPlaylist.subscribe(songBeingAdded => {
+      this.trackToAdd = songBeingAdded;
+    })
   }
 
   loadMoreTracks() {
@@ -45,7 +51,8 @@ export class SongsComponent implements OnInit {
         this.tracks.items = this.tracks.items.concat(data.items);
         document.getElementById('loadMoreSongsButton').blur();
       },
-      error => {console.log(error);
+      error => {
+        console.log(error);
       }
     )
   };
@@ -55,15 +62,7 @@ export class SongsComponent implements OnInit {
   };
 
   goToAlbum(album) {
-    this.spotifyService.getAlbum(album.id).subscribe(
-      data => {
-        this.album = {
-          album: data
-        };
-        this.navigationService.goToAlbum(this.album);
-      },
-      error => {console.log(error);}
-    );
+    this.router.navigate(['main/album', album.id]);
   };
 
   toggleAddToPlaylistModal(track) {

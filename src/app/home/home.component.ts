@@ -13,17 +13,15 @@ export class HomeComponent implements OnInit {
   user: any;
 
   constructor(public router: Router,
-              private spotifyService: SpotifyService,
-              private auth: AuthService) {
+              private spotifyService: SpotifyService) {
   }
 
   public login() {
     this.spotifyService.login().subscribe(
-      success => {
+      () => {
         this.spotifyService.getCurrentUser()
           .subscribe(data => {
               localStorage.setItem('user', JSON.stringify(data));
-              this.auth.user.next(data);
               this.router.navigateByUrl('main');
             },
             err => console.error(err));
@@ -37,9 +35,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.user.subscribe(data => {
-      console.log(data);
-    });
 
   }
 

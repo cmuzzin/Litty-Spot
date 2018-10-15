@@ -1,29 +1,31 @@
-<div class="card is-fixed musicPlayer" *ngIf="currentSong">
-  <div class="card-header">
-    <p class="card-header-title"></p>
-    <a class="card-header-icon" (click)="close()">
+<div class="musicPlayer" [ngClass]="{visible: currentSong}">
+  <div class="card has-shadow" *ngIf="currentSong">
+    <div class="card-header">
+      <p class="card-header-title"></p>
+      <a class="card-header-icon" (click)="close()">
       <span class="icon">
         <i class="fa fa-times"></i>
       </span>
-    </a>
-  </div>
-  <div class="card-image" *ngIf="currentSong.preview_url">
-    <figure class="image is-16by9">
-      <img src="{{currentSong.album.images[0].url}}" *ngIf="currentSong.album.images.length">
-      <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!currentSong.album.images.length">
-    </figure>
-  </div>
-  <div class="card-content has-text-centered">
-    <div *ngIf="currentSong.preview_url">
-      <h1 class="title is-6 is-marginless">{{currentSong.name}}</h1>
-      <a class="is-link" (click)="goToArtist(currentSong.artists[0])">{{currentSong.artists[0].name}}</a>
-      <audio controls autoplay src="{{currentSong.preview_url}}">
-        Your browser does not support the audio tag.
-      </audio>
+      </a>
     </div>
-    <div class="notification is-danger" *ngIf="!currentSong.preview_url">
-      This track doesn't have a preview available. You can listen to the track
-      <a class="is-link" href="{{currentSong.external_urls.spotify}}">here!</a>
+    <div class="card-image" *ngIf="currentSong.preview_url">
+      <figure class="image is-16by9">
+        <img src="{{currentSong.album.images[0].url}}" *ngIf="currentSong.album.images.length">
+        <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!currentSong.album.images.length">
+      </figure>
+    </div>
+    <div class="card-content has-text-centered">
+      <div *ngIf="currentSong.preview_url">
+        <h1 class="title is-6 is-marginless">{{currentSong.name}}</h1>
+        <a class="is-link" (click)="goToArtist(currentSong.artists[0])">{{currentSong.artists[0].name}}</a>
+        <audio controls autoplay src="{{currentSong.preview_url}}">
+          Your browser does not support the audio tag.
+        </audio>
+      </div>
+      <div class="notification is-danger" *ngIf="!currentSong.preview_url">
+        This track doesn't have a preview available. You can listen to the track
+        <a class="is-link" href="{{currentSong.external_urls.spotify}}">here!</a>
+      </div>
     </div>
   </div>
 </div>
