@@ -10,7 +10,7 @@
       <div class="card-content">
         <div class="content">
           <p class="subtitle" (click)="goToAlbum(item.album)">{{item.album.name}}</p>
-          <a class="is-link" (click)="goToArtist(artist)">{{item.album.artists[0].name}}</a>
+          <a class="is-link" (click)="goToArtist(item.album.artists[0])">{{item.album.artists[0].name}}</a>
         </div>
       </div>
     </div>
