@@ -48,4 +48,9 @@ export class AlbumsComponent implements OnInit {
     this.router.navigate(['main/album', album.id])
   }
 
+  goToArtist(artist) {
+    this.router.navigate(['main/artist', artist.id])
+  };
+
+
 }

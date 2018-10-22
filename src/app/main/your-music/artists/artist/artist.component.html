@@ -1,31 +1,38 @@
-<section class="hero is-dark is-bold" *ngIf="artist">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-multiline is-centered is-vcentered">
-        <div class="column is-full">
-          <figure class="image">
-            <img class="is-rounded" src="{{artist.images[0].url}}">
-          </figure>
-        </div>
-        <div class="column is-full has-text-centered">
-          <p class="title is-1">{{artist?.name}}</p>
-          <p class="subtitle">{{artist?.followers.total}} followers</p>
-          <button class="button is-primary is-medium is-outlined" *ngIf="isFollowing === false" (click)="followArtist()">
-            Follow
-          </button>
-          <button class="button is-primary is-medium clickable follow-button" *ngIf="isFollowing === true"
-                  (click)="unfollowArtist()">Unfollow
-          </button>
+<div *ngIf="artist">
+  <section class="hero is-dark is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-multiline is-centered is-vcentered">
+          <div class="column is-full">
+            <figure class="image">
+              <img class="is-rounded" src="{{artist.images[0].url}}">
+            </figure>
+          </div>
+          <div class="column is-full has-text-centered">
+            <p class="title is-1">{{artist.name}}</p>
+            <p class="subtitle">{{artist.followers.total}} followers</p>
+            <button class="button is-primary is-medium is-outlined" *ngIf="!isFollowing" (click)="followArtist()">
+              Follow
+            </button>
+            <button class="button is-primary is-medium" *ngIf="isFollowing"
+                    (click)="unfollowArtist()">Unfollow
+            </button>
+          </div>
         </div>
       </div>
     </div>
+  </section>
+  <div class="tabs">
+    <ul>
+      <li *ngFor="let view of views; let i = index" [class.is-active]="i === active">
+        <a href="javascript:void(0);" (click)="active = i">{{view.type}}</a>
+      </li>
+    </ul>
   </div>
-</section>
-<div class="tabs">
-  <ul>
-    <li routerLinkActive="is-active"><a routerLink="/main/artist/overview">Owerview</a></li>
-    <li routerLinkActive="is-active"><a routerLink="/main/artist/related-artists">Related Artist</a></li>
-  </ul>
+  <div>
+    <app-overview [artist]="artist" *ngIf="views[0].show === active"></app-overview>
+    <app-related-artists [artist]="artist" *ngIf="views[1].show === active"></app-related-artists>
+  </div>
 </div>
-<router-outlet></router-outlet>
+
 

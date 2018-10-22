@@ -11,7 +11,6 @@ import {SideNavComponent} from "./main/side-nav/side-nav.component";
 import {MainComponent} from "./main/main.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ActiveSongService} from "./main/music-player/active-song.service";
-import {LoadArtistService} from "./main/your-music/artists/artist/load-artist.service";
 import {UserService} from "./shared/services/user.service";
 import {UtilitiesService} from "./shared/services/utilities.service";
 import {NavigationService} from "./shared/services/navigation.service";
@@ -64,7 +63,6 @@ import {SpotifyService} from "./shared/services/spotify-services";
     {provide: APP_BASE_HREF, useValue: '/'},
     ActiveSongService,
     SpotifyService,
-    LoadArtistService,
     UtilitiesService,
     NavigationService,
     UserService,

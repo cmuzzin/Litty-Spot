@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
-import {LoadArtistService} from './load-artist.service';
 import {UtilitiesService} from '../../../../shared/services/utilities.service';
 import {ActivatedRoute} from "@angular/router";
 
@@ -13,41 +12,32 @@ export class ArtistComponent implements OnInit {
   artist: any;
   type: string = 'artist';
   isFollowing: boolean;
-  artistId: any;
-  artistIds: [any];
+  active: any;
+  views: any = [
+    {type: 'overview', show: 0},
+    {type: 'related', show: 1}
+  ];
 
   constructor(private spotifyService: SpotifyService,
-              private loadArtistService: LoadArtistService,
               private utilities: UtilitiesService,
               private ar: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.loadArtistService.currentArtist.subscribe(
-      currentArtist => {
-        if (currentArtist.id) {
-          this.artistId = currentArtist.id;
-          this.loadArtist(this.artistId);
-          this.checkIfUserFollowsArtist(this.artistId);
-          localStorage.setItem('artist', JSON.stringify(currentArtist));
-        } else {
-          this.artistId = JSON.parse(localStorage.getItem('artist')).id;
-          this.loadArtist(this.artistId);
-          this.checkIfUserFollowsArtist(this.artistId);
-        }
-      });
-  }
-
-  loadArtist(id) {
-    this.spotifyService.getArtist(id).subscribe(
-      data => {
-        this.artist = data;
-        this.artist.followers.total = this.utilities.numberWithCommas(this.artist.followers.total);
-      },
-      error => {
-        console.log(error);
+    this.ar.params.subscribe(
+      params => {
+        this.spotifyService.getArtist(params.artistId).subscribe(
+          data => {
+            this.active = 0;
+            this.artist = data;
+            this.checkIfUserFollowsArtist(params.artistId)
+          },
+          error => {
+            console.log(error);
+          }
+        )
       }
-    )
+    );
   }
 
   checkIfUserFollowsArtist(id) {
@@ -62,10 +52,9 @@ export class ArtistComponent implements OnInit {
   };
 
   followArtist() {
-    this.artistIds = [this.artist.id];
-    this.spotifyService.follow(this.type, this.artistIds).subscribe(
+    this.spotifyService.follow(this.type, [this.artist.id]).subscribe(
       () => {
-        this.checkIfUserFollowsArtist(this.artist.id);
+        this.isFollowing = !this.isFollowing
       },
       error => {
         console.log(error);
@@ -74,10 +63,9 @@ export class ArtistComponent implements OnInit {
   }
 
   unfollowArtist() {
-    this.artistIds = [this.artist.id];
-    this.spotifyService.unfollow(this.type, this.artistIds).subscribe(
+    this.spotifyService.unfollow(this.type, [this.artist.id]).subscribe(
       () => {
-        this.checkIfUserFollowsArtist(this.artist.id);
+        this.isFollowing = !this.isFollowing
       },
       error => {
         console.log(error);

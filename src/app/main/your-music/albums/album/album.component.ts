@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as moment from 'moment';
-import * as _ from 'lodash';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ActiveSongService} from '../../../music-player/active-song.service';
@@ -16,7 +14,6 @@ export class AlbumComponent implements OnInit {
   album: any;
   saved: boolean;
   options: any;
-  albumTracks: any;
   selected: any;
 
   constructor(private spotifyService: SpotifyService,
@@ -73,7 +70,7 @@ export class AlbumComponent implements OnInit {
   }
 
   goToArtist(artist) {
-    this.navigationService.goToArtist(artist);
+    this.router.navigate(['main/artist', artist.id])
   };
 
   setClickedRow(track, i) {

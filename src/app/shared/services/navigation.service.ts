@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadArtistService } from '../../main/your-music/artists/artist/load-artist.service';
 import { UserService } from './user.service';
 
 @Injectable()
 export class NavigationService {
-    constructor(private router: Router, private loadArtistService: LoadArtistService, private userService: UserService) {
+    constructor(private router: Router,
+                private userService: UserService) {
     }
 
     goToAlbum(album) {
@@ -14,7 +14,6 @@ export class NavigationService {
     };
 
     goToArtist(artist) {
-        this.loadArtistService.currentArtist.next(artist);
         this.router.navigate(['main/artist'])
     };
 

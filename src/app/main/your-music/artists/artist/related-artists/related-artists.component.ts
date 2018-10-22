@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../../shared/services/spotify-services';
 import {Router} from '@angular/router';
-import {NavigationService} from '../../../../../shared/services/navigation.service';
 
 @Component({
   selector: 'app-related-artists',
@@ -9,19 +8,14 @@ import {NavigationService} from '../../../../../shared/services/navigation.servi
   styleUrls: ['./related-artists.component.scss']
 })
 export class RelatedArtistsComponent implements OnInit {
-  public artist: any;
+  @Input() artist: any;
   public relatedArtists: any;
 
-  constructor(public spotifyService: SpotifyService, public router: Router,
-              private navigationService: NavigationService) {
+  constructor(private spotifyService: SpotifyService,
+              private router: Router) {
   }
 
   ngOnInit() {
-    this.loadRelatedArtists();
-  }
-
-  loadRelatedArtists() {
-    this.artist = JSON.parse(localStorage.getItem('artist'));
     this.spotifyService.getRelatedArtists(this.artist.id).subscribe(
       data => {
         this.relatedArtists = data.artists;
@@ -30,10 +24,10 @@ export class RelatedArtistsComponent implements OnInit {
         console.log(error);
       }
     )
-  };
+  }
 
   goToArtist(artist) {
-    this.navigationService.goToArtist(artist);
+    this.router.navigate(['main/artist', artist.id])
   };
 
 

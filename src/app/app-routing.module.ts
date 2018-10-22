@@ -62,19 +62,8 @@ const routes: Routes = [
         component: UserComponent
       },
       {
-        path: 'artist',
+        path: 'artist/:artistId',
         component: ArtistComponent,
-        children: [
-          { path: '', redirectTo: 'overview', pathMatch: 'full' },
-          {
-            path: 'overview',
-            component: OverviewComponent
-          },
-          {
-            path: 'related-artists',
-            component: RelatedArtistsComponent
-          }
-        ]
       },
       {
         path: 'your-music',

@@ -1,127 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
-import * as _ from 'lodash';
-import { Router } from '@angular/router';
-import { ActiveSongService } from '../../../../music-player/active-song.service';
-import { NavigationService } from '../../../../../shared/services/navigation.service';
-import { LoadArtistService } from '../load-artist.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ActiveSongService} from '../../../../music-player/active-song.service';
 import {SpotifyService} from "../../../../../shared/services/spotify-services";
+import {UtilitiesService} from "../../../../../shared/services/utilities.service";
 
 @Component({
-    selector: 'app-overview',
-    templateUrl: './overview.component.html',
-    styleUrls: ['./overview.component.scss']
+  selector: 'app-overview',
+  templateUrl: './overview.component.html',
+  styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-    artist: any;
-    user: any;
-    topTracks: any;
-    options: any;
-    artistAlbums: any;
-    singles: any;
-    compilations: any;
-    album: any;
-    selectedRow: any;
-    artistId: any;
+  @Input() artist: any;
+  user: any = JSON.parse(localStorage.getItem('user'));
+  topTracks: any;
+  albums: any;
+  singles: any;
+  compilations; any;
+  options: any = {limit: 50, include_groups: 'album,single,compilation'};
+  selected: any;
 
-    constructor(public spotifyService: SpotifyService, public router: Router,
-                private activeSongService: ActiveSongService, private navigationService: NavigationService,
-                private loadArtistService: LoadArtistService) {
-    }
+  constructor(private spotifyService: SpotifyService,
+              private utilities: UtilitiesService,
+              private router: Router,
+              private ar: ActivatedRoute,
+              private activeSongService: ActiveSongService) {
+  }
 
-    ngOnInit() {
-        this.loadArtistService.currentArtist.subscribe(
-            currentArtist => {
-                if (currentArtist.id) {
-                    this.artistId = currentArtist.id;
-                    localStorage.setItem('artist', JSON.stringify(currentArtist));
-                } else {
-                    this.artistId = JSON.parse(localStorage.getItem('artist')).id;
-                }
-            });
-        this.loadTopTracks();
-        this.loadArtistAlbums();
-        this.loadArtistSingles();
-        this.loadCompliations();
-    }
-
-    loadTopTracks() {
-        this.user = JSON.parse(localStorage.getItem('user'));
-        this.spotifyService.getArtistTopTracks(this.artistId, this.user.country).subscribe(
+  ngOnInit() {
+      this.spotifyService.getArtistAlbums(this.artist.id, this.options).subscribe(
+        data => {
+          this.albums = data.items.filter(item => item.album_type === 'album');
+          this.singles = data.items.filter(item => item.album_type === 'single');
+          this.compilations = data.items.filter(item => item.album_type === 'compilation');
+          this.spotifyService.getArtistTopTracks(this.artist.id, this.user.country).subscribe(
             data => {
-                this.topTracks = data.tracks;
-                _.each(this.topTracks, (track: any) => {
-                    track.duration_ms = moment(track.duration_ms).format('m:ss');
-                })
-            },
-            error => {
-                console.log(error);
+              this.topTracks = data.tracks;
             }
-        )
-    }
+          );
+        },
+        error => console.log(error)
+      );
+  }
 
-    loadArtistAlbums() {
-        this.options = {
-            album_type: 'album',
-            limit: 50
-        };
-        this.spotifyService.getArtistAlbums(this.artistId, this.options).subscribe(
-            data => {
-                this.artistAlbums = data.items;
-            },
-            error => {
-                console.log(error);
-            }
-        )
-    }
+  goToAlbum(album) {
+    this.router.navigate(['main/album', album.id])
+  };
 
-    loadArtistSingles() {
-        this.options = {
-            album_type: 'single',
-            limit: 50
-        };
-        this.spotifyService.getArtistAlbums(this.artistId, this.options).subscribe(
-            data => {
-                this.singles = data.items;
-            },
-            error => {
-                console.log(error);
-            }
-        )
-    };
+  formatDuration(duration) {
+    return this.utilities.formatDuration(duration);
+  }
 
-    loadCompliations() {
-        this.options = {
-            album_type: 'compilation',
-            limit: 50
-        };
-        this.spotifyService.getArtistAlbums(this.artistId, this.options).subscribe(
-            data => {
-                this.compilations = data.items;
-            },
-            error => {
-                console.log(error);
-            }
-        )
-    };
-
-    goToAlbum(album) {
-        this.spotifyService.getAlbum(album.id).subscribe(
-            data => {
-                this.album = {
-                    album: data
-                };
-                this.navigationService.goToAlbum(this.album);
-            },
-            error => {
-                console.log(error);
-            }
-        );
-    };
-
-    setClickedRow(index, track) {
-        this.selectedRow = index;
-        this.activeSongService.currentSong.next(track);
-    };
+  setClickedRow(track, index) {
+    this.selected = index;
+    this.activeSongService.currentSong.next(track);
+  };
 
 }

@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../shared/services/spotify-services';
 import {Router} from '@angular/router';
-import * as _ from 'lodash';
-import {NavigationService} from '../../../shared/services/navigation.service';
 
 @Component({
   selector: 'app-artists',
@@ -15,8 +13,7 @@ export class ArtistsComponent implements OnInit {
   type: string = 'artist';
 
   constructor(public spotifyService: SpotifyService,
-              public router: Router,
-              private navigationService: NavigationService) {
+              public router: Router) {
   }
 
   ngOnInit() {
@@ -29,10 +26,6 @@ export class ArtistsComponent implements OnInit {
       }
     )
   }
-
-  goToArtist(artist) {
-    this.navigationService.goToArtist(artist);
-  };
 
   loadMoreArtists() {
     this.options = {
@@ -50,4 +43,7 @@ export class ArtistsComponent implements OnInit {
     );
   };
 
+  goToArtist(artist) {
+    this.router.navigate(['main/artist', artist.id])
+  };
 }
