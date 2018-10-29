@@ -7,7 +7,7 @@ import {ArtistsComponent} from "./artists/artists.component";
 import {ArtistComponent} from "./artists/artist/artist.component";
 import {PlaylistsComponent} from "./playlists/playlists.component";
 import {PlaylistComponent} from "./playlists/playlist/playlist.component";
-import {UserComponent} from "./playlists/user/user.component";
+import {OwnerComponent} from "./playlists/owner/owner.component";
 import {SongsComponent} from "./songs/songs.component";
 import {RelatedArtistsComponent} from "./artists/artist/related-artists/related-artists.component";
 import {OverviewComponent} from "./artists/artist/overview/overview.component";
@@ -31,7 +31,7 @@ import {FormsModule} from "@angular/forms";
     OverviewComponent,
     PlaylistsComponent,
     PlaylistComponent,
-    UserComponent,
+    OwnerComponent,
     SongsComponent,
     MostPlayedComponent
   ]

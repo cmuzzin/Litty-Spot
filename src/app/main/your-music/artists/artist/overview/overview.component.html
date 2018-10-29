@@ -16,7 +16,7 @@
       </table>
     </div>
   </div>
-  <div class="section columns" *ngIf="albums">
+  <div class="section columns" *ngIf="albums.length">
     <div class="column">
       <p class="title section-title is-1 has-text-centered">Albums</p>
       <div class="columns is-multiline">
@@ -38,7 +38,7 @@
       </div>
     </div>
   </div>
-  <div class="section columns" *ngIf="singles">
+  <div class="section columns" *ngIf="singles.length">
     <div class="column">
       <p class="title section-title is-1 has-text-centered">Singles</p>
       <div class="columns is-multiline">
@@ -60,7 +60,7 @@
       </div>
     </div>
   </div>
-  <div class="section columns" *ngIf="compilations">
+  <div class="section columns" *ngIf="compilations.length">
     <div class="column">
       <p class="title section-title is-1 has-text-centered">Compilations</p>
       <div class="columns is-multiline">

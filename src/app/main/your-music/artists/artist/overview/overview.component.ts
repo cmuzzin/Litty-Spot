@@ -13,9 +13,9 @@ export class OverviewComponent implements OnInit {
   @Input() artist: any;
   user: any = JSON.parse(localStorage.getItem('user'));
   topTracks: any;
-  albums: any;
-  singles: any;
-  compilations; any;
+  albums: any = [];
+  singles: any = [];
+  compilations: any = [];
   options: any = {limit: 50, include_groups: 'album,single,compilation'};
   selected: any;
 

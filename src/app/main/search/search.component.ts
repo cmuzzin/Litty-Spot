@@ -72,7 +72,7 @@ export class SearchComponent implements OnInit {
   }
 
   goToArtist(artist) {
-    this.navigationService.goToArtist(artist);
+    this.router.navigate(['main/artist', artist.id]);
   };
 
   goToAlbum(album) {

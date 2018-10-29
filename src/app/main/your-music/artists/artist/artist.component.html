@@ -10,7 +10,7 @@
           </div>
           <div class="column is-full has-text-centered">
             <p class="title is-1">{{artist.name}}</p>
-            <p class="subtitle">{{artist.followers.total}} followers</p>
+            <p class="subtitle">{{formatNumberWithCommas(artist.followers.total)}} followers</p>
             <button class="button is-primary is-medium is-outlined" *ngIf="!isFollowing" (click)="followArtist()">
               Follow
             </button>
@@ -25,7 +25,7 @@
   <div class="tabs">
     <ul>
       <li *ngFor="let view of views; let i = index" [class.is-active]="i === active">
-        <a href="javascript:void(0);" (click)="active = i">{{view.type}}</a>
+        <a (click)="active = i">{{view.type}}</a>
       </li>
     </ul>
   </div>

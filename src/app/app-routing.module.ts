@@ -21,7 +21,7 @@ import {CategoryComponent} from './main/browse/genre-moods/category/category.com
 import {ArtistComponent} from './main/your-music/artists/artist/artist.component';
 import {OverviewComponent} from './main/your-music/artists/artist/overview/overview.component';
 import {RelatedArtistsComponent} from './main/your-music/artists/artist/related-artists/related-artists.component';
-import {UserComponent} from './main/your-music/playlists/user/user.component';
+import {OwnerComponent} from './main/your-music/playlists/owner/owner.component';
 import {MostPlayedComponent} from "./main/your-music/most-played/most-played.component";
 
 const routes: Routes = [
@@ -58,8 +58,8 @@ const routes: Routes = [
         component: CategoryComponent
       },
       {
-        path: 'user',
-        component: UserComponent
+        path: 'owner/:ownerId',
+        component: OwnerComponent
       },
       {
         path: 'artist/:artistId',

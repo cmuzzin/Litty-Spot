@@ -51,8 +51,8 @@ export class PlaylistsComponent implements OnInit {
     this.router.navigate(['main/playlist', playlist.owner.id, playlist.id])
   }
 
-  goToUser(id) {
-    this.navigationService.goToUser(id);
+  goToUser(playlist) {
+    this.router.navigate(['main/owner', playlist.owner.id])
   };
 
 }

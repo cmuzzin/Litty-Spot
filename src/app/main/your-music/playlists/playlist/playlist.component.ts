@@ -100,22 +100,22 @@ export class PlaylistComponent implements OnInit {
   };
 
   goToArtist(artist) {
-    this.navigationService.goToArtist(artist);
+    this.router.navigate(['main/artist', artist.id])
   };
 
   goToAlbum(album) {
     this.router.navigate(['main/album', album.id]);
   };
 
+  goToUser(playlist) {
+    this.router.navigate(['main/owner', playlist.owner.id])
+  };
 
   setClickedRow(item, i) {
     this.selected = i;
     this.activeSongService.currentSong.next(item.track);
   };
 
-  goToUser(id) {
-    this.navigationService.goToUser(id);
-  };
 
   toggleEditModal(playlist) {
     this.editPlaylistService.playlistToBeEdited.next(playlist);

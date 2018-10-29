@@ -1,13 +1,13 @@
 <div class="columns is-multiline push-around" *ngIf="user">
   <div class="column is-full has-text-centered ">
-    <img class="is-square is-rounded" src="{{user.images.length}}" *ngIf="user.images.length">
+    <img class="is-square is-rounded" src="{{user.images[0].url}}" *ngIf="user.images.length">
     <img class="is-square is-rounded" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!user.images.length">
     <p class="title is-1">{{user.display_name}}</p>
-    <p class="subtitle is-2">PUBLIC PLAYLISTS</p>
+    <p class="subtitle is-2">Public Playlists</p>
   </div>
 </div>
 <div class="columns is-multiline push-around" *ngIf="playlists">
-  <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet"
+  <div class="column is-one-fifth-desktop is-one-third-tablet"
        *ngFor="let playlist of playlists.items">
     <div class="card">
       <div class="card-image">
@@ -18,14 +18,15 @@
       </div>
       <div class="card-content">
         <div class="content">
-          <p class="subtitle" (click)="goToPlaylist(playlist)">{{playlist.name}}</p>
+          <a class="is-link" (click)="goToPlaylist(playlist)">{{playlist.name}}</a>
         </div>
       </div>
     </div>
   </div>
-  <button id="loadMoreUserPlaylists" class="button is-primary is-outlined is-fullwidth"
+  <button id="loadMoreUserPlaylists"
+          class="button is-primary is-outlined is-fullwidth"
           (click)="loadMorePlaylists()"
           *ngIf="playlists.items.length < playlists.total">
-    Load more playlists
+    Load more
   </button>
 </div>

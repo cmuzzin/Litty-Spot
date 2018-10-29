@@ -73,4 +73,8 @@ export class ArtistComponent implements OnInit {
     )
   }
 
+  formatNumberWithCommas(number) {
+    return this.utilities.numberWithCommas(number)
+  }
+
 }
