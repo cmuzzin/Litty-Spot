@@ -112,6 +112,7 @@ export class PlaylistComponent implements OnInit {
   };
 
   setClickedRow(item, i) {
+    console.log(item);
     this.selected = i;
     this.activeSongService.currentSong.next(item.track);
   };

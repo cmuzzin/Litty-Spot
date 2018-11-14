@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {SpotifyService} from '../../../shared/services/spotify-services';
 import {Router} from '@angular/router';
@@ -12,13 +13,17 @@ import { NavigationService } from '../../../shared/services/navigation.service';
 export class NewReleasesComponent implements OnInit {
   public offset: number = 0;
   public newReleases: any;
-  public options: any;
-  private album: any;
-  constructor(private spotifyService: SpotifyService, private router: Router, private navigationService: NavigationService) { }
+
+  constructor(
+    private spotifyService: SpotifyService,
+    private router: Router,
+    private ar: ActivatedRoute) { }
 
   ngOnInit() {
+    this.ar.params.subscribe();
     this.spotifyService.getNewReleases().subscribe(
       data => {
+        console.log(data);
         this.newReleases = data.albums;
       },
       error => {
@@ -27,12 +32,12 @@ export class NewReleasesComponent implements OnInit {
     )
   }
   loadMoreNewReleases() {
-    this.options = {
-      offset: this.offset + 20,
+    const options = {
+      offset: this.offset += 20,
     };
-    this.spotifyService.getNewReleases(this.options).subscribe(
+    this.spotifyService.getNewReleases(options).subscribe(
       data => {
-        this.newReleases = _.concat(this.newReleases.items, data.albums.items);
+        this.newReleases.items = _.concat(this.newReleases.items, data.albums.items);
         document.getElementById('loadMoreNewReleases').blur();
       },
       error => {
@@ -40,18 +45,7 @@ export class NewReleasesComponent implements OnInit {
       }
     )
   }
-
   goToAlbum(album) {
-    this.spotifyService.getAlbum(album.id).subscribe(
-      data => {
-        this.album = {
-          album: data
-        };
-        this.navigationService.goToAlbum(this.album);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  };
+    this.router.navigate(['main/album', album.id]);
+  }
 }
