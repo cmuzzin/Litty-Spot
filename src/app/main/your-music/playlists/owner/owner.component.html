@@ -1,4 +1,4 @@
-<div class="columns is-multiline push-around" *ngIf="user">
+<div class="columns is-multiline" *ngIf="user">
   <div class="column is-full has-text-centered ">
     <img class="is-square is-rounded" src="{{user.images[0].url}}" *ngIf="user.images.length">
     <img class="is-square is-rounded" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!user.images.length">
@@ -6,7 +6,7 @@
     <p class="subtitle is-2">Public Playlists</p>
   </div>
 </div>
-<div class="columns is-multiline push-around" *ngIf="playlists">
+<div class="columns is-multiline" *ngIf="playlists">
   <div class="column is-one-fifth-desktop is-one-third-tablet"
        *ngFor="let playlist of playlists.items">
     <div class="card">

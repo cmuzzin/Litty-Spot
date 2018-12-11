@@ -54,7 +54,7 @@ const routes: Routes = [
         component: AlbumComponent
       },
       {
-        path: 'category',
+        path: 'category/:id',
         component: CategoryComponent
       },
       {

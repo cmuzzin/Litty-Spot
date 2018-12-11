@@ -23,7 +23,6 @@ export class PlaylistComponent implements OnInit {
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
               private utilities: UtilitiesService,
-              private navigationService: NavigationService,
               private editPlaylistService: EditPlayListService,
               private ar: ActivatedRoute,
               private router: Router) {

@@ -1,4 +1,4 @@
-<div class="columns is-multiline push-around" *ngIf="playlist.id">
+<div class="columns is-multiline" *ngIf="playlist.id">
   <div class="column is-full">
     <div class="columns">
       <div class="column is-one-quarter">
@@ -14,7 +14,7 @@
       <div class="column is-three-quarters">
         <p class="title" [(ngModel)]="playlist.name" ngDefaultControl>{{playlist.name}}</p>
         <p>Playlist By:
-          <a class="is-link is-outlined push-left" (click)="goToUser(playlist.owner.id)">{{user.id}}</a>
+          <a class="is-link is-outlined push-left" (click)="goToUser(playlist)">{{user.id}}</a>
         </p>
         <p class="push-down" [(ngModel)]="playlist.description" ngDefaultControl [innerHTML]='playlist.description'></p>
         <p>{{formatNumberWithCommas(playlist.tracks.total)}} songs {{formatNumberWithCommas(playlist.followers.total)}} followers</p>

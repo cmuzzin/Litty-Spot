@@ -1,12 +1,11 @@
-<div *ngIf="featuredPlaylists">
   <h1 class="title is-2 has-text-centered">{{featuredPlaylists.message}}</h1>
-  <div class="columns is-multiline push-around">
-    <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let featured of featuredPlaylists.playlists.items">
+  <div class="columns is-multiline">
+    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let featured of featuredPlaylists.playlists.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
-            <img src="{{featured.images[0].url}}" *ngIf="featured.images[0].url">
-            <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!featured.images[0].url">
+            <img src="{{featured.images[0].url}}" *ngIf="featured.images.length">
+            <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!featured.images.length">
           </figure>
         </div>
         <div class="card-content">
@@ -17,5 +16,3 @@
       </div>
     </div>
   </div>
-
-</div>

@@ -9,26 +9,21 @@ import {NavigationService} from '../../../shared/services/navigation.service';
   styleUrls: ['./featured.component.scss']
 })
 export class FeaturedComponent implements OnInit {
-  public featuredPlaylists: any;
+  featuredPlaylists: any = {message: '', playlists: {}};
 
-  constructor(public spotifyService: SpotifyService,
-              public router: Router,
-              private ar: ActivatedRoute,
-              private navigationService: NavigationService) {
+  constructor(private spotifyService: SpotifyService,
+              private router: Router,
+              private ar: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.ar.params.subscribe(
-      () => {
         this.spotifyService.getFeaturedPlaylists().subscribe(
           data => {
+            console.log(data);
             this.featuredPlaylists = data;
           },
           error => console.log(error)
-        )
-      },
-      error => console.log(error)
-    );
+        );
   }
 
   goToPlaylist(playlist) {

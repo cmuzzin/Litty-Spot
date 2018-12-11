@@ -1,7 +1,6 @@
-<div *ngIf="newReleases">
   <h1 class="title is-2 has-text-centered">New Albums and Singles</h1>
-  <div class="columns is-multiline push-around">
-    <div class="column is-2-widescreen is-one-quarter-desktop is-one-third-tablet" *ngFor="let newRelease of newReleases.items">
+  <div class="columns is-multiline">
+    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let newRelease of newReleases.albums.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -18,8 +17,6 @@
     </div>
   </div>
   <button id="loadMoreNewReleases" class="button is-primary is-outlined is-fullwidth"
-          (click)="loadMoreNewReleases()" *ngIf="newReleases.items.length < newReleases.total">
+          (click)="loadMoreNewReleases()" *ngIf="newReleases.albums.items.length < newReleases.albums.total">
     Load More New Releases
   </button>
-
-</div>

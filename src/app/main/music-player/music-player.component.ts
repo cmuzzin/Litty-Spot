@@ -22,7 +22,6 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activeSongService.currentSong.takeUntil(this.destroy$).subscribe(track => {
-      console.log(track);
       if (!track) {
         this.currentSong = '';
         return

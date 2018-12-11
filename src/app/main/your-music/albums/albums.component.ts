@@ -1,56 +1,47 @@
-import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../shared/services/spotify-services';
-import {Router} from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { SpotifyService } from "../../../shared/services/spotify-services";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-albums',
-  templateUrl: './albums.component.html',
-  styleUrls: ['./albums.component.scss']
+  selector: "app-albums",
+  templateUrl: "./albums.component.html",
+  styleUrls: ["./albums.component.scss"]
 })
-
 export class AlbumsComponent implements OnInit {
-  albums: any;
+  albums: any = {items:[]};
   offset: number = 0;
-  options: any;
 
-  constructor(private spotifyService: SpotifyService,
-              private router: Router) {
-  }
+  constructor(private spotifyService: SpotifyService, private router: Router) {}
 
   ngOnInit() {
     this.spotifyService.getSavedUserAlbums().subscribe(
       data => {
         this.albums = data;
       },
-      error => {console.log(error);
+      error => {
+        console.log(error);
       }
-    )
+    );
   }
 
   loadMoreAlbums() {
-    this.offset += 20;
-    this.options = {
-      offset: this.offset
-    };
-
-    this.spotifyService.getSavedUserAlbums(this.options).subscribe(
+    const options = { offset: this.offset += 20 };
+    this.spotifyService.getSavedUserAlbums(options).subscribe(
       data => {
         this.albums.items = this.albums.items.concat(data.items);
-        document.getElementById('loadMoreAlbums').blur();
+        document.getElementById("loadMoreAlbums").blur();
       },
       error => {
         console.log(error);
       }
-    )
-  };
+    );
+  }
 
   goToAlbum(album) {
-    this.router.navigate(['main/album', album.id])
+    this.router.navigate(["main/album", album.id]);
   }
 
   goToArtist(artist) {
-    this.router.navigate(['main/artist', artist.id])
-  };
-
-
+    this.router.navigate(["main/artist", artist.id]);
+  }
 }
