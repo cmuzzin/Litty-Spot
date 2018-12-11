@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../shared/services/spotify-services';
 import * as _ from 'lodash';
 import {ActiveSongService} from '../music-player/active-song.service';
-import {NavigationService} from '../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
 import {UtilitiesService} from "../../shared/services/utilities.service";
 import {Router} from "@angular/router";
@@ -24,13 +23,11 @@ export class SearchComponent implements OnInit {
   playlists: any;
   tracks: any;
   album: any;
-  options: any;
   offset: number = 0;
   selected: boolean;
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
-              private navigationService: NavigationService,
               private utilities: UtilitiesService,
               private addSongToPlaylistService: AddSongToPlaylistService,
               private router: Router) {
@@ -56,11 +53,8 @@ export class SearchComponent implements OnInit {
   }
 
   loadMoreTracks() {
-    this.offset = this.offset + 50;
-    this.options = {
-      offset: this.offset
-    };
-    this.spotifyService.search(this.searchQuery, this.type, this.options).subscribe(
+    const options = {offset: this.offset += 50};
+    this.spotifyService.search(this.searchQuery, this.type, options).subscribe(
       data => {
         this.tracks.items = _.concat(this.tracks.items, data.tracks.items);
         document.getElementById('loadMoreSearchTracks').blur();

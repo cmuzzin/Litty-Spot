@@ -3,7 +3,6 @@ import {SpotifyService} from '../../../../shared/services/spotify-services';
 import concat from 'lodash-es/concat';
 import {ActiveSongService} from '../../../music-player/active-song.service';
 import {UtilitiesService} from '../../../../shared/services/utilities.service';
-import {NavigationService} from '../../../../shared/services/navigation.service';
 import {EditPlayListService} from '../../../../shared/modals/edit-playlist-modal/edit-play-list-service';
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -16,7 +15,6 @@ export class PlaylistComponent implements OnInit {
   playlist: any = {};
   user: any;
   followed: boolean;
-  options: any;
   offset: number = 0;
   selected: boolean;
 
@@ -59,12 +57,8 @@ export class PlaylistComponent implements OnInit {
   };
 
   loadMoreTracks() {
-    this.options = {
-      limit: 100,
-      offset: this.offset += 100
-    };
-
-    this.spotifyService.getPlaylistTracks(this.playlist.owner.id, this.playlist.id, this.options).subscribe(
+    const options = {limit: 100,offset: this.offset += 100 };
+    this.spotifyService.getPlaylistTracks(this.playlist.owner.id, this.playlist.id, options).subscribe(
       tracks => {
         this.playlist.tracks.items = concat(this.playlist.tracks.items, tracks.items);
         document.getElementById('loadMorePlaylistTracks').blur();

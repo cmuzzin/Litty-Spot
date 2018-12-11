@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SpotifyService} from '../../shared/services/spotify-services';
-import {NavigationService} from '../../shared/services/navigation.service';
+import { ActiveSongService } from '../music-player/active-song.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,8 +12,8 @@ export class ProfileComponent implements OnInit {
   user: any;
 
   constructor(public router: Router,
-              public spotifyService: SpotifyService,
-              private navigationService: NavigationService) {
+              private activeSong: ActiveSongService,
+              public spotifyService: SpotifyService) {
   }
 
   ngOnInit() {
@@ -21,7 +21,9 @@ export class ProfileComponent implements OnInit {
   }
 
   logout() {
-    this.navigationService.logout();
+    localStorage.clear();
+    this.activeSong.currentSong.next('');
+    this.router.navigate(['home']);
   }
 
 }

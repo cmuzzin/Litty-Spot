@@ -11,9 +11,7 @@ import {SideNavComponent} from "./main/side-nav/side-nav.component";
 import {MainComponent} from "./main/main.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ActiveSongService} from "./main/music-player/active-song.service";
-import {UserService} from "./shared/services/user.service";
 import {UtilitiesService} from "./shared/services/utilities.service";
-import {NavigationService} from "./shared/services/navigation.service";
 import {AddToPlaylistModalComponent} from "./shared/modals/add-to-playlist-modal/add-to-playlist-modal.component";
 import {AddSongToPlaylistService} from "./shared/modals/add-to-playlist-modal/add-song-to-playlist.service";
 import {EditPlaylistModalComponent} from "./shared/modals/edit-playlist-modal/edit-playlist-modal.component";
@@ -64,8 +62,6 @@ import {SpotifyService} from "./shared/services/spotify-services";
     ActiveSongService,
     SpotifyService,
     UtilitiesService,
-    NavigationService,
-    UserService,
     AddSongToPlaylistService,
     ControlPanelServiceService,
     EditPlayListService,

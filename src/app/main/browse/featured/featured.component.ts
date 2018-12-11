@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../shared/services/spotify-services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NavigationService} from '../../../shared/services/navigation.service';
 
 @Component({
   selector: 'app-featured',
@@ -19,7 +18,6 @@ export class FeaturedComponent implements OnInit {
   ngOnInit() {
         this.spotifyService.getFeaturedPlaylists().subscribe(
           data => {
-            console.log(data);
             this.featuredPlaylists = data;
           },
           error => console.log(error)

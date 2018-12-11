@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SpotifyService } from "../../../shared/services/spotify-services";
 import { Router } from "@angular/router";
-import { NavigationService } from "../../../shared/services/navigation.service";
 
 @Component({
   selector: "app-genre-moods",
@@ -10,16 +9,14 @@ import { NavigationService } from "../../../shared/services/navigation.service";
 })
 export class GenreMoodsComponent implements OnInit {
   categories: any = {};
-  options: any;
 
   constructor(
     public spotifyService: SpotifyService,
-    public router: Router,
-    private navigationService: NavigationService
+    public router: Router
   ) {}
 
   ngOnInit() {
-    this.spotifyService.getCategories(this.options).subscribe(
+    this.spotifyService.getCategories().subscribe(
       data => {
         this.categories = data;
       },

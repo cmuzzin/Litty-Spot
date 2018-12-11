@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { SpotifyService } from "../../../../shared/services/spotify-services";
-import * as _ from "lodash";
-import { NavigationService } from "../../../../shared/services/navigation.service";
 import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -12,7 +10,6 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class CategoryComponent implements OnInit {
   category: any = {};
   playlists: any = { items: [], total: "" };
-  options: any = {};
   offset: any = 0;
 
   constructor(
@@ -38,16 +35,12 @@ export class CategoryComponent implements OnInit {
   }
 
   loadMoreCategories() {
-    this.options = {
-      offset: this.offset + 20
-    };
+    const options = {offset: this.offset += 20};
     this.spotifyService
-      .getCategoryPlaylists(this.category.id, this.options)
+      .getCategoryPlaylists(this.category.id, options)
       .subscribe(
         data => {
-          this.playlists.items = this.playlists.items.concat(
-            data.playlists.items
-          );
+          this.playlists.items = this.playlists.items.concat(data.playlists.item);
         },
         error => {
           console.log(error);

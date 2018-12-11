@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../shared/services/spotify-services';
-import {NavigationService} from '../../../shared/services/navigation.service';
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,16 +11,14 @@ export class PlaylistsComponent implements OnInit {
   offset: number = 0;
   user: any;
   playlists: any;
-  options: any = {limit: 50};
 
   constructor(private spotifyService: SpotifyService,
-              private navigationService: NavigationService,
               private router: Router) {
   }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.spotifyService.getUserPlaylists(this.user.id, this.options).subscribe(
+    this.spotifyService.getUserPlaylists(this.user.id).subscribe(
       data => {
         this.playlists = data;
       },
@@ -33,10 +30,8 @@ export class PlaylistsComponent implements OnInit {
 
 
   loadMorePlaylists() {
-    this.options = {
-      offset: this.offset += 20
-    };
-    this.spotifyService.getUserPlaylists(this.user.id, this.options).subscribe(
+    const options = {offset: this.offset += 20};
+    this.spotifyService.getUserPlaylists(this.user.id, options).subscribe(
       data => {
         this.playlists.items = this.playlists.items.concat(data.items);
         document.getElementById('loadMorePlaylists').blur();

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActiveSongService} from '../../music-player/active-song.service';
-import {NavigationService} from '../../../shared/services/navigation.service';
 import {AddSongToPlaylistService} from '../../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
 import {SpotifyService} from "../../../shared/services/spotify-services";
 import {UtilitiesService} from "../../../shared/services/utilities.service";
@@ -14,13 +13,11 @@ import {Router} from "@angular/router";
 export class SongsComponent implements OnInit {
   trackToAdd: any;
   tracks: any;
-  options: any;
   offset: number = 0;
   selected: boolean;
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
-              private navigationService: NavigationService,
               private utilities: UtilitiesService,
               private addSongToPlaylistService: AddSongToPlaylistService,
               private router: Router) {
@@ -41,12 +38,8 @@ export class SongsComponent implements OnInit {
   }
 
   loadMoreTracks() {
-    this.offset += 50;
-    this.options = {
-      limit: 50,
-      offset: this.offset
-    };
-    this.spotifyService.getSavedUserTracks(this.options).subscribe(
+    const options = {limit: 50,offset: this.offset += 50};
+    this.spotifyService.getSavedUserTracks(options).subscribe(
       data => {
         this.tracks.items = this.tracks.items.concat(data.items);
         document.getElementById('loadMoreSongsButton').blur();

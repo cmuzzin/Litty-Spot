@@ -16,6 +16,7 @@ export class NewReleasesComponent implements OnInit {
   ngOnInit() {
     this.spotifyService.getNewReleases().subscribe(
       data => {
+        console.log(data);
         this.newReleases = data;
       },
       error => {
@@ -24,15 +25,10 @@ export class NewReleasesComponent implements OnInit {
     );
   }
   loadMoreNewReleases() {
-    const options = {
-      offset: this.offset += 20
-    };
+    const options = {offset: this.offset += 20};
     this.spotifyService.getNewReleases(options).subscribe(
       data => {
-        this.newReleases.items = _.concat(
-          this.newReleases.items,
-          data.albums.items
-        );
+        this.newReleases.albums.items = this.newReleases.albums.items.concat(data.albums.items);
         document.getElementById("loadMoreNewReleases").blur();
       },
       error => {
