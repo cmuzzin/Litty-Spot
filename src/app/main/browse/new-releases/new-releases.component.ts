@@ -1,8 +1,7 @@
+import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { SpotifyService } from "../../../shared/services/spotify-services";
 import { Router } from "@angular/router";
-import * as _ from "lodash";
-import { NavigationService } from "../../../shared/services/navigation.service";
 
 @Component({
   selector: "app-new-releases",
@@ -25,10 +24,13 @@ export class NewReleasesComponent implements OnInit {
     );
   }
   loadMoreNewReleases() {
-    const options = { offset: this.offset += 20 };
+    const options = {
+      offset: this.offset += 20
+    };
     this.spotifyService.getNewReleases(options).subscribe(
       data => {
-        this.newReleases.albums.items = this.newReleases.albums.items.concat(
+        this.newReleases.items = _.concat(
+          this.newReleases.items,
           data.albums.items
         );
         document.getElementById("loadMoreNewReleases").blur();
@@ -38,7 +40,6 @@ export class NewReleasesComponent implements OnInit {
       }
     );
   }
-
   goToAlbum(album) {
     this.router.navigate(["main/album", album.id]);
   }

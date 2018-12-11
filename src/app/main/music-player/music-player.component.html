@@ -1,5 +1,5 @@
-<div class="musicPlayer" [ngClass]="{visible: currentSong}">
-  <div class="card has-shadow" *ngIf="currentSong">
+<div class="musicPlayer" [ngClass]="{visible: showPlayer}">
+  <div class="card has-shadow" *ngIf="showPlayer">
     <div class="card-header">
       <p class="card-header-title"></p>
       <a class="card-header-icon" (click)="close()">

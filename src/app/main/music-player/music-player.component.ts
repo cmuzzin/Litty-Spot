@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActiveSongService} from './active-song.service';
 import {SpotifyService} from "../../shared/services/spotify-services";
 import {Router} from "@angular/router";
-import {ReplaySubject} from "rxjs/ReplaySubject";
+import {Subject} from "rxjs/Subject";
 
 
 @Component({
@@ -12,7 +12,8 @@ import {ReplaySubject} from "rxjs/ReplaySubject";
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
   currentSong: any;
-  destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
+  showPlayer: boolean;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
 
   constructor(private activeSongService: ActiveSongService,
@@ -23,11 +24,12 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.activeSongService.currentSong.takeUntil(this.destroy$).subscribe(track => {
       if (!track) {
-        this.currentSong = '';
-        return
+        this.showPlayer = false;
+        return;
       }
       this.spotifyService.getTrack(track.id).subscribe(
         data => {
+          this.showPlayer = true;
           this.currentSong = data;
 
         },
@@ -48,9 +50,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   };
 
   close() {
-    this.activeSongService.currentSong.next('');
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this.showPlayer = false;
   }
 
 }

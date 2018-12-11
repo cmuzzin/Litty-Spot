@@ -2,9 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ActiveSongService} from '../../../music-player/active-song.service';
-import {NavigationService} from '../../../../shared/services/navigation.service';
-import {UtilitiesService} from "../../../../shared/services/utilities.service";
-
+import {UtilitiesService} from '../../../../shared/services/utilities.service';
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
@@ -20,7 +18,6 @@ export class AlbumComponent implements OnInit {
               private router: Router,
               private ar: ActivatedRoute,
               private activeSongService: ActiveSongService,
-              private navigationService: NavigationService,
               private utilities: UtilitiesService) {
   }
 
@@ -31,8 +28,8 @@ export class AlbumComponent implements OnInit {
           data => {
             this.album = data;
             this.spotifyService.userAlbumsContains(this.album.id).subscribe(
-              data => {
-                this.saved = data[0];
+              (saved) => {
+                this.saved = saved[0];
               },
               error => {
                 console.log(error);
