@@ -74,7 +74,7 @@ export class SpotifyService {
    * Pass in comma separated string or array of album ids
    */
   getAlbums(albums: string | Array<string>) {
-    let albumList = this.mountItemList(albums);
+    const albumList = this.mountItemList(albums);
     return this.api({
       method: 'get',
       url: `/albums`,
@@ -116,7 +116,7 @@ export class SpotifyService {
    * Get multiple artists
    */
   getArtists(artists: string | Array<string>) {
-    let artistList = this.mountItemList(artists);
+    const artistList = this.mountItemList(artists);
     return this.api({
       method: 'get',
       url: `/artists/`,
@@ -135,7 +135,7 @@ export class SpotifyService {
     }).map(res => res.json());
   }
 
-  //Artist Albums
+  // Artist Albums
   getArtistAlbums(artist: string, options?: SpotifyOptions) {
     artist = this.getIdFromUri(artist);
     return this.api({
@@ -311,7 +311,7 @@ export class SpotifyService {
   }
 
   userTracksContains(tracks: string | Array<string>) {
-    let trackList = this.mountItemList(tracks);
+    const trackList = this.mountItemList(tracks);
     return this.api({
       method: 'get',
       url: `/me/tracks/contains`,
@@ -321,7 +321,7 @@ export class SpotifyService {
   }
 
   saveUserTracks(tracks: string | Array<string>) {
-    let trackList = this.mountItemList(tracks);
+    const trackList = this.mountItemList(tracks);
 
     return this.api({
       method: 'put',
@@ -332,7 +332,7 @@ export class SpotifyService {
   }
 
   removeUserTracks(tracks: string | Array<string>) {
-    let trackList = this.mountItemList(tracks);
+    const trackList = this.mountItemList(tracks);
 
     return this.api({
       method: 'delete',
@@ -352,7 +352,7 @@ export class SpotifyService {
   }
 
   saveUserAlbums(albums: string | Array<string>) {
-    let albumList = this.mountItemList(albums);
+    const albumList = this.mountItemList(albums);
 
     return this.api({
       method: 'put',
@@ -363,7 +363,7 @@ export class SpotifyService {
   }
 
   removeUserAlbums(albums: string | Array<string>) {
-    let albumList = this.mountItemList(albums);
+    const albumList = this.mountItemList(albums);
 
     return this.api({
       method: 'delete',
@@ -374,7 +374,7 @@ export class SpotifyService {
   }
 
   userAlbumsContains(albums: string | Array<string>) {
-    let albumList = this.mountItemList(albums);
+    const albumList = this.mountItemList(albums);
 
     return this.api({
       method: 'get',
@@ -433,13 +433,15 @@ export class SpotifyService {
   }
 
   addPlaylistTracks(userId: string, playlistId: string, tracks: string | Array<string>, options?: { position: number }) {
-    let trackList = Array.isArray(tracks) ? tracks : tracks.split(',');
+    const trackList = Array.isArray(tracks) ? tracks : tracks.split(',');
     trackList.forEach((value, index) => {
       trackList[index] = value.indexOf('spotify:') === -1 ? 'spotify:track:' + value : value;
     });
 
-    let search = {uris: trackList.toString()};
-    if (!!options) search['position'] = options.position;
+    const search = {uris: trackList.toString()};
+    if (!!options) {
+      search['position'] = options.position;
+    }
 
     return this.api({
       method: 'post',
@@ -450,8 +452,8 @@ export class SpotifyService {
   }
 
   removePlaylistTracks(userId: string, playlistId: string, tracks: string | Array<string>) {
-    let trackList = Array.isArray(tracks) ? tracks : tracks.split(',');
-    let trackUris = [];
+    const trackList = Array.isArray(tracks) ? tracks : tracks.split(',');
+    const trackUris = [];
     trackList.forEach((value, index) => {
       trackUris[index] = {
         uri: value.indexOf('spotify:') === -1 ? 'spotify:track:' + value : value
@@ -475,7 +477,7 @@ export class SpotifyService {
   }
 
   replacePlaylistTracks(userId: string, playlistId: string, tracks: string | Array<string>) {
-    let trackList = Array.isArray(tracks) ? tracks : tracks.split(',');
+    const trackList = Array.isArray(tracks) ? tracks : tracks.split(',');
     trackList.forEach((value, index) => {
       trackList[index] = value.indexOf('spotify:') === -1 ? 'spotify:track:' + value : value;
     });
