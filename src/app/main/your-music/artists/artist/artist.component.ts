@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import {UtilitiesService} from '../../../../shared/services/utilities.service';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-artist',
@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ArtistComponent implements OnInit {
   artist: any;
-  type: string = 'artist';
+  type = 'artist';
   isFollowing: boolean;
   active: any;
   views: any = [

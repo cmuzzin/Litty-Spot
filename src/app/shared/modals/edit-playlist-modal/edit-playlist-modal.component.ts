@@ -44,7 +44,6 @@ export class EditPlaylistModalComponent implements OnInit {
           toggle => {
             this.toggle = toggle;
           }
-
         );
     }
 
@@ -71,7 +70,7 @@ export class EditPlaylistModalComponent implements OnInit {
 
     toggleCheckbox() {
         this.isChecked = !this.isChecked;
-        if (this.isChecked === true) {
+        if (this.isChecked) {
             this.publicPrivate = 'Public'
         } else {
             this.publicPrivate = 'Private'

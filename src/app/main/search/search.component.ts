@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../shared/services/spotify-services';
-import * as _ from 'lodash';
-import {ActiveSongService} from '../music-player/active-song.service';
 import {AddSongToPlaylistService} from '../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
-import {UtilitiesService} from "../../shared/services/utilities.service";
-import {Router} from "@angular/router";
-import {FormControl, Validators} from "@angular/forms";
+import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ActiveSongService } from 'app/shared/music-player/active-song.service';
+import { UtilitiesService } from 'app/shared/services/utilities.service';
 
 
 @Component({
@@ -16,14 +15,14 @@ import {FormControl, Validators} from "@angular/forms";
 export class SearchComponent implements OnInit {
   searchQuery: string;
   searchInput: FormControl = new FormControl('', Validators.required);
-  noResults: boolean = false;
-  type: string = 'album,artist,track,playlist';
+  noResults = false;
+  type = 'album,artist,track,playlist';
   artists: any;
   albums: any;
   playlists: any;
   tracks: any;
   album: any;
-  offset: number = 0;
+  offset = 0;
   selected: boolean;
 
   constructor(private spotifyService: SpotifyService,
@@ -56,7 +55,7 @@ export class SearchComponent implements OnInit {
     const options = {offset: this.offset += 50};
     this.spotifyService.search(this.searchQuery, this.type, options).subscribe(
       data => {
-        this.tracks.items = _.concat(this.tracks.items, data.tracks.items);
+        this.tracks.items = this.tracks.items.concat(data.track.items);
         document.getElementById('loadMoreSearchTracks').blur();
       },
       error => {
@@ -85,7 +84,7 @@ export class SearchComponent implements OnInit {
     this.searchQuery = null;
   };
 
-  setClickedRow(track,i) {
+  setClickedRow(track, i) {
     this.selected = i;
     this.activeSongService.currentSong.next(track)
   };

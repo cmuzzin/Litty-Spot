@@ -19,10 +19,8 @@ import {NewReleasesComponent} from './main/browse/new-releases/new-releases.comp
 import {AuthGuard} from './auth';
 import {CategoryComponent} from './main/browse/genre-moods/category/category.component';
 import {ArtistComponent} from './main/your-music/artists/artist/artist.component';
-import {OverviewComponent} from './main/your-music/artists/artist/overview/overview.component';
-import {RelatedArtistsComponent} from './main/your-music/artists/artist/related-artists/related-artists.component';
 import {OwnerComponent} from './main/your-music/playlists/owner/owner.component';
-import {MostPlayedComponent} from "./main/your-music/most-played/most-played.component";
+import { MostPlayedComponent } from './main/your-music/most-played/most-played.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

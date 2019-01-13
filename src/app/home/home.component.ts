@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from "../auth";
-import {SpotifyService} from "../shared/services/spotify-services";
+import {SpotifyService} from '../shared/services/spotify-services';
 
 
 @Component({
@@ -9,11 +8,10 @@ import {SpotifyService} from "../shared/services/spotify-services";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   user: any;
 
-  constructor(public router: Router,
-              private spotifyService: SpotifyService) {
+  constructor(private router: Router, private spotifyService: SpotifyService) {
   }
 
   public login() {
@@ -33,10 +31,4 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
-  ngOnInit() {
-
-  }
-
-
 }

@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ActiveSongService} from '../../../../music-player/active-song.service';
-import {SpotifyService} from "../../../../../shared/services/spotify-services";
-import {UtilitiesService} from "../../../../../shared/services/utilities.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SpotifyService } from 'app/shared/services/spotify-services';
+import { UtilitiesService } from 'app/shared/services/utilities.service';
+import { ActiveSongService } from 'app/shared/music-player/active-song.service';
+
 
 @Component({
   selector: 'app-overview',
@@ -33,8 +34,8 @@ export class OverviewComponent implements OnInit {
           this.singles = data.items.filter(item => item.album_type === 'single');
           this.compilations = data.items.filter(item => item.album_type === 'compilation');
           this.spotifyService.getArtistTopTracks(this.artist.id, this.user.country).subscribe(
-            data => {
-              this.topTracks = data.tracks;
+            (tracks: any) => {
+              this.topTracks = tracks.tracks;
             }
           );
         },

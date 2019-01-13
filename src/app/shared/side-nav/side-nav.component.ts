@@ -1,5 +1,5 @@
-import {Component, ElementRef, OnInit, Renderer} from '@angular/core';
-import {ControlPanelServiceService} from "../control-panel/control-panel-service.service";
+import {Component, OnInit} from '@angular/core';
+import { ControlPanelServiceService } from '../control-panel/control-panel-service.service';
 
 @Component({
   selector: 'app-side-nav',

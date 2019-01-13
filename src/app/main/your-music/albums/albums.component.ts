@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { SpotifyService } from "../../../shared/services/spotify-services";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SpotifyService } from 'app/shared/services/spotify-services';
 
 @Component({
-  selector: "app-albums",
-  templateUrl: "./albums.component.html",
-  styleUrls: ["./albums.component.scss"]
+  selector: 'app-albums',
+  templateUrl: './albums.component.html',
+  styleUrls: ['./albums.component.scss']
 })
 export class AlbumsComponent implements OnInit {
-  albums: any = {items:[]};
-  offset: number = 0;
+  albums: any = {items: []};
+  offset = 0;
 
   constructor(private spotifyService: SpotifyService, private router: Router) {}
 
@@ -29,7 +29,7 @@ export class AlbumsComponent implements OnInit {
     this.spotifyService.getSavedUserAlbums(options).subscribe(
       data => {
         this.albums.items = this.albums.items.concat(data.items);
-        document.getElementById("loadMoreAlbums").blur();
+        document.getElementById('loadMoreAlbums').blur();
       },
       error => {
         console.log(error);
@@ -38,10 +38,10 @@ export class AlbumsComponent implements OnInit {
   }
 
   goToAlbum(album) {
-    this.router.navigate(["main/album", album.id]);
+    this.router.navigate(['main/album', album.id]);
   }
 
   goToArtist(artist) {
-    this.router.navigate(["main/artist", artist.id]);
+    this.router.navigate(['main/artist', artist.id]);
   }
 }

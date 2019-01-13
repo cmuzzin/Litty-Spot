@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../../shared/services/spotify-services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ActiveSongService} from '../../../music-player/active-song.service';
-import {UtilitiesService} from '../../../../shared/services/utilities.service';
+import { SpotifyService } from 'app/shared/services/spotify-services';
+import { ActiveSongService } from 'app/shared/music-player/active-song.service';
+import { UtilitiesService } from 'app/shared/services/utilities.service';
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',

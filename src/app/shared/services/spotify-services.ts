@@ -557,7 +557,7 @@ export class SpotifyService {
   }
 
   getTracks(tracks: string | Array<string>) {
-    let trackList = this.mountItemList(tracks);
+    const trackList = this.mountItemList(tracks);
     return this.api({
       method: 'get',
       url: `/tracks/`,
@@ -568,7 +568,7 @@ export class SpotifyService {
   //#endregion
 
 
-  //$region play
+  // $region play
   getUserDevices() {
     return this.api({
       method: 'get',
@@ -643,19 +643,19 @@ export class SpotifyService {
   }
 
 
-  //# end region
+  // #end region
 
 
-  //#region login
+  // #region login
 
   login() {
-    let promise = new Promise((resolve, reject) => {
-      let w = 800,
+    const promise = new Promise((resolve, reject) => {
+      const w = 800,
         h = 500,
         left = (screen.width / 2) - (w / 2),
         top = (screen.height / 2) - (h / 2);
 
-      let params = {
+      const params = {
         client_id: this.clientId,
         redirect_uri: this.redirectUri,
         scope: this.scope || '',
@@ -663,7 +663,7 @@ export class SpotifyService {
         show_dialog: this.showDialog
       };
       let authCompleted = false;
-      let authWindow = this.openDialog(
+      const authWindow = this.openDialog(
         'https://accounts.spotify.com/authorize?' + this.toQueryString(params),
         'Spotify',
         'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=' + w + ',height=' + h + ',top=' + top + ',left=' + left,
@@ -674,7 +674,7 @@ export class SpotifyService {
         }
       );
 
-      let storageChanged = (e) => {
+      const storageChanged = (e) => {
         if (e.key === 'angular2-spotify-token') {
           if (authWindow) {
             authWindow.close();
@@ -698,8 +698,8 @@ export class SpotifyService {
   //#region utils
 
   private toQueryString(obj: Object): string {
-    let parts = [];
-    for (let key in obj) {
+    const parts = [];
+    for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
       }
@@ -708,8 +708,8 @@ export class SpotifyService {
   };
 
   private openDialog(uri, name, options, cb) {
-    let win = window.open(uri, name, options);
-    let interval = window.setInterval(() => {
+    const win = window.open(uri, name, options);
+    const interval = window.setInterval(() => {
       try {
         if (!win || win.closed) {
           window.clearInterval(interval);
@@ -723,9 +723,7 @@ export class SpotifyService {
   }
 
   private auth(isJson?: boolean): Object {
-    let auth = {
-      'Authorization': 'Bearer ' + this.authToken
-    };
+    const auth = {'Authorization': 'Bearer ' + this.authToken};
     if (isJson) {
       auth['Content-Type'] = 'application/json';
     }
@@ -741,7 +739,7 @@ export class SpotifyService {
   }
 
   private mountItemList(items: string | Array<string>): Array<string> {
-    let itemList = Array.isArray(items) ? items : items.split(',');
+    const itemList = Array.isArray(items) ? items : items.split(',');
     itemList.forEach((value, index) => {
       itemList[index] = this.getIdFromUri(value);
     });

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import concat from 'lodash-es/concat';
-import {ActiveSongService} from '../../../music-player/active-song.service';
 import {UtilitiesService} from '../../../../shared/services/utilities.service';
 import {EditPlayListService} from '../../../../shared/modals/edit-playlist-modal/edit-play-list-service';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActiveSongService } from 'app/shared/music-player/active-song.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-playlist',
@@ -15,7 +15,7 @@ export class PlaylistComponent implements OnInit {
   playlist: any = {};
   user: any;
   followed: boolean;
-  offset: number = 0;
+  offset = 0;
   selected: boolean;
 
   constructor(private spotifyService: SpotifyService,
@@ -57,7 +57,7 @@ export class PlaylistComponent implements OnInit {
   };
 
   loadMoreTracks() {
-    const options = {limit: 100,offset: this.offset += 100 };
+    const options = {limit: 100, offset: this.offset += 100 };
     this.spotifyService.getPlaylistTracks(this.playlist.owner.id, this.playlist.id, options).subscribe(
       tracks => {
         this.playlist.tracks.items = concat(this.playlist.tracks.items, tracks.items);
@@ -105,7 +105,6 @@ export class PlaylistComponent implements OnInit {
   };
 
   setClickedRow(item, i) {
-    console.log(item);
     this.selected = i;
     this.activeSongService.currentSong.next(item.track);
   };

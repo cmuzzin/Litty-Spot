@@ -1,51 +1,29 @@
-import {BrowserModule} from "@angular/platform-browser";
-import {NgModule} from "@angular/core";
-import {AppRoutingModule} from "./app-routing.module";
-import {AppComponent} from "./app.component";
-import {CallbackComponent} from "./callback/callback.component";
-import {HttpModule} from "@angular/http";
-import {APP_BASE_HREF, CommonModule} from "@angular/common";
-import {AppConfig} from "./shared/config/app.config";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {SideNavComponent} from "./main/side-nav/side-nav.component";
-import {MainComponent} from "./main/main.component";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ActiveSongService} from "./main/music-player/active-song.service";
-import {UtilitiesService} from "./shared/services/utilities.service";
-import {AddToPlaylistModalComponent} from "./shared/modals/add-to-playlist-modal/add-to-playlist-modal.component";
-import {AddSongToPlaylistService} from "./shared/modals/add-to-playlist-modal/add-song-to-playlist.service";
-import {EditPlaylistModalComponent} from "./shared/modals/edit-playlist-modal/edit-playlist-modal.component";
-import {EditPlayListService} from "./shared/modals/edit-playlist-modal/edit-play-list-service";
-import {ToastrModule} from "ngx-toastr";
-import {HomeModule} from "./home/home.module";
-import {MusicPlayerComponent} from "./main/music-player/music-player.component";
-import {MainModule} from "./main/main.module";
-import {ControlPanelComponent} from "./main/control-panel/control-panel.component";
-import {ControlPanelServiceService} from "./main/control-panel/control-panel-service.service";
-import {AuthGuard, AuthService} from "./auth";
-import {SpotifyService} from "./shared/services/spotify-services";
-
+import { AppComponent } from './app.component';
+import { CallbackComponent } from './callback/callback.component';
+import { CommonModule, APP_BASE_HREF } from '@angular/common';
+import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
+import { MainModule } from './main/main.module';
+import { ActiveSongService } from './shared/music-player/active-song.service';
+import { SpotifyService } from './shared/services/spotify-services';
+import { UtilitiesService } from './shared/services/utilities.service';
+import { AddSongToPlaylistService } from './shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
+import { ControlPanelServiceService } from './shared/control-panel/control-panel-service.service';
+import { EditPlayListService } from './shared/modals/edit-playlist-modal/edit-play-list-service';
+import { AuthGuard, AuthService } from './auth';
+import { AppConfig } from './shared/config/app.config';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CallbackComponent,
-    SideNavComponent,
-    MainComponent,
-    AddToPlaylistModalComponent,
-    EditPlaylistModalComponent,
-    MusicPlayerComponent,
-    ControlPanelComponent
+    CallbackComponent
   ],
   imports: [
     CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HomeModule,
-    MainModule,
+    AppRoutingModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-center',
@@ -55,7 +33,9 @@ import {SpotifyService} from "./shared/services/spotify-services";
       newestOnTop: true,
       preventDuplicates: true
     }),
-    AppRoutingModule
+    SharedModule,
+    HomeModule,
+    MainModule,
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
