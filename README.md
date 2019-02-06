@@ -15,7 +15,7 @@
 ## In the works
 
 <ul> 
-  <li>Upgrade to Angular 6</li>
+  <li>Upgrade Versions</li>
   <li>Version upgrades for all node packages</li>
   <li>Refresh token and auth interceptor</li>
   <li>Control panel for playbacks</li>
