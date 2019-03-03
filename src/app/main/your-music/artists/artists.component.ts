@@ -8,16 +8,16 @@ import {Router} from '@angular/router';
   styleUrls: ['./artists.component.scss']
 })
 export class ArtistsComponent implements OnInit {
-  artists: any;
-  options: any;
-  type: string = 'artist';
+  artists: any = [];
+  type = 'artist';
 
   constructor(public spotifyService: SpotifyService,
               public router: Router) {
   }
 
   ngOnInit() {
-    this.spotifyService.getFollowedArtists(this.type).subscribe(
+    const options = { limit: 50 };
+    this.spotifyService.getFollowedArtists(this.type, options).subscribe(
       data => {
         this.artists = data.artists;
       },
@@ -28,11 +28,11 @@ export class ArtistsComponent implements OnInit {
   }
 
   loadMoreArtists() {
-    this.options = {
-      limit: 20,
+    const options = {
+      limit: 50,
       after: this.artists.cursors.after
     };
-    this.spotifyService.getFollowedArtists(this.type, this.options).subscribe(
+    this.spotifyService.getFollowedArtists(this.type, options).subscribe(
       data => {
         this.artists.items = this.artists.items.concat(data.artists.items);
         document.getElementById('loadMoreArtists').blur();

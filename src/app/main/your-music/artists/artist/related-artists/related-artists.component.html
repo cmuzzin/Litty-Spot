@@ -9,9 +9,9 @@
                 <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!artist.images.length">
               </figure>
             </div>
-            <div class="card-content">
+            <div class="card-content clickable" (click)="goToArtist(artist)">
               <div class="content">
-                <a class="is-link" (click)="goToArtist(artist)">{{artist.name}}</a>
+                <h6 class="is-6 truncate">{{artist.name}}</h6>
               </div>
             </div>
           </div>

@@ -5,13 +5,13 @@
       <div class="card">
         <div class="card-image">
           <figure class="image is-4by3">
-            <img src="{{playlist.images[0].url}}" *ngIf="playlist.images[0].url">
-            <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!playlist.images[0].url">
+            <img src="{{playlist.images[0].url}}" *ngIf="playlist?.images[0].url">
+            <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!playlist?.images[0].url">
           </figure>
         </div>
-        <div class="card-content">
+        <div class="card-content clickable">
           <div class="content">
-            <a class="subtitle clickable" (click)="goToPlaylist(playlist)">{{playlist.name}}</a>
+            <h6 class="title is-6 truncate" (click)="goToPlaylist(playlist)">{{playlist.name}}</h6>
           </div>
         </div>
       </div>

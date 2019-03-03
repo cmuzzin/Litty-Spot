@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../../../shared/services/spotify-services';
 import concat from 'lodash-es/concat';
 import {UtilitiesService} from '../../../../shared/services/utilities.service';
-import {EditPlayListService} from '../../../../shared/modals/edit-playlist-modal/edit-play-list-service';
-import { ActiveSongService } from 'app/shared/music-player/active-song.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ActiveSongService } from 'app/shared/components/music-player/active-song.service';
+import { EditPlayListService } from 'app/shared/components/edit-playlist-modal/edit-play-list-service';
 
 @Component({
   selector: 'app-playlist',
@@ -24,6 +24,7 @@ export class PlaylistComponent implements OnInit {
               private editPlaylistService: EditPlayListService,
               private ar: ActivatedRoute,
               private router: Router) {
+                this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   ngOnInit() {
@@ -36,7 +37,6 @@ export class PlaylistComponent implements OnInit {
           console.log(error)
         }
       );
-      this.user = JSON.parse(localStorage.getItem('user'));
       this.spotifyService.playlistFollowingContains(params.ownerId, params.id, this.user.id).subscribe(
         data => {
           this.followed = data[0];

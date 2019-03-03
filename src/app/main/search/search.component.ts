@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from '../../shared/services/spotify-services';
-import {AddSongToPlaylistService} from '../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ActiveSongService } from 'app/shared/music-player/active-song.service';
 import { UtilitiesService } from 'app/shared/services/utilities.service';
+import { ActiveSongService } from 'app/shared/components/music-player/active-song.service';
+import { AddSongToPlaylistService } from 'app/shared/components/add-to-playlist-modal/add-song-to-playlist.service';
 
 
 @Component({

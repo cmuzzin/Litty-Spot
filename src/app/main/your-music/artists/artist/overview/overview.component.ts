@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpotifyService } from 'app/shared/services/spotify-services';
 import { UtilitiesService } from 'app/shared/services/utilities.service';
-import { ActiveSongService } from 'app/shared/music-player/active-song.service';
+import { ActiveSongService } from 'app/shared/components/music-player/active-song.service';
 
 
 @Component({

@@ -1,6 +1,6 @@
   <h1 class="title is-2 has-text-centered">Genres & Moods</h1>
   <div class="columns is-multiline">
-    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let category of categories.categories.items">
+    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let category of categories.categories?.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -8,9 +8,9 @@
             <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!category.icons[0].url">
           </figure>
         </div>
-        <div class="card-content">
+        <div class="card-content clickable">
           <div class="content">
-            <a class="subtitle clickable" (click)="goToCategory(category)">{{category.name}}</a>
+            <h6 class="title is-6 truncate" (click)="goToCategory(category)">{{category.name}}</h6>
           </div>
         </div>
       </div>

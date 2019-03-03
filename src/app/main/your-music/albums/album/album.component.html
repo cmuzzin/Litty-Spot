@@ -8,8 +8,8 @@
         </figure>
       </div>
       <div class="card-content">
-        <h1 class="title is-marginless">{{album.name}}</h1>
-        <a class="is-link is-size-4" (click)="goToArtist(album.artists[0])">{{album.artists[0].name}}</a>
+        <h6 class="title is-6 truncate is-marginless">{{album.name}}</h6>
+        <a class="is-link is-size-6" (click)="goToArtist(album.artists[0])">{{album.artists[0].name}}</a>
         <p class="push">{{album.release_date | date: 'yyyy'}} - {{album.total}} songs</p>
       </div>
       <footer class="card-footer">

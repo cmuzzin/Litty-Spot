@@ -10,13 +10,13 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <a class="subtitle clickable" (click)="goToAlbum(newRelease)">{{newRelease.name}}</a>
+            <h6 class="title is-6 truncate" (click)="goToAlbum(newRelease)">{{newRelease.name}}</h6>
           </div>
         </div>
       </div>
     </div>
   </div>
   <button id="loadMoreNewReleases" class="button is-primary is-outlined is-fullwidth"
-          (click)="loadMoreNewReleases()" *ngIf="newReleases.albums.items.length < newReleases.albums.total">
+          (click)="loadMoreNewReleases()" *ngIf="newReleases.albums.items?.length < newReleases.albums?.total">
     Load More New Releases
   </button>

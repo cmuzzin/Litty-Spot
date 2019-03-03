@@ -10,8 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class OwnerComponent implements OnInit {
   user: any;
   playlists: any;
-  options: any = { limit: 50 };
-  offset: number = 0;
+  offset = 0;
 
   constructor(
     private spotifyService: SpotifyService,
@@ -21,9 +20,9 @@ export class OwnerComponent implements OnInit {
 
   ngOnInit() {
     this.ar.params.subscribe(params => {
+      const options = { limit: 50 };
       this.spotifyService
-        .getUserPlaylists(params.ownerId, this.options)
-        .subscribe(
+        .getUserPlaylists(params.ownerId, options).subscribe(
           data => {
             this.playlists = data;
           },
@@ -43,11 +42,11 @@ export class OwnerComponent implements OnInit {
   }
 
   loadMorePlaylists() {
-    this.options = {
+    const options = {
       limit: 50,
       offset: this.offset += 50
     };
-    this.spotifyService.getUserPlaylists(this.user.id, this.options).subscribe(
+    this.spotifyService.getUserPlaylists(this.user.id, options).subscribe(
       data => {
         this.playlists.items = this.playlists.items.concat(data.items);
         document.getElementById("loadMoreUserPlaylists").blur();

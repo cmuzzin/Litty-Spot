@@ -22,7 +22,8 @@ export class CategoryComponent implements OnInit {
     this.ar.params.subscribe(params => {
       this.spotifyService.getCategory(params.id).subscribe(data => {
         this.category = data;
-        this.spotifyService.getCategoryPlaylists(params.id).subscribe(
+        const options = { limit: 50 };
+        this.spotifyService.getCategoryPlaylists(params.id, options).subscribe(
           data => {
             this.playlists = data.playlists;
           },
@@ -35,12 +36,12 @@ export class CategoryComponent implements OnInit {
   }
 
   loadMoreCategories() {
-    const options = {offset: this.offset += 20};
+    const options = {limit: 50, offset: this.offset += 50 };
     this.spotifyService
-      .getCategoryPlaylists(this.category.id, options)
-      .subscribe(
+      .getCategoryPlaylists(this.category.id, options).subscribe(
         data => {
-          this.playlists.items = this.playlists.items.concat(data.playlists.item);
+          console.log(this.playlists, data);
+          this.playlists.items = this.playlists.items.concat(data.playlists.items);
         },
         error => {
           console.log(error);

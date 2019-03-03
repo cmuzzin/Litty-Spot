@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SpotifyService } from '../../shared/services/spotify-services';
-import { ActiveSongService } from 'app/shared/music-player/active-song.service';
+import { ActiveSongService } from 'app/shared/components/music-player/active-song.service';
 
 @Component({
   selector: 'app-profile',

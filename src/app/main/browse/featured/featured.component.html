@@ -1,6 +1,6 @@
   <h1 class="title is-2 has-text-centered">{{featuredPlaylists.message}}</h1>
   <div class="columns is-multiline">
-    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let featured of featuredPlaylists.playlists.items">
+    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let featured of featuredPlaylists.playlists?.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -8,9 +8,9 @@
             <img class="is-square img-circle" src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!featured.images.length">
           </figure>
         </div>
-        <div class="card-content">
+        <div class="card-content clickable">
           <div class="content">
-            <a class="subtitle clickable"  (click)="goToPlaylist(featured)">{{featured.name}}</a>
+            <h6 class="title is-6 truncate"  (click)="goToPlaylist(featured)">{{featured.name}}</h6>
           </div>
         </div>
       </div>

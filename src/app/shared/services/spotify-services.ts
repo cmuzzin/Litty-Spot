@@ -48,7 +48,8 @@ export class SpotifyService {
   constructor(private http: Http) {
     this.clientId = '9d7ee30778da43ce8b048be43fb84050';
     this.redirectUri = 'http://' + window.location.host + '/callback';
-    this.scope = 'user-follow-modify user-follow-read playlist-read-private playlist-read-collaborative playlist-modify-public ' + 'playlist-modify-private user-library-read user-library-modify user-read-private user-read-playback-state user-modify-playback-state';
+    this.scope = 'user-follow-modify user-follow-read playlist-read-private playlist-read-collaborative playlist-modify-public '
+                 + 'playlist-modify-private user-library-read user-library-modify user-read-private user-read-playback-state user-modify-playback-state';
     this.showDialog = true;
     this.authToken = localStorage.getItem('angular2-spotify-token');
     this.apiBase = 'https://api.spotify.com/v1';
@@ -467,7 +468,7 @@ export class SpotifyService {
     }).map(res => res.json());
   }
 
-  reorderPlaylistTracks(userId: string, playlistId: string, options: { range_start: number, range_length?: number, insert_before: number, snapshot_id?: string }) {
+    reorderPlaylistTracks(userId: string, playlistId: string, options: { range_start: number, range_length?: number, insert_before: number, snapshot_id?: string }) {
     return this.api({
       method: 'put',
       url: `/users/${userId}/playlists/${playlistId}/tracks`,

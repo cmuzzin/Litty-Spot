@@ -1,3 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CallbackComponent } from './callback/callback.component';
 import { CommonModule, APP_BASE_HREF } from '@angular/common';
@@ -6,14 +8,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { MainModule } from './main/main.module';
-import { ActiveSongService } from './shared/music-player/active-song.service';
-import { SpotifyService } from './shared/services/spotify-services';
-import { UtilitiesService } from './shared/services/utilities.service';
-import { AddSongToPlaylistService } from './shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
-import { ControlPanelServiceService } from './shared/control-panel/control-panel-service.service';
-import { EditPlayListService } from './shared/modals/edit-playlist-modal/edit-play-list-service';
 import { AuthGuard, AuthService } from './auth';
-import { AppConfig } from './shared/config/app.config';
+import { AppConfig } from './app.config';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -23,6 +19,8 @@ import { NgModule } from '@angular/core';
   ],
   imports: [
     CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ToastrModule.forRoot({
       timeOut: 5000,
@@ -39,12 +37,6 @@ import { NgModule } from '@angular/core';
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
-    ActiveSongService,
-    SpotifyService,
-    UtilitiesService,
-    AddSongToPlaylistService,
-    ControlPanelServiceService,
-    EditPlayListService,
     {
       provide: 'SpotifyConfig',
       useValue: {

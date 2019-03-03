@@ -28,9 +28,9 @@
                 <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!album.images.length">
               </figure>
             </div>
-            <div class="card-content">
+            <div class="card-content clickable" (click)="goToAlbum(album)">
               <div class="content">
-                <a class="is-link" (click)="goToAlbum(album)">{{album.name}}</a>
+                <h6 class="is-6 truncate">{{album.name}}</h6>
               </div>
             </div>
           </div>
@@ -50,9 +50,9 @@
                 <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!single.images.length">
               </figure>
             </div>
-            <div class="card-content">
+            <div class="card-content clickable" (click)="goToAlbum(single)">
               <div class="content">
-                <a class="is-link" (click)="goToAlbum(single)">{{single.name}}</a>
+                <h6 class="is-6 truncate">{{single.name}}</h6>
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@
             </div>
             <div class="card-content">
               <div class="content">
-                <a class="is-link" (click)="goToAlbum(compilation)">{{compilation.name}}</a>
+                <h6 class="is-6 truncate" (click)="goToAlbum(compilation)">{{compilation.name}}</h6>
               </div>
             </div>
           </div>

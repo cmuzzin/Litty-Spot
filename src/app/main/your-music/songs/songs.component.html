@@ -1,4 +1,4 @@
-  <div class="columns" *ngIf="tracks">
+  <div class="columns">
     <div class="column">
       <table class="table is-fullwidth">
         <thead>
@@ -18,20 +18,20 @@
           <td>{{i + 1}}</td>
           <td>{{item.track.name}}</td>
           <td>
-            <a class="is-link" (click)="goToArtist(item.track.album.artists[0])">{{item.track.album.artists[0].name}}</a>
+            <a class="is-link truncate" (click)="goToArtist(item.track.album.artists[0])">{{item.track.album.artists[0].name}}</a>
           </td>
           <td>
-            <a class="is-link" (click)="goToAlbum(item.track.album)">{{item.track.album.name}}</a>
+            <a class="is-link truncate" (click)="goToAlbum(item.track.album)">{{item.track.album.name}}</a>
           </td>
           <td>
-            <i class="fa fa-plus" (click)="toggleAddToPlaylistModal(item.track)"></i>
+            <i class="fa fa-plus truncate" (click)="toggleAddToPlaylistModal(item.track)"></i>
           </td>
           <td>{{formatDuration(item.track.duration_ms)}}</td>
         </tr>
         </tbody>
       </table>
       <button id="loadMoreSongsButton" class="button is-primary is-outlined is-fullwidth"
-              (click)="loadMoreTracks()" *ngIf="tracks.items.length < tracks.total">Load More Tracks
+              (click)="loadMoreTracks()" *ngIf="tracks.items?.length < tracks?.total">Load More Tracks
       </button>
     </div>
   </div>

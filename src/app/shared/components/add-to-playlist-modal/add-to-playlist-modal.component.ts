@@ -1,21 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {SpotifyService} from '../../services/spotify-services';
 import {AddSongToPlaylistService} from './add-song-to-playlist.service';
 import {ToastrService} from 'ngx-toastr';
-import * as _ from 'lodash';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-add-to-playlist-modal',
   templateUrl: './add-to-playlist-modal.component.html',
   styleUrls: ['./add-to-playlist-modal.component.scss']
 })
-export class AddToPlaylistModalComponent implements OnInit {
+export class AddToPlaylistModalComponent implements OnInit, OnDestroy {
   trackToAdd: any;
   user: any;
   totalPlaylists: any;
   playlists: Array<any>;
   options: any;
   toggle: boolean;
+  playlistFilter: string;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private spotifyService: SpotifyService,
               private addSongToPlaylistService: AddSongToPlaylistService,
@@ -25,16 +27,21 @@ export class AddToPlaylistModalComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.loadPlaylists();
-    this.addSongToPlaylistService.songToAddToPlaylist.subscribe(
+    this.addSongToPlaylistService.songToAddToPlaylist.takeUntil(this.destroy$).subscribe(
       songBeingAdded => {
         this.trackToAdd = songBeingAdded;
       }
     );
-    this.addSongToPlaylistService.toggleAddSongToPlaylist.subscribe(
+    this.addSongToPlaylistService.toggleAddSongToPlaylist.takeUntil(this.destroy$).subscribe(
       toggle => {
         this.toggle = toggle;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   closeAddToPlayListModal() {
@@ -59,18 +66,15 @@ export class AddToPlaylistModalComponent implements OnInit {
   };
 
   loadPlaylists() {
-    this.options = {
-      limit: 50
-    };
+    this.options = { limit: 50 };
     this.spotifyService.getUserPlaylists(this.user.id, this.options).subscribe(
       data => {
         const playlists = [];
-        _.each(data.items, p => {
-          if (p.owner.id === this.user.id) {
-            playlists.push(p);
+        data.items.forEach(playlist => {
+          if (playlist.owner.id === this.user.id) {
+            playlists.push(playlist);
           }
         });
-
         this.playlists = playlists;
         this.totalPlaylists = data.total;
       },

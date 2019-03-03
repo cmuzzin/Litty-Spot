@@ -1,41 +1,26 @@
-<div class="columns is-multiline" *ngIf="playlists">
-  <div
-    class="column is-one-fifth-desktop is-one-third-tablet"
-    *ngFor="let playlist of playlists.items"
-  >
+<div class="columns is-multiline">
+  <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let playlist of playlists.items">
     <div class="card">
       <div class="card-image">
         <figure class="image is-square">
-          <img
-            src="{{playlist.images[0].url}}"
-            *ngIf="playlist.images.length"
-          />
-          <img
-            src="http://bulma.io/images/placeholders/480x480.png"
-            *ngIf="!playlist.images.length"
-          />
+          <img src="{{playlist.images[0].url}}" *ngIf="playlist?.images.length"/>
+          <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!playlist.images?.length"/>
         </figure>
       </div>
       <div class="card-content">
         <div class="content">
-          <a class="subtitle" (click)="goToPlaylist(playlist)">{{
-            playlist.name
-          }}</a>
+          <h6 class="title is-6 truncate" (click)="goToPlaylist(playlist)">{{playlist.name}}</h6>
           <p>
-            <a class="is-link" (click)="goToUser(playlist)">{{
-              playlist.owner.id
-            }}</a>
+            <a class="is-link" (click)="goToUser(playlist)">{{playlist.owner.id}}</a>
           </p>
         </div>
       </div>
     </div>
   </div>
-  <button
-    id="loadMorePlaylists"
-    class="button is-primary is-outlined is-fullwidth"
-    (click)="loadMorePlaylists()"
-    *ngIf="playlists.items.length < playlists.total"
-  >
+  <button id="loadMorePlaylists"
+          class="button is-primary is-outlined is-fullwidth"
+          (click)="loadMorePlaylists()"
+          *ngIf="playlists.items?.length < playlists?.total">
     Load more Playlists
   </button>
 </div>

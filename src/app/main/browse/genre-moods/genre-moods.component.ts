@@ -16,9 +16,11 @@ export class GenreMoodsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.spotifyService.getCategories().subscribe(
+    const options = { limit: 50}
+    this.spotifyService.getCategories(options).subscribe(
       data => {
         this.categories = data;
+        console.log(data);
       },
       error => {
         console.log(error);

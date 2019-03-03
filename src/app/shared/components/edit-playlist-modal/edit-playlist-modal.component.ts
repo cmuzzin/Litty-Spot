@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SpotifyService } from '../../services/spotify-services';
 import { EditPlayListService } from './edit-play-list-service';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-edit-playlist-modal',
     templateUrl: 'edit-playlist-modal.component.html',
     styleUrls: ['edit-playlist-modal.component.scss']
 })
-export class EditPlaylistModalComponent implements OnInit {
+export class EditPlaylistModalComponent implements OnInit, OnDestroy {
     newPlaylistDescription: any;
     newPlaylistName: any;
     playlistDetails: any;
@@ -17,13 +18,14 @@ export class EditPlaylistModalComponent implements OnInit {
     isChecked: boolean;
     publicPrivate: string;
     toggle: boolean;
+    destroy$: Subject<boolean> = new Subject<boolean>();
 
     constructor(private spotifyService: SpotifyService, private editPlayListService: EditPlayListService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
-        this.editPlayListService.playlistToBeEdited.subscribe(
+        this.editPlayListService.playlistToBeEdited.takeUntil(this.destroy$).subscribe(
             playlist => {
                 this.playlist = playlist;
                 this.newPlaylistDescription = playlist.description;
@@ -47,14 +49,19 @@ export class EditPlaylistModalComponent implements OnInit {
         );
     }
 
+    ngOnDestroy() {
+      this.destroy$.next(true);
+      this.destroy$.complete();
+    }
+
     saveChanges() {
-        this.playlistDetails = {
+        const playlistDetails = {
             'description': this.newPlaylistDescription,
             'public': this.isChecked,
             'name': this.newPlaylistName
         };
 
-        this.spotifyService.updatePlaylistDetails(this.playlist.owner.id, this.playlist.id, this.playlistDetails).subscribe(
+        this.spotifyService.updatePlaylistDetails(this.playlist.owner.id, this.playlist.id, playlistDetails).subscribe(
             () => {
                 this.newPlaylistDescription = '';
                 this.newPlaylistName = '';

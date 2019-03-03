@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AddSongToPlaylistService} from '../../../shared/modals/add-to-playlist-modal/add-song-to-playlist.service';
 import { SpotifyService } from 'app/shared/services/spotify-services';
-import { ActiveSongService } from 'app/shared/music-player/active-song.service';
 import { UtilitiesService } from 'app/shared/services/utilities.service';
 import { Router } from '@angular/router';
+import { ActiveSongService } from 'app/shared/components/music-player/active-song.service';
+import { AddSongToPlaylistService } from 'app/shared/components/add-to-playlist-modal/add-song-to-playlist.service';
 
 @Component({
   selector: 'app-songs',
@@ -12,9 +12,10 @@ import { Router } from '@angular/router';
 })
 export class SongsComponent implements OnInit {
   trackToAdd: any;
-  tracks: any;
+  tracks: any = [];
   offset = 0;
   selected: boolean;
+  songsFilter: string;
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
@@ -24,7 +25,8 @@ export class SongsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spotifyService.getSavedUserTracks().subscribe(
+    const options = {limit: 50};
+    this.spotifyService.getSavedUserTracks(options).subscribe(
       data => {
         this.tracks = data;
       },

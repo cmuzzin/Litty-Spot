@@ -14,7 +14,8 @@ export class AlbumsComponent implements OnInit {
   constructor(private spotifyService: SpotifyService, private router: Router) {}
 
   ngOnInit() {
-    this.spotifyService.getSavedUserAlbums().subscribe(
+    const options = {limit: 50 };
+    this.spotifyService.getSavedUserAlbums(options).subscribe(
       data => {
         this.albums = data;
       },

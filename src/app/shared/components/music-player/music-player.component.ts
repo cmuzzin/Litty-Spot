@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActiveSongService} from './active-song.service';
-import {SpotifyService} from "../../shared/services/spotify-services";
 import {Router} from "@angular/router";
 import {Subject} from "rxjs/Subject";
+import { SpotifyService } from 'app/shared/services/spotify-services';
 
 
 @Component({

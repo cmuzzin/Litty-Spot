@@ -10,13 +10,13 @@ import { Router } from "@angular/router";
 })
 export class NewReleasesComponent implements OnInit {
   private newReleases: any = { albums: { items: [] } };
-  private offset: number = 0;
+  private offset = 0;
   constructor(private spotifyService: SpotifyService, private router: Router) {}
 
   ngOnInit() {
-    this.spotifyService.getNewReleases().subscribe(
+    const options = { limit: 50 };
+    this.spotifyService.getNewReleases(options).subscribe(
       data => {
-        console.log(data);
         this.newReleases = data;
       },
       error => {
@@ -25,7 +25,7 @@ export class NewReleasesComponent implements OnInit {
     );
   }
   loadMoreNewReleases() {
-    const options = {offset: this.offset += 20};
+    const options = { limit: 50, offset: this.offset += 50 };
     this.spotifyService.getNewReleases(options).subscribe(
       data => {
         this.newReleases.albums.items = this.newReleases.albums.items.concat(data.albums.items);
