@@ -11,17 +11,6 @@
   <li>View album, artist, and playlist</li>
   <li>Preview song</li>
  </ul>
- 
-## In the works
-
-<ul> 
-  <li>Upgrade Versions</li>
-  <li>Version upgrades for all node packages</li>
-  <li>Refresh token and auth interceptor</li>
-  <li>Control panel for playbacks</li>
-  <li>Recently played tracks</li>
-</ul>
-
 
 
 
