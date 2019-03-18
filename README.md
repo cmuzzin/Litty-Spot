@@ -1,7 +1,3 @@
-
-
-## App features:
-
 <ul>
   <li>Login with Spotify account (implicit grant)</li>
   <li>Search Spotify</li>
