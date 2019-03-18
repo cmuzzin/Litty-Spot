@@ -3,7 +3,7 @@
 ## App features:
 
 <ul>
- <li>Login with Spotify account</li>
+ <li>Login with Spotify account (implicit grant)</li>
   <li>Search Spotify</li>
   <li>View your music including playlists, songs, albums, artists, most played</li>
   <li>Edit your playlists</li>
