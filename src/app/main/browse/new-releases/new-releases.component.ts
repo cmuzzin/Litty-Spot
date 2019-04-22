@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./new-releases.component.scss']
 })
 export class NewReleasesComponent implements OnInit {
-  private newReleases: any = { albums: { items: [] } };
-  private offset = 0;
+  newReleases: any = { albums: { items: [] } };
+  offset = 0;
 
   @HostListener('window:scroll', [])
   onScroll(): void {
