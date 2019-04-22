@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { SpotifyService } from 'app/shared/services/spotify-services';
 
@@ -10,6 +10,13 @@ import { SpotifyService } from 'app/shared/services/spotify-services';
 export class AlbumsComponent implements OnInit {
   albums: any = {items: []};
   offset = 0;
+
+@HostListener('window:scroll', [])
+onScroll(): void {
+if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.albums.items.length < this.albums.total) {
+      this.loadMoreAlbums();
+    }
+}
 
   constructor(private spotifyService: SpotifyService, private router: Router) {}
 
@@ -30,7 +37,6 @@ export class AlbumsComponent implements OnInit {
     this.spotifyService.getSavedUserAlbums(options).subscribe(
       data => {
         this.albums.items = this.albums.items.concat(data.items);
-        document.getElementById('loadMoreAlbums').blur();
       },
       error => {
         console.log(error);

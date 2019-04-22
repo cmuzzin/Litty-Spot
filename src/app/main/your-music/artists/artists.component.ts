@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../shared/services/spotify-services';
-import {Router} from '@angular/router';
+import { Component, OnInit, HostListener} from '@angular/core';
+import { SpotifyService } from '../../../shared/services/spotify-services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-artists',
@@ -10,6 +10,13 @@ import {Router} from '@angular/router';
 export class ArtistsComponent implements OnInit {
   artists: any = [];
   type = 'artist';
+
+@HostListener('window:scroll', [])
+onScroll(): void {
+if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.artists.items.length < this.artists.total) {
+      this.loadMoreArtists();
+    }
+}
 
   constructor(public spotifyService: SpotifyService,
               public router: Router) {
@@ -35,7 +42,6 @@ export class ArtistsComponent implements OnInit {
     this.spotifyService.getFollowedArtists(this.type, options).subscribe(
       data => {
         this.artists.items = this.artists.items.concat(data.artists.items);
-        document.getElementById('loadMoreArtists').blur();
       },
       error => {
         console.log(error);

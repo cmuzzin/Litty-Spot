@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../../../shared/services/spotify-services';
-import {Router} from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { SpotifyService } from '../../../../../shared/services/spotify-services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-related-artists',

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from "../../../shared/services/spotify-services";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../../../shared/services/spotify-services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-most-played',
@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class MostPlayedComponent implements OnInit {
   mostPlayed: any;
-  type: string = 'artists';
+  type = 'artists';
 
   constructor(private spotifyService: SpotifyService,
               private router: Router) {

@@ -1,21 +1,17 @@
-  <div class="columns" *ngIf="relatedArtists">
-    <div class="column">
-      <div class="columns is-multiline">
-        <div class="column is-one-fifth-desktop is-full-tablet" *ngFor="let artist of relatedArtists">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-square">
-                <img src="{{artist.images[0].url}}" *ngIf="artist.images.length">
-                <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!artist.images.length">
-              </figure>
-            </div>
-            <div class="card-content clickable" (click)="goToArtist(artist)">
-              <div class="content">
-                <h6 class="is-6 truncate">{{artist.name}}</h6>
-              </div>
-            </div>
-          </div>
+<div class="columns is-multiline" *ngIf="relatedArtists">
+  <div class="column  is-2-desktop is-one-quarter-tablet" *ngFor="let artist of relatedArtists">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{artist.images[0].url}}" *ngIf="artist.images.length">
+          <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!artist.images.length">
+        </figure>
+      </div>
+      <div class="card-content clickable" (click)="goToArtist(artist)">
+        <div class="content">
+          <p class="more-info is-marginless has-text-weight-bold truncate">{{artist.name}}</p>
         </div>
       </div>
     </div>
   </div>
+</div>

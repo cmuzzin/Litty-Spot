@@ -1,5 +1,5 @@
 <div class="columns is-multiline">
-  <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let playlist of playlists.items">
+  <div class="column is-2-desktop is-one-quarter-tablet" *ngFor="let playlist of playlists.items">
     <div class="card">
       <div class="card-image">
         <figure class="image is-square">
@@ -7,12 +7,10 @@
           <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!playlist.images?.length"/>
         </figure>
       </div>
-      <div class="card-content">
+      <div class="card-content has-text-center clickable"  (click)="goToPlaylist(playlist)">
         <div class="content">
-          <h6 class="title is-6 truncate" (click)="goToPlaylist(playlist)">{{playlist.name}}</h6>
-          <p>
-            <a class="is-link" (click)="goToUser(playlist)">{{playlist.owner.id}}</a>
-          </p>
+          <p class="more-info is-marginless has-text-weight-bold truncate">{{playlist.name}}</p>
+          <a class="more-info is-link is-marginless is-block truncate" (click)="goToUser(playlist)">{{playlist.owner.id}}</a>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
-<div class="is-fullwidth" *ngIf="artist">
-  <div class="section columns">
+<div class="section is-fullwidth" *ngIf="artist">
+  <div class="columns">
     <div class="column">
       <p class="title is-1 has-text-centered">Popular</p>
       <table class="table is-fullwidth">
@@ -16,11 +16,11 @@
       </table>
     </div>
   </div>
-  <div class="section columns" *ngIf="albums.length">
+  <div class="columns" *ngIf="albums.length">
     <div class="column">
-      <p class="title section-title is-1 has-text-centered">Albums</p>
+      <p class="title is-1 has-text-centered">Albums</p>
       <div class="columns is-multiline">
-        <div class="column is-one-fifth-desktop is-full-tablet" *ngFor="let album of albums">
+        <div class="column is-2-desktop is-full-tablet" *ngFor="let album of albums">
           <div class="card">
             <div class="card-image">
               <figure class="image is-square">
@@ -30,7 +30,7 @@
             </div>
             <div class="card-content clickable" (click)="goToAlbum(album)">
               <div class="content">
-                <h6 class="is-6 truncate">{{album.name}}</h6>
+                <p class="more-info is-marginless has-text-weight-bold truncate">{{album.name}}</p>
               </div>
             </div>
           </div>
@@ -38,11 +38,11 @@
       </div>
     </div>
   </div>
-  <div class="section columns" *ngIf="singles.length">
+  <div class="columns" *ngIf="singles.length">
     <div class="column">
-      <p class="title section-title is-1 has-text-centered">Singles</p>
+      <p class="title is-1 has-text-centered">Singles</p>
       <div class="columns is-multiline">
-        <div class="column is-one-fifth-desktop is-full-tablet" *ngFor="let single of singles">
+        <div class="column is-2-desktop is-full-tablet" *ngFor="let single of singles">
           <div class="card">
             <div class="card-image">
               <figure class="image is-square">
@@ -52,7 +52,7 @@
             </div>
             <div class="card-content clickable" (click)="goToAlbum(single)">
               <div class="content">
-                <h6 class="is-6 truncate">{{single.name}}</h6>
+                <p class="more-info is-marginless has-text-weight-bold truncate">{{single.name}}</p>
               </div>
             </div>
           </div>
@@ -60,11 +60,11 @@
       </div>
     </div>
   </div>
-  <div class="section columns" *ngIf="compilations.length">
+  <div class="columns" *ngIf="compilations.length">
     <div class="column">
-      <p class="title section-title is-1 has-text-centered">Compilations</p>
+      <p class="title is-1 has-text-centered">Compilations</p>
       <div class="columns is-multiline">
-        <div class="column is-one-fifth-desktop is-full-tablet" *ngFor="let compilation of compilations">
+        <div class="column is-2-desktop is-full-tablet" *ngFor="let compilation of compilations">
           <div class="card">
             <div class="card-image">
               <figure class="image is-square">
@@ -74,7 +74,7 @@
             </div>
             <div class="card-content">
               <div class="content">
-                <h6 class="is-6 truncate" (click)="goToAlbum(compilation)">{{compilation.name}}</h6>
+                <p class="more-info is-marginless has-text-weight-bold truncate" (click)="goToAlbum(compilation)">{{compilation.name}}</p>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SpotifyService } from 'app/shared/services/spotify-services';
 import { UtilitiesService } from 'app/shared/services/utilities.service';
 import { Router } from '@angular/router';
@@ -12,10 +12,17 @@ import { AddSongToPlaylistService } from 'app/shared/components/add-to-playlist-
 })
 export class SongsComponent implements OnInit {
   trackToAdd: any;
-  tracks: any = [];
+  tracks: any;
   offset = 0;
   selected: boolean;
   songsFilter: string;
+
+@HostListener('window:scroll', [])
+onScroll(): void {
+if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.tracks.items.length < this.tracks.total) {
+       this.loadMoreTracks();
+    }
+}
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
@@ -44,7 +51,6 @@ export class SongsComponent implements OnInit {
     this.spotifyService.getSavedUserTracks(options).subscribe(
       data => {
         this.tracks.items = this.tracks.items.concat(data.items);
-        document.getElementById('loadMoreSongsButton').blur();
       },
       error => {
         console.log(error);

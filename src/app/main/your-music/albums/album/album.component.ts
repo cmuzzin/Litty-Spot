@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SpotifyService } from 'app/shared/services/spotify-services';
 import { UtilitiesService } from 'app/shared/services/utilities.service';
 import { ActiveSongService } from 'app/shared/components/music-player/active-song.service';
@@ -55,7 +55,7 @@ export class AlbumComponent implements OnInit {
     )
   }
 
-  saveAlbum(album) {
+  saveAlbum() {
     this.spotifyService.saveUserAlbums(this.album.id).subscribe(
       () => {
         this.saved = !this.saved;

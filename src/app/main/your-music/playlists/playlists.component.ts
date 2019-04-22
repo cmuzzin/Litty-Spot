@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SpotifyService } from 'app/shared/services/spotify-services';
 
 @Component({
@@ -10,7 +10,7 @@ import { SpotifyService } from 'app/shared/services/spotify-services';
 export class PlaylistsComponent implements OnInit {
   offset = 0;
   user: any;
-  playlists: any = [];
+  playlists: any;
 
   constructor(private spotifyService: SpotifyService,
               private router: Router) {

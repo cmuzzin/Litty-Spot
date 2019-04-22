@@ -1,20 +1,18 @@
 <div class="columns is-multiline">
-      <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let artist of artists.items">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-square">
-              <img src="{{artist.images[0].url}}" *ngIf="artist.images?.length">
-              <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!artist.images?.length">
-            </figure>
-          </div>
-          <div class="card-content clickable" (click)="goToArtist(artist)">
-            <div class="content">
-              <h6 class="title is-6 truncate is-marginless">{{artist.name}}</h6>
-            </div>
-          </div>
+  <div class="column is-2-desktop is-one-quarter-tablet" *ngFor="let artist of artists.items">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{artist.images[0].url}}" *ngIf="artist.images?.length">
+          <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!artist.images?.length">
+        </figure>
+      </div>
+      <div class="card-content clickable" (click)="goToArtist(artist)">
+        <div class="content">
+          <p class="more-info is-marginless has-text-weight-bold truncate">{{artist.name}}</p>
         </div>
       </div>
-  <button id="loadMoreArtists" class="button is-primary is-outlined is-fullwidth" (click)="loadMoreArtists()"
-          *ngIf="artists.items?.length < artists?.total">Load More Artists</button>
+    </div>
+  </div>
 </div>
 

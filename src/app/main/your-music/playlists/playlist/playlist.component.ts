@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../../shared/services/spotify-services';
-import concat from 'lodash-es/concat';
-import {UtilitiesService} from '../../../../shared/services/utilities.service';
+
+import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../../../../shared/services/spotify-services';
+import { UtilitiesService } from '../../../../shared/services/utilities.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActiveSongService } from 'app/shared/components/music-player/active-song.service';
 import { EditPlayListService } from 'app/shared/components/edit-playlist-modal/edit-play-list-service';
@@ -12,7 +12,7 @@ import { EditPlayListService } from 'app/shared/components/edit-playlist-modal/e
   styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit {
-  playlist: any = {};
+  playlist: any;
   user: any;
   followed: boolean;
   offset = 0;
@@ -60,7 +60,7 @@ export class PlaylistComponent implements OnInit {
     const options = {limit: 100, offset: this.offset += 100 };
     this.spotifyService.getPlaylistTracks(this.playlist.owner.id, this.playlist.id, options).subscribe(
       tracks => {
-        this.playlist.tracks.items = concat(this.playlist.tracks.items, tracks.items);
+        this.playlist.tracks.items = this.playlist.tracks.items.concat(tracks.items);
         document.getElementById('loadMorePlaylistTracks').blur();
       },
       error => {

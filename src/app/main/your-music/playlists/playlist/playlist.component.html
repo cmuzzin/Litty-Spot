@@ -2,13 +2,9 @@
   <div class="column is-full">
     <div class="columns">
       <div class="column is-one-quarter">
-        <figure class="image is-square">
-          <img src="{{playlist.images[0].url}}"
-               width="{{playlist.images[0].width}}"
-               height="{{playlist.images[0].height}}"
-               *ngIf="playlist.images.length">
-          <img src="http://bulma.io/images/placeholders/480x480.png"
-               *ngIf="!playlist.images.length">
+        <figure class="image is-4by3">
+          <img src="{{playlist.images[0].url}}" width="{{playlist.images[0].width}}" height="{{playlist.images[0].height}}" *ngIf="playlist.images.length">
+          <img src="http://bulma.io/images/placeholders/480x480.png" *ngIf="!playlist.images.length">
         </figure>
       </div>
       <div class="column is-three-quarters">
@@ -16,9 +12,9 @@
         <p>Playlist By:
           <a class="is-link is-outlined push-left" (click)="goToUser(playlist)">{{user.id}}</a>
         </p>
-        <p class="push-down" [(ngModel)]="playlist.description" ngDefaultControl [innerHTML]='playlist.description'></p>
+        <p [(ngModel)]="playlist.description" ngDefaultControl [innerHTML]='playlist.description'></p>
         <p>{{formatNumberWithCommas(playlist.tracks.total)}} songs {{formatNumberWithCommas(playlist.followers.total)}} followers</p>
-        <p class="push-down">
+        <p class="margin-top">
           <button class="button is-primary is-medium is-outlined is-rounded"
                   *ngIf="followed === false && user.id !== playlist.owner.id" (click)="followPlaylist()">Follow
           </button>

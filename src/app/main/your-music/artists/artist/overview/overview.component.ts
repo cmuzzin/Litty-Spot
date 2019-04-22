@@ -14,10 +14,10 @@ export class OverviewComponent implements OnInit {
   @Input() artist: any;
   user: any = JSON.parse(localStorage.getItem('user'));
   topTracks: any;
-  albums: any = [];
-  singles: any = [];
-  compilations: any = [];
-  options: any = {limit: 50, include_groups: 'album,single,compilation'};
+  albums: Array<any> = [];
+  singles: Array<any> = [];
+  compilations: Array<any> = [];
+  options: Object = {limit: 50, include_groups: 'album,single,compilation'};
   selected: any;
 
   constructor(private spotifyService: SpotifyService,

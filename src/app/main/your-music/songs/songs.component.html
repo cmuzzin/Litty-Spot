@@ -1,6 +1,6 @@
-  <div class="columns">
+  <div class="columns" *ngIf="tracks">
     <div class="column">
-      <table class="table is-fullwidth">
+      <table class="table is-fullwidth is-hoverable is-striped">
         <thead>
         <tr>
           <th></th>
@@ -30,9 +30,6 @@
         </tr>
         </tbody>
       </table>
-      <button id="loadMoreSongsButton" class="button is-primary is-outlined is-fullwidth"
-              (click)="loadMoreTracks()" *ngIf="tracks.items?.length < tracks?.total">Load More Tracks
-      </button>
     </div>
   </div>
 

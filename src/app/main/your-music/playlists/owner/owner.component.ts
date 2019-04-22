@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { SpotifyService } from "../../../../shared/services/spotify-services";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../../../../shared/services/spotify-services';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: "app-owner",
-  templateUrl: "./owner.component.html",
-  styleUrls: ["./owner.component.scss"]
+  selector: 'app-owner',
+  templateUrl: './owner.component.html',
+  styleUrls: ['./owner.component.scss']
 })
 export class OwnerComponent implements OnInit {
   user: any;
@@ -24,6 +24,7 @@ export class OwnerComponent implements OnInit {
       this.spotifyService
         .getUserPlaylists(params.ownerId, options).subscribe(
           data => {
+            console.log(data);
             this.playlists = data;
           },
           error => {
@@ -32,6 +33,7 @@ export class OwnerComponent implements OnInit {
         );
       this.spotifyService.getUser(params.ownerId).subscribe(
         data => {
+          console.log(data);
           this.user = data;
         },
         error => {
@@ -49,7 +51,7 @@ export class OwnerComponent implements OnInit {
     this.spotifyService.getUserPlaylists(this.user.id, options).subscribe(
       data => {
         this.playlists.items = this.playlists.items.concat(data.items);
-        document.getElementById("loadMoreUserPlaylists").blur();
+        document.getElementById('loadMoreUserPlaylists').blur();
       },
       error => {
         console.log(error);
@@ -58,6 +60,6 @@ export class OwnerComponent implements OnInit {
   }
 
   goToPlaylist(playlist) {
-    this.router.navigate(["main/playlist", playlist.owner.id, playlist.id]);
+    this.router.navigate(['main/playlist', playlist.owner.id, playlist.id]);
   }
 }

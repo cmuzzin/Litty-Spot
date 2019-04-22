@@ -1,5 +1,5 @@
 <div class="columns is-multiline">
-  <div class="column is-one-fifth-desktop is-full-tablet" *ngFor="let item of albums.items">
+  <div class="column is-2-desktop is-one-quarter-tablet" *ngFor="let item of albums.items">
     <div class="card">
       <div class="card-image">
         <figure class="image is-square">
@@ -9,16 +9,11 @@
       </div>
       <div class="card-content clickable" (click)="goToAlbum(item.album)">
         <div class="content">
-          <h6 class="title is-6 truncate is-marginless">{{item.album.name}}</h6>
-          <a class="is-link" (click)="goToArtist(item.album.artists[0])">{{item.album.artists[0].name}}</a>
+          <p class="more-info is-marginless has-text-weight-bold truncate">{{item.album.name}}</p>
+          <a class="more-info is-link is-marginless is-block truncate" (click)="goToArtist(item.album.artists[0])">{{item.album.artists[0].name}}</a>
         </div>
       </div>
     </div>
   </div>
-  <button id="loadMoreAlbums"
-          class="button is-primary is-outlined is-fullwidth"
-          *ngIf="albums.items?.length < albums?.total"
-          (click)="loadMoreAlbums()">Load More Albums
-  </button>
 </div>
 
