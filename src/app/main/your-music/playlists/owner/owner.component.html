@@ -18,15 +18,9 @@
       </div>
       <div class="card-content">
         <div class="content">
-          <a class="is-link" (click)="goToPlaylist(playlist)">{{playlist.name}}</a>
+          <a class="more-info is-link is-marginless is-block truncate" (click)="goToPlaylist(playlist)">{{playlist.name}}</a>
         </div>
       </div>
     </div>
   </div>
-  <button id="loadMoreUserPlaylists"
-          class="button is-primary is-outlined is-fullwidth"
-          (click)="loadMorePlaylists()"
-          *ngIf="playlists.items.length < playlists.total">
-    Load more
-  </button>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SpotifyService } from '../../../../shared/services/spotify-services';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,6 +11,12 @@ export class OwnerComponent implements OnInit {
   user: any;
   playlists: any;
   offset = 0;
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.playlists.items.length < this.playlists.total) {
+      this.loadMorePlaylists();
+    }
+  }
 
   constructor(
     private spotifyService: SpotifyService,
@@ -24,7 +30,6 @@ export class OwnerComponent implements OnInit {
       this.spotifyService
         .getUserPlaylists(params.ownerId, options).subscribe(
           data => {
-            console.log(data);
             this.playlists = data;
           },
           error => {
@@ -33,7 +38,6 @@ export class OwnerComponent implements OnInit {
         );
       this.spotifyService.getUser(params.ownerId).subscribe(
         data => {
-          console.log(data);
           this.user = data;
         },
         error => {
@@ -51,7 +55,6 @@ export class OwnerComponent implements OnInit {
     this.spotifyService.getUserPlaylists(this.user.id, options).subscribe(
       data => {
         this.playlists.items = this.playlists.items.concat(data.items);
-        document.getElementById('loadMoreUserPlaylists').blur();
       },
       error => {
         console.log(error);

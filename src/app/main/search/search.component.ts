@@ -62,7 +62,6 @@ export class SearchComponent implements OnInit {
     const options = {offset: this.offset += 50};
     this.spotifyService.search(this.searchQuery, this.type, options).subscribe(
       data => {
-        console.log(data);
         this.tracks.items = this.tracks.items.concat(data.tracks.items);
       },
       error => {

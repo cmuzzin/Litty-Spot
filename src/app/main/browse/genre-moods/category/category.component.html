@@ -1,7 +1,8 @@
+<section>
   <p class="title is-2 has-text-centered">{{category.name}}</p>
   <div class="columns is-multiline">
     <div class="column is-2-desktop is-one-quarter-tablet"
-         *ngFor="let playlist of playlists.items">
+          *ngFor="let playlist of playlists.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-4by3">
@@ -17,7 +18,5 @@
       </div>
     </div>
   </div>
-  <button class="button is-primary is-outlined is-fullwidth" (click)="loadMoreCategories()"
-          *ngIf="playlists.items.length < playlists.total">Load more playlist's
-  </button>
+</section>
 

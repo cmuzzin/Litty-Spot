@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SpotifyService } from '../../../../shared/services/spotify-services';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -12,6 +12,13 @@ export class CategoryComponent implements OnInit {
   playlists: any = { items: [], total: '' };
   offset: any = 0;
 
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.playlists.items.length < this.playlists.total) {
+      this.loadMoreCategories();
+    }
+  }
+
   constructor(
     private spotifyService: SpotifyService,
     private router: Router,
@@ -24,7 +31,7 @@ export class CategoryComponent implements OnInit {
         this.category = category;
         const options = { limit: 50 };
         this.spotifyService.getCategoryPlaylists(params.id, options).subscribe(
-          (categories: any) => {
+          categories => {
             this.playlists = categories.playlists;
           },
           error => {
@@ -40,7 +47,6 @@ export class CategoryComponent implements OnInit {
     this.spotifyService
       .getCategoryPlaylists(this.category.id, options).subscribe(
         data => {
-          console.log(this.playlists, data);
           this.playlists.items = this.playlists.items.concat(data.playlists.items);
         },
         error => {

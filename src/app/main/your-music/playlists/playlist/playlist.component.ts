@@ -49,9 +49,11 @@ export class PlaylistComponent implements OnInit {
 
     this.editPlaylistService.playlistChanges.subscribe(
       changes => {
-        this.playlist.name = changes.name;
-        this.playlist.description = changes.description;
-        this.playlist.public = changes.public;
+        if (changes) {
+          this.playlist.name = changes.name;
+          this.playlist.description = changes.description;
+          this.playlist.public = changes.public;
+        }
       }
     );
   };
