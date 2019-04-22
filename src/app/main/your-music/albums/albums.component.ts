@@ -11,12 +11,12 @@ export class AlbumsComponent implements OnInit {
   albums: any = {items: []};
   offset = 0;
 
-@HostListener('window:scroll', [])
-onScroll(): void {
-if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.albums.items.length < this.albums.total) {
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.albums.items.length < this.albums.total) {
       this.loadMoreAlbums();
     }
-}
+  }
 
   constructor(private spotifyService: SpotifyService, private router: Router) {}
 

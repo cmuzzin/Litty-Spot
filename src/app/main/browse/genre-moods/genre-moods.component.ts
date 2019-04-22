@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { SpotifyService } from "../../../shared/services/spotify-services";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../../../shared/services/spotify-services';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-genre-moods",
-  templateUrl: "./genre-moods.component.html",
-  styleUrls: ["./genre-moods.component.scss"]
+  selector: 'app-genre-moods',
+  templateUrl: './genre-moods.component.html',
+  styleUrls: ['./genre-moods.component.scss']
 })
 export class GenreMoodsComponent implements OnInit {
   categories: any = {};
@@ -20,7 +20,6 @@ export class GenreMoodsComponent implements OnInit {
     this.spotifyService.getCategories(options).subscribe(
       data => {
         this.categories = data;
-        console.log(data);
       },
       error => {
         console.log(error);
@@ -29,6 +28,6 @@ export class GenreMoodsComponent implements OnInit {
   }
 
   goToCategory(category) {
-    this.router.navigate(["main/category", category.id]);
+    this.router.navigate(['main/category', category.id]);
   }
 }

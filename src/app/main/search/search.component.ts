@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../shared/services/spotify-services';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { SpotifyService } from '../../shared/services/spotify-services';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UtilitiesService } from 'app/shared/services/utilities.service';
@@ -24,6 +24,13 @@ export class SearchComponent implements OnInit {
   album: any;
   offset = 0;
   selected: boolean;
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.tracks.items.length < this.tracks.total) {
+      this.loadMoreTracks();
+    }
+  }
 
   constructor(private spotifyService: SpotifyService,
               private activeSongService: ActiveSongService,
@@ -55,8 +62,8 @@ export class SearchComponent implements OnInit {
     const options = {offset: this.offset += 50};
     this.spotifyService.search(this.searchQuery, this.type, options).subscribe(
       data => {
-        this.tracks.items = this.tracks.items.concat(data.track.items);
-        document.getElementById('loadMoreSearchTracks').blur();
+        console.log(data);
+        this.tracks.items = this.tracks.items.concat(data.tracks.items);
       },
       error => {
         console.log(error);

@@ -27,7 +27,7 @@
 <div id="artists" class="section" *ngIf="artists  && !noResults">
   <h1 class="title is-2 has-text-centered">Artists</h1>
   <div class="columns is-multiline">
-    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let artist of artists.items">
+    <div class="column is-2-desktop is-one-quarter-tablet" *ngFor="let artist of artists.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -37,7 +37,7 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <a class="is-link" (click)="goToArtist(artist)">{{artist.name}}</a>
+            <a class="more-info is-link is-marginless is-block truncate" (click)="goToArtist(artist)">{{artist.name}}</a>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
 <div id="albums" class="section" *ngIf="albums && !noResults">
   <h1 class="title is-2 has-text-centered">Albums</h1>
   <div class="columns is-multiline">
-    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let album of albums.items">
+    <div class="column is-2-desktop is-one-quarter-tablet" *ngFor="let album of albums.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -57,7 +57,7 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <a class="is-link" (click)="goToAlbum(album)">{{album.name}}</a>
+            <a class="more-info is-link is-marginless is-block truncate" (click)="goToAlbum(album)">{{album.name}}</a>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
 <div id="playlists" class="section" *ngIf="playlists && !noResults">
   <p class="title is-2 has-text-centered">Playlists</p>
   <div class="columns is-multiline">
-    <div class="column is-one-fifth-desktop is-one-third-tablet" *ngFor="let playlist of playlists.items">
+    <div class="column is-2-desktop is-one-quarter-tablet" *ngFor="let playlist of playlists.items">
       <div class="card">
         <div class="card-image">
           <figure class="image is-square">
@@ -77,7 +77,7 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <a class="is-link" (click)="goToPlaylist(playlist)">{{playlist.name}}</a>
+            <a class="more-info is-link is-marginless is-block truncate" (click)="goToPlaylist(playlist)">{{playlist.name}}</a>
           </div>
         </div>
       </div>
@@ -118,11 +118,6 @@
         </tr>
         </tbody>
       </table>
-      <br>
-      <button id="loadMoreSearchTracks" class="button is-primary is-outlined is-fullwidth"
-              *ngIf="tracks.items.length < tracks.total"
-              (click)="loadMoreTracks()">Load More Tracks
-      </button>
     </div>
   </div>
 </div>

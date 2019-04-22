@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { SpotifyService } from "../../../../shared/services/spotify-services";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../../../../shared/services/spotify-services';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: "app-category",
-  templateUrl: "./category.component.html",
-  styleUrls: ["./category.component.scss"]
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
   category: any = {};
-  playlists: any = { items: [], total: "" };
+  playlists: any = { items: [], total: '' };
   offset: any = 0;
 
   constructor(
@@ -20,12 +20,12 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.ar.params.subscribe(params => {
-      this.spotifyService.getCategory(params.id).subscribe(data => {
-        this.category = data;
+      this.spotifyService.getCategory(params.id).subscribe(category => {
+        this.category = category;
         const options = { limit: 50 };
         this.spotifyService.getCategoryPlaylists(params.id, options).subscribe(
-          data => {
-            this.playlists = data.playlists;
+          (categories: any) => {
+            this.playlists = categories.playlists;
           },
           error => {
             console.log(error);
@@ -50,6 +50,6 @@ export class CategoryComponent implements OnInit {
   }
 
   goToPlaylist(playlist) {
-    this.router.navigate(["main/playlist", playlist.owner.id, playlist.id]);
+    this.router.navigate(['main/playlist', playlist.owner.id, playlist.id]);
   }
 }

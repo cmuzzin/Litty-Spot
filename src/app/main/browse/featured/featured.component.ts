@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {SpotifyService} from '../../../shared/services/spotify-services';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../../../shared/services/spotify-services';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-featured',

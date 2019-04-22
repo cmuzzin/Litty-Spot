@@ -1,16 +1,23 @@
-import { ActivatedRoute } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
-import { SpotifyService } from "../../../shared/services/spotify-services";
-import { Router } from "@angular/router";
+import { Component, OnInit, HostListener } from '@angular/core';
+import { SpotifyService } from '../../../shared/services/spotify-services';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-new-releases",
-  templateUrl: "./new-releases.component.html",
-  styleUrls: ["./new-releases.component.scss"]
+  selector: 'app-new-releases',
+  templateUrl: './new-releases.component.html',
+  styleUrls: ['./new-releases.component.scss']
 })
 export class NewReleasesComponent implements OnInit {
   private newReleases: any = { albums: { items: [] } };
   private offset = 0;
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight &&
+    this.newReleases.albums.items.length < this.newReleases.albums.total) {
+      this.loadMoreNewReleases();
+    }
+  }
   constructor(private spotifyService: SpotifyService, private router: Router) {}
 
   ngOnInit() {
@@ -29,7 +36,6 @@ export class NewReleasesComponent implements OnInit {
     this.spotifyService.getNewReleases(options).subscribe(
       data => {
         this.newReleases.albums.items = this.newReleases.albums.items.concat(data.albums.items);
-        document.getElementById("loadMoreNewReleases").blur();
       },
       error => {
         console.log(error);
@@ -37,6 +43,6 @@ export class NewReleasesComponent implements OnInit {
     );
   }
   goToAlbum(album) {
-    this.router.navigate(["main/album", album.id]);
+    this.router.navigate(['main/album', album.id]);
   }
 }
